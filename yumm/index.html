@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>yummy_707 推特 - 创作者内容追踪与作品归档</title>
+<meta name="description" content="yummy_707 推特内容聚合页，整理 yummy_707 在推特发布的写真图集、短视频片段、直播回放与联名企划，按发布时间、类型和更新节奏归档，适合追踪创作者动态的粉丝参考。">
+<meta name="keywords" content="yummy_707 推特">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e8607a'/%3E%3Cpath d='M30 62c8-26 32-26 40 0' stroke='%23fff' stroke-width='7' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='36' cy='38' r='6' fill='%23fff'/%3E%3Ccircle cx='64' cy='38' r='6' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{
+  --main:#d94f6d;
+  --main-l:#f3dbe1;
+  --main-d:#a63350;
+  --bg:#fbf7f5;
+  --panel:#ffffff;
+  --ink:#241c1f;
+  --ink-2:#5c4b52;
+  --ink-3:#8d7d84;
+  --line:#ecdfe3;
+  --r-card:14px;
+  --r-btn:9px;
+  --r-tag:6px;
+  --r-banner:18px;
+  --sh:0 2px 8px rgba(80,30,45,.06);
+  --sh-h:0 8px 22px rgba(80,30,45,.13);
+  --sticky-h:96px;
+  --wrap:1300px;
+  font-size:16px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:var(--sticky-h);}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  line-height:1.75;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{margin:0;line-height:1.35;}
+ul,ol{margin:0;padding:0;list-style:none;}
+button{font-family:inherit;cursor:pointer;}
+:focus-visible{outline:3px solid var(--main);outline-offset:2px;}
+
+/* ---------- 吸顶区 ---------- */
+.sticky-top{position:sticky;top:0;z-index:60;}
+.notice{
+  background:linear-gradient(90deg,var(--main-d),var(--main));
+  color:#fff;font-size:.82rem;
+  display:flex;align-items:center;gap:14px;
+  padding:7px 18px;flex-wrap:wrap;
+}
+.notice b{font-weight:700;letter-spacing:.5px;}
+.notice .n-item{display:inline-flex;align-items:center;gap:6px;opacity:.95;}
+.notice .n-item i{font-style:normal;font-size:.72rem;background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px;}
+.site-head{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(80,30,45,.03);
+}
+.head-in{
+  max-width:var(--wrap);margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;gap:20px;
+}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.logo svg{width:36px;height:36px;flex-shrink:0;}
+.logo-text{font-size:1.15rem;font-weight:800;letter-spacing:.3px;color:var(--main-d);}
+.head-nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto;}
+.head-nav a{
+  font-size:.88rem;color:var(--ink-2);padding:6px 11px;border-radius:var(--r-btn);
+  transition:background .18s,color .18s;
+}
+.head-nav a:hover{background:var(--main-l);color:var(--main-d);}
+.head-actions{display:flex;gap:8px;align-items:center;}
+.btn{
+  border:1px solid var(--line);background:#fff;color:var(--ink-2);
+  padding:7px 14px;border-radius:var(--r-btn);font-size:.85rem;
+  transition:.18s;display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover{border-color:var(--main);color:var(--main-d);box-shadow:var(--sh);}
+.btn-primary{background:var(--main);border-color:var(--main);color:#fff;}
+.btn-primary:hover{background:var(--main-d);border-color:var(--main-d);color:#fff;}
+.hamburger{display:none;border:1px solid var(--line);background:#fff;border-radius:var(--r-btn);padding:6px 10px;font-size:1.1rem;line-height:1;color:var(--ink-2);}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(217,79,109,.16),transparent 46%),
+    radial-gradient(circle at 12% 88%,rgba(166,51,80,.12),transparent 50%),
+    linear-gradient(150deg,#fff6f8 0%,#fdf3f0 52%,#f8ecf1 100%);
+  border-bottom:1px solid var(--line);
+}
+.hero-in{
+  max-width:var(--wrap);margin:0 auto;padding:52px 20px 46px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+}
+.hero-tag{
+  display:inline-block;font-size:.78rem;color:var(--main-d);background:var(--main-l);
+  padding:3px 10px;border-radius:20px;margin-bottom:14px;letter-spacing:.4px;
+}
+.hero h1{
+  font-size:clamp(2rem,4.2vw,3rem);font-weight:900;letter-spacing:.5px;
+  color:var(--main-d);margin-bottom:16px;word-break:break-word;
+}
+.hero-desc{font-size:1rem;color:var(--ink-2);max-width:34em;margin-bottom:22px;}
+.hero-desc strong{color:var(--main-d);}
+.hero-links{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:16px;}
+.hero-stats div{font-size:.8rem;color:var(--ink-3);}
+.hero-stats b{display:block;font-size:1.25rem;color:var(--ink);font-weight:800;line-height:1.2;}
+.hero-art{position:relative;height:320px;}
+.hero-art .ring{
+  position:absolute;border-radius:50%;border:2px dashed rgba(217,79,109,.35);
+  inset:18px;animation:spin 46s linear infinite;
+}
+.hero-art .ring2{
+  position:absolute;border-radius:50%;border:1px solid rgba(166,51,80,.22);
+  inset:56px;animation:spin 32s linear infinite reverse;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.hero-card{
+  position:absolute;background:#fff;border-radius:var(--r-card);
+  box-shadow:var(--sh-h);padding:10px;border:1px solid var(--line);
+}
+.hero-card img{border-radius:9px;object-fit:cover;}
+.hc1{width:150px;top:6px;left:12%;transform:rotate(-5deg);}
+.hc2{width:172px;top:64px;right:2%;transform:rotate(4deg);}
+.hc3{width:130px;bottom:8px;left:34%;transform:rotate(-2deg);}
+.hero-card span{display:block;font-size:.68rem;color:var(--ink-3);padding:5px 2px 0;text-align:center;}
+
+/* ---------- 主体三栏 ---------- */
+.layout{
+  max-width:var(--wrap);margin:0 auto;padding:38px 20px 20px;
+  display:grid;grid-template-columns:176px minmax(0,1fr) 250px;gap:30px;align-items:start;
+}
+/* 左频道 */
+.chan{position:sticky;top:calc(var(--sticky-h) + 16px);}
+.chan-title{font-size:.78rem;color:var(--ink-3);letter-spacing:1px;margin-bottom:12px;font-weight:600;}
+.chan ul{display:flex;flex-direction:column;gap:2px;}
+.chan a{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.86rem;color:var(--ink-2);padding:7px 10px;border-radius:var(--r-btn);
+  border-left:2px solid transparent;transition:.16s;
+}
+.chan a:hover{background:var(--main-l);color:var(--main-d);}
+.chan a.active{background:var(--main-l);color:var(--main-d);border-left-color:var(--main);font-weight:600;}
+.chan a em{font-style:normal;font-size:.72rem;color:var(--ink-3);}
+
+/* 主栏 */
+.main-col{min-width:0;}
+section.block{margin-bottom:44px;scroll-margin-top:var(--sticky-h);}
+.block-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.block-head h2{
+  font-size:1.3rem;font-weight:800;letter-spacing:.3px;
+  display:flex;align-items:center;gap:9px;
+}
+.block-head h2::before{
+  content:"";width:5px;height:19px;border-radius:3px;background:var(--main);display:inline-block;
+}
+.block-head .sub{font-size:.8rem;color:var(--ink-3);}
+.lead{color:var(--ink-2);font-size:.94rem;margin-bottom:16px;}
+
+/* 概览 */
+.overview{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:24px 26px;box-shadow:var(--sh);}
+.overview p{font-size:.94rem;color:var(--ink-2);margin:0 0 13px;}
+.overview p:last-child{margin-bottom:0;}
+.overview b{color:var(--ink);}
+
+/* 精选卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:18px;}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  overflow:hidden;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-h);}
+.card img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;}
+.card-body{padding:13px 14px 15px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.card-body h3{font-size:.97rem;font-weight:700;}
+.card-body h3 a:hover{color:var(--main-d);}
+.tag-row{display:flex;gap:5px;flex-wrap:wrap;}
+.tag{font-size:.71rem;background:var(--main-l);color:var(--main-d);padding:2px 7px;border-radius:var(--r-tag);}
+.tag.grey{background:#f2eeef;color:var(--ink-3);}
+.card-note{font-size:.83rem;color:var(--ink-2);flex:1;}
+.card-meta{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:8px;}
+.card-meta b{color:var(--main-d);}
+
+/* 更新流 */
+.updates{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--sh);}
+.upd{display:flex;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line);align-items:flex-start;}
+.upd:last-child{border-bottom:none;}
+.upd time{font-size:.75rem;color:var(--ink-3);flex-shrink:0;width:74px;padding-top:2px;font-variant-numeric:tabular-nums;}
+.upd .u-main{flex:1;min-width:0;}
+.upd .u-main strong{font-size:.92rem;display:block;margin-bottom:2px;}
+.upd .u-main p{margin:0;font-size:.83rem;color:var(--ink-2);}
+.upd .u-type{font-size:.7rem;padding:1px 7px;border-radius:4px;background:#f2eeef;color:var(--ink-3);flex-shrink:0;white-space:nowrap;}
+
+/* 分类 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.cat{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:14px 15px;box-shadow:var(--sh);transition:.18s;
+}
+.cat:hover{box-shadow:var(--sh-h);border-color:var(--main);transform:translateY(-2px);}
+.cat strong{display:block;font-size:.93rem;margin-bottom:4px;}
+.cat span{font-size:.76rem;color:var(--ink-3);}
+
+/* 深度解析 */
+.article{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:28px 30px;box-shadow:var(--sh);}
+.article h3{font-size:1.06rem;margin:26px 0 10px;color:var(--main-d);}
+.article h3:first-child{margin-top:0;}
+.article p{font-size:.92rem;color:var(--ink-2);margin:0 0 12px;}
+.article ul{margin:0 0 14px;padding-left:2px;}
+.article li{font-size:.9rem;color:var(--ink-2);padding-left:18px;position:relative;margin-bottom:7px;}
+.article li::before{content:"";position:absolute;left:3px;top:.68em;width:5px;height:5px;border-radius:50%;background:var(--main);}
+.article b{color:var(--ink);}
+.quote{
+  border-left:3px solid var(--main);background:var(--main-l);
+  padding:12px 16px;border-radius:0 8px 8px 0;font-size:.87rem;color:var(--main-d);margin:0 0 14px;
+}
+.check-table{width:100%;border-collapse:collapse;font-size:.84rem;margin:0 0 16px;}
+.check-table th,.check-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;}
+.check-table th{background:#faf5f6;color:var(--ink);font-weight:700;}
+.check-table td{color:var(--ink-2);}
+
+/* 指南步骤 */
+.steps{counter-reset:st;display:grid;gap:12px;}
+.step{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:15px 18px 15px 54px;position:relative;box-shadow:var(--sh);
+}
+.step::before{
+  counter-increment:st;content:counter(st);
+  position:absolute;left:16px;top:15px;width:26px;height:26px;border-radius:50%;
+  background:var(--main);color:#fff;font-size:.8rem;font-weight:700;
+  display:grid;place-items:center;
+}
+.step strong{display:block;font-size:.93rem;margin-bottom:3px;}
+.step p{margin:0;font-size:.85rem;color:var(--ink-2);}
+
+/* FAQ */
+.faq details{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  margin-bottom:10px;box-shadow:var(--sh);overflow:hidden;
+}
+.faq summary{
+  padding:14px 18px;font-size:.93rem;font-weight:600;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{content:"+";font-size:1.15rem;color:var(--main);flex-shrink:0;transition:transform .2s;}
+.faq details[open] summary::after{content:"−";}
+.faq .ans{padding:0 18px 15px;font-size:.88rem;color:var(--ink-2);}
+
+/* 评论 */
+.cmt-list{display:grid;gap:10px;}
+.cmt{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:12px 16px;box-shadow:var(--sh);
+}
+.cmt-head{display:flex;align-items:center;gap:9px;margin-bottom:4px;}
+.avatar{
+  width:26px;height:26px;border-radius:50%;background:var(--main-l);color:var(--main-d);
+  display:grid;place-items:center;font-size:.72rem;font-weight:700;flex-shrink:0;
+}
+.cmt-head strong{font-size:.82rem;color:var(--ink);}
+.cmt-head time{font-size:.72rem;color:var(--ink-3);margin-left:auto;}
+.cmt p{margin:0;font-size:.87rem;color:var(--ink-2);}
+
+/* 资讯 */
+.news{display:grid;gap:12px;}
+.news-item{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);
+  padding:16px 18px;box-shadow:var(--sh);display:grid;grid-template-columns:1fr auto;gap:6px 16px;
+}
+.news-item h3{font-size:.95rem;grid-column:1;}
+.news-item time{font-size:.74rem;color:var(--ink-3);white-space:nowrap;}
+.news-item p{grid-column:1/-1;margin:0;font-size:.85rem;color:var(--ink-2);}
+
+/* 相关推荐标签 */
+.rel-tags{display:flex;flex-wrap:wrap;gap:9px;}
+.rel-tags a{
+  font-size:.83rem;background:var(--panel);border:1px solid var(--line);
+  padding:6px 13px;border-radius:20px;color:var(--ink-2);transition:.16s;
+}
+.rel-tags a:hover{background:var(--main-l);color:var(--main-d);border-color:var(--main);}
+
+/* 榜单 */
+.rank{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--sh);overflow:hidden;}
+.rank li{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:.89rem;}
+.rank li:last-child{border-bottom:none;}
+.rank .no{
+  width:22px;height:22px;border-radius:6px;background:#f2eeef;color:var(--ink-3);
+  display:grid;place-items:center;font-size:.75rem;font-weight:700;flex-shrink:0;
+}
+.rank li:nth-child(1) .no{background:var(--main);color:#fff;}
+.rank li:nth-child(2) .no{background:#f0a9ba;color:#fff;}
+.rank li:nth-child(3) .no{background:#f6c9d4;color:var(--main-d);}
+.rank .r-name{flex:1;min-width:0;}
+.rank .r-name em{font-style:normal;font-size:.72rem;color:var(--ink-3);display:block;}
+.rank .r-hot{font-size:.76rem;color:var(--main-d);font-weight:700;white-space:nowrap;}
+
+/* 投稿互动 */
+.interact{
+  background:linear-gradient(135deg,#fff5f7,#fbeef1);
+  border:1px solid var(--line);border-radius:var(--r-card);padding:24px 26px;
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;box-shadow:var(--sh);
+}
+.interact h2{font-size:1.15rem;margin-bottom:6px;}
+.interact p{margin:0;font-size:.87rem;color:var(--ink-2);}
+.interact .acts{display:flex;gap:9px;flex-wrap:wrap;}
+
+/* 右栏 */
+.side{position:sticky;top:calc(var(--sticky-h) + 16px);display:flex;flex-direction:column;gap:20px;}
+.side-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:16px 16px 14px;box-shadow:var(--sh);scroll-margin-top:var(--sticky-h);}
+.side-box h3{font-size:.88rem;margin-bottom:11px;display:flex;align-items:center;gap:7px;}
+.side-box h3::before{content:"";width:4px;height:14px;background:var(--main);border-radius:2px;}
+.search-wrap{display:flex;gap:6px;margin-bottom:10px;}
+.search-wrap input{
+  flex:1;min-width:0;border:1px solid var(--line);border-radius:var(--r-btn);
+  padding:7px 10px;font-size:.83rem;font-family:inherit;background:var(--bg);color:var(--ink);
+}
+.search-wrap input:focus{outline:2px solid var(--main);outline-offset:1px;}
+.search-wrap button{border:none;background:var(--main);color:#fff;border-radius:var(--r-btn);padding:0 12px;font-size:.82rem;}
+.search-wrap button:hover{background:var(--main-d);}
+.search-fb{font-size:.78rem;color:var(--ink-3);min-height:1.2em;}
+.search-hit{display:block;font-size:.82rem;color:var(--ink-2);padding:5px 0;border-bottom:1px dashed var(--line);}
+.search-hit:last-child{border-bottom:none;}
+.search-hit b{color:var(--main-d);}
+
+.side-list li{padding:9px 0;border-bottom:1px dashed var(--line);}
+.side-list li:last-child{border-bottom:none;}
+.side-list a{font-size:.84rem;display:block;line-height:1.5;}
+.side-list a:hover{color:var(--main-d);}
+.side-list span{font-size:.73rem;color:var(--ink-3);display:block;margin-top:2px;}
+
+.timeline{position:relative;padding-left:15px;}
+.timeline::before{content:"";position:absolute;left:4px;top:5px;bottom:5px;width:1px;background:var(--line);}
+.timeline li{position:relative;padding-bottom:13px;font-size:.82rem;color:var(--ink-2);}
+.timeline li:last-child{padding-bottom:0;}
+.timeline li::before{content:"";position:absolute;left:-14px;top:.55em;width:7px;height:7px;border-radius:50%;background:var(--main);}
+.timeline b{display:block;font-size:.79rem;color:var(--ink);font-weight:700;}
+
+/* 页脚 */
+.site-foot{background:#2b2024;color:#cdbfc4;margin-top:40px;padding:44px 20px 26px;}
+.foot-in{max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;}
+.foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.foot-brand svg{width:30px;height:30px;}
+.foot-brand span{font-size:1.02rem;font-weight:800;color:#fff;}
+.foot-pos{font-size:.84rem;line-height:1.8;color:#b3a3a8;}
+.foot-col h4{font-size:.86rem;color:#fff;margin-bottom:11px;font-weight:700;}
+.foot-col li{margin-bottom:7px;}
+.foot-col a{font-size:.82rem;color:#b3a3a8;transition:color .16s;}
+.foot-col a:hover{color:#fff;}
+.foot-bottom{
+  max-width:var(--wrap);margin:30px auto 0;padding-top:18px;border-top:1px solid #43353a;
+  font-size:.76rem;color:#8f7f84;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+
+/* 回顶 */
+.to-top{
+  position:fixed;right:22px;bottom:26px;width:44px;height:44px;border-radius:50%;
+  background:var(--main);color:#fff;border:none;font-size:1.05rem;
+  box-shadow:var(--sh-h);display:none;place-items:center;z-index:50;transition:.2s;
+}
+.to-top.show{display:grid;}
+.to-top:hover{background:var(--main-d);transform:translateY(-2px);}
+
+/* 遮罩 */
+.mask{position:fixed;inset:0;background:rgba(36,28,31,.45);z-index:70;display:none;}
+.mask.show{display:block;}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1024px){
+  .layout{grid-template-columns:1fr;gap:0;}
+  .chan{
+    position:static;margin-bottom:26px;background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--r-card);padding:14px;box-shadow:var(--sh);
+  }
+  .chan ul{flex-direction:row;flex-wrap:wrap;gap:6px;}
+  .chan a{border-left:none;border:1px solid var(--line);padding:5px 11px;}
+  .chan a.active{border-color:var(--main);}
+  .side{position:static;flex-direction:row;flex-wrap:wrap;margin-top:10px;}
+  .side-box{flex:1 1 260px;}
+  .hero-in{grid-template-columns:1fr;gap:26px;}
+  .hero-art{height:260px;max-width:420px;margin:0 auto;width:100%;}
+  .foot-in{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:740px){
+  :root{--sticky-h:104px;}
+  .head-nav{display:none;}
+  .hamburger{display:inline-block;}
+  .head-in{gap:10px;padding:9px 14px;flex-wrap:wrap;}
+  .head-actions .btn:not(.btn-primary){display:none;}
+  .notice{font-size:.75rem;padding:6px 12px;gap:8px;}
+  .notice .n-item:nth-child(n+3){display:none;}
+  .layout{padding:24px 14px 10px;}
+  .hero-in{padding:34px 14px 30px;}
+  .hero h1{font-size:1.85rem;}
+  .article{padding:20px 18px;}
+  .card-grid{grid-template-columns:1fr;}
+  .interact{grid-template-columns:1fr;}
+  .foot-in{grid-template-columns:1fr;gap:22px;}
+  .to-top{right:14px;bottom:16px;width:40px;height:40px;}
+  .news-item{grid-template-columns:1fr;}
+  .news-item time{grid-column:1;}
+  .upd{flex-wrap:wrap;gap:4px 10px;}
+  .upd time{width:auto;}
+  .check-table{display:block;overflow-x:auto;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-top">
+  <div class="notice" role="status">
+    <b>yummy_707 推特</b>
+    <span class="n-item"><i>11-08</i>《冬夜车厢》写真第五组上线</span>
+    <span class="n-item"><i>11-07</i>直播回放「深夜开箱」已归档</span>
+    <span class="n-item"><i>11-05</i>联名企划「粉雾」预告片释出</span>
+  </div>
+  <header class="site-head">
+    <div class="head-in">
+      <a class="logo" href="/#top" aria-label="yummy_707 推特 首页">
+        <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+          <rect width="100" height="100" rx="22" fill="#d94f6d"/>
+          <path d="M28 64c9-30 35-30 44 0" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <circle cx="36" cy="37" r="6" fill="#fff"/>
+          <circle cx="64" cy="37" r="6" fill="#fff"/>
+          <circle cx="50" cy="52" r="4" fill="#fff" opacity=".85"/>
+        </svg>
+        <span class="logo-text">yummy_707 推特</span>
+      </a>
+      <nav class="head-nav" aria-label="主题导航">
+        <a href="/#overview">领域概览</a>
+        <a href="/#picks">精选图集</a>
+        <a href="/#updates">更新动态</a>
+        <a href="/#cats">分类入口</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#guide">观看路径</a>
+        <a href="/#faq">常见问题</a>
+      </nav>
+      <div class="head-actions">
+        <a class="btn" href="/#interact">投稿互动</a>
+        <a class="btn btn-primary" href="/#updates">最新更新</a>
+        <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单">☰</button>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="mask" id="mask"></div>
+
+<main id="top">
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="hero-in">
+      <div>
+        <span class="hero-tag">创作者内容归档 · 2026 年 11 月</span>
+        <h1>yummy_707 推特</h1>
+        <p class="hero-desc">
+          汇总 yummy_707 在推特账号发布与转存的写真图集、短视频片段、直播回放和联名企划，
+          按<strong>发布日、内容类型、制作班底</strong>三条线索整理，方便按图集编号或企划名找具体条目。
+        </p>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="#picks">看图集条目</a>
+          <a class="btn" href="#updates">更新记录</a>
+          <a class="btn" href="#deep">解析拍摄班底</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>42</b>条图文归档</div>
+          <div><b>17</b>段短视频</div>
+          <div><b>9</b>场直播回放</div>
+          <div><b>11-08</b>最近更新</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="ring2"></div>
+        <div class="hero-card hc1">
+          <img src="https://picsum.photos/seed/yummy707winter1/400/600" width="400" height="600" alt="冬夜车厢写真第一组，车窗反光与毛呢外套特写" loading="lazy">
+          <span>冬夜车厢 · 01</span>
+        </div>
+        <div class="hero-card hc2">
+          <img src="https://picsum.photos/seed/yummy707pink2/400/600" width="400" height="600" alt="粉雾联名企划预告画面，粉色烟雾与白衬衫" loading="lazy">
+          <span>粉雾企划 · 预告</span>
+        </div>
+        <div class="hero-card hc3">
+          <img src="https://picsum.photos/seed/yummy707live3/400/300" width="400" height="300" alt="深夜开箱直播回放封面，桌面摆件与补光灯" loading="lazy">
+          <span>深夜开箱</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <!-- 左频道 -->
+    <aside class="chan" aria-label="频道索引">
+      <div class="chan-title">频道索引</div>
+      <ul>
+        <li><a href="/#overview" class="active">领域概览</a></li>
+        <li><a href="/#picks">精选图集 <em>10</em></a></li>
+        <li><a href="/#updates">更新动态 <em>10</em></a></li>
+        <li><a href="/#cats">分类入口 <em>8</em></a></li>
+        <li><a href="/#deep">深度解析</a></li>
+        <li><a href="/#guide">观看路径</a></li>
+        <li><a href="/#faq">常见问题 <em>6</em></a></li>
+        <li><a href="/#comments">读者评论</a></li>
+        <li><a href="/#news">相关资讯 <em>6</em></a></li>
+        <li><a href="/#rank">热度榜单</a></li>
+        <li><a href="/#interact">投稿互动</a></li>
+      </ul>
+    </aside>
+
+    <!-- 主栏 -->
+    <div class="main-col">
+
+      <!-- 1 概览 -->
+      <section class="block" id="overview">
+        <div class="block-head">
+          <h2>创作者内容领域概览</h2>
+          <span class="sub">推特图文、短视频、直播回放与联名企划</span>
+        </div>
+        <div class="overview">
+          <p>
+            yummy_707 的推特账号以<b>写真图集</b>为主线，围绕季节与场景做系列化发布：2026 年秋季完结的「旧公寓日光」共六组，
+            11 月启动的「冬夜车厢」已放出五组。图集之外，账号每隔一两周会补一段 <b>30 秒到 90 秒的短视频</b>，
+            内容多为拍摄花絮、换装转场和未采用的废片，剪辑者署名通常写在推文第二行。
+          </p>
+          <p>
+            直播是另一条线。固定在周五晚 22:00 开播的「深夜开箱」已进行到第 14 期，内容是拆粉丝寄来的物件、试穿当季服装，
+            结束后 48 小时内把回放切成三段上传。观众能查到每期开箱清单，清单由主播在直播中口述、由粉丝账号 <b>@707archive</b> 整理成表。
+          </p>
+          <p>
+            联名企划数量不多，2026 年只公开了三次：「粉雾」与服装品牌 MOLLY SALT 合作、「旧胶片」与独立冲印店 35mm 事务所合作、
+            「午夜食堂」与便利店联名贴纸。三次企划的预告片、正片和幕后分别发布在推特、Instagram 与 YouTube，
+            推特端只放预告与部分正片，完整版需跳转。这一点常被新观众误解，评论区里关于「找不到完整正片」的提问占了相当比例。
+          </p>
+          <p>
+            值得关注的方向还有<b>图集编号体系</b>。2026 年 6 月起，每组图集推文首行统一写「系列名 · 组号 / 总组数」，
+            例如「冬夜车厢 · 05/06」。编号一旦发布不再改动，因此按编号检索比按日期检索更可靠。
+          </p>
+        </div>
+      </section>
+
+      <!-- 2 精选 -->
+      <section class="block" id="picks">
+        <div class="block-head">
+          <h2>精选图集与企划条目</h2>
+          <span class="sub">2026-10-12 至 2026-11-08 发布</span>
+        </div>
+        <p class="lead">按图集组号与企划名排列，热度为推文点赞与转推合计的近似值，取 11 月 8 日 10:00 数据。</p>
+        <div class="card-grid">
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707car01/400/300" width="400" height="300" alt="冬夜车厢第一组，夜间列车车厢内靠窗坐姿" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">冬夜车厢 · 01/06</a></h3>
+              <div class="tag-row"><span class="tag">写真图集</span><span class="tag grey">夜景</span><span class="tag grey">列车</span></div>
+              <p class="card-note">拍摄于 10 月 29 日末班车，车厢灯管偏绿，成片保留了色偏没有校色。摄影师署名 K.Sato，是其与账号的第二次合作。</p>
+              <div class="card-meta"><span>热度 <b>1.8万</b></span><span>10-31 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707car05/400/300" width="400" height="300" alt="冬夜车厢第五组，站台雨棚下的侧身剪影" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">冬夜车厢 · 05/06</a></h3>
+              <div class="tag-row"><span class="tag">写真图集</span><span class="tag grey">雨夜</span><span class="tag grey">站台</span></div>
+              <p class="card-note">雨棚下用一盏 LED 补光，背景列车进站有拖影。推文附了未采用的 4 张废片，其中两张因对焦失败被本人标注「报废」。</p>
+              <div class="card-meta"><span>热度 <b>2.3万</b></span><span>11-08 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707pinkpre/400/300" width="400" height="300" alt="粉雾联名企划预告，粉烟与白衬衫局部" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">粉雾企划 · 预告片</a></h3>
+              <div class="tag-row"><span class="tag">联名企划</span><span class="tag grey">MOLLY SALT</span></div>
+              <p class="card-note">45 秒预告，11 月 5 日上线。画面用干冰与粉色滤片，正片 11 月 15 日在品牌官网首发，推特端只放前 20 秒。</p>
+              <div class="card-meta"><span>热度 <b>9600</b></span><span>11-05 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707apt03/400/300" width="400" height="300" alt="旧公寓日光第三组，午后窗影落在木地板" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">旧公寓日光 · 03/06</a></h3>
+              <div class="tag-row"><span class="tag">写真图集</span><span class="tag grey">自然光</span><span class="tag grey">室内</span></div>
+              <p class="card-note">整组只用下午两点到四点的自然光，没有补光设备。第 4 张因窗帘穿帮被重拍，推文里贴了重拍前后对比。</p>
+              <div class="card-meta"><span>热度 <b>1.4万</b></span><span>10-14 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707live14/400/300" width="400" height="300" alt="深夜开箱第14期回放封面，桌面摆着纸箱与补光灯" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">深夜开箱 · 第 14 期回放</a></h3>
+              <div class="tag-row"><span class="tag">直播回放</span><span class="tag grey">开箱</span></div>
+              <p class="card-note">11 月 7 日 22:00 开播，时长 1 小时 52 分，切成三段上传。本期拆到粉丝寄的旧相机，当场试拍了两张。</p>
+              <div class="card-meta"><span>热度 <b>7100</b></span><span>11-07 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707film02/400/300" width="400" height="300" alt="旧胶片企划第二组，手持胶片机与冲印店工作台" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">旧胶片企划 · 冲印店篇</a></h3>
+              <div class="tag-row"><span class="tag">联名企划</span><span class="tag grey">35mm 事务所</span></div>
+              <p class="card-note">与独立冲印店 35mm 事务所合作，全程用 Portra 400 拍摄，扫描件未修。推文列出每张的机型与快门参数。</p>
+              <div class="card-meta"><span>热度 <b>1.1万</b></span><span>10-22 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707short07/400/300" width="400" height="300" alt="换装转场短视频截图，镜子前两套服装切换" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">换装转场短片 · 07</a></h3>
+              <div class="tag-row"><span class="tag">短视频</span><span class="tag grey">剪辑花絮</span></div>
+              <p class="card-note">58 秒，一镜到底靠镜面遮挡完成三次换装。剪辑署名 @nana_cut，评论区有人逐帧数出实际只有两次真换装。</p>
+              <div class="card-meta"><span>热度 <b>8300</b></span><span>10-27 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707midnight/400/300" width="400" height="300" alt="午夜食堂联名贴纸，便利店货架与贴纸特写" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">午夜食堂 · 联名贴纸</a></h3>
+              <div class="tag-row"><span class="tag">联名企划</span><span class="tag grey">便利店</span></div>
+              <p class="card-note">10 月 18 日起在关东地区 320 家门店随关东煮发售，共 6 款。推文贴了完整货架照片与贴纸编号对照表。</p>
+              <div class="card-meta"><span>热度 <b>1.2万</b></span><span>10-18 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707car03/400/300" width="400" height="300" alt="冬夜车厢第三组，车厢连接处不锈钢扶手与倒影" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">冬夜车厢 · 03/06</a></h3>
+              <div class="tag-row"><span class="tag">写真图集</span><span class="tag grey">不锈钢</span><span class="tag grey">反光</span></div>
+              <p class="card-note">在车厢连接处拍摄，利用不锈钢门的变形做构图。第 2 张因列车晃动糊掉，本人认为糊得刚好，保留进正片。</p>
+              <div class="card-meta"><span>热度 <b>1.6万</b></span><span>11-03 发布</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://picsum.photos/seed/yummy707apt06/400/300" width="400" height="300" alt="旧公寓日光第六组，傍晚逆光下的窗帘与身影" loading="lazy">
+            <div class="card-body">
+              <h3><a href="/#picks">旧公寓日光 · 06/06</a></h3>
+              <div class="tag-row"><span class="tag">写真图集</span><span class="tag grey">逆光</span><span class="tag grey">收尾</span></div>
+              <p class="card-note">系列收尾组，只拍了 9 张，推文说明因公寓 10 月底退租，最后一组在搬空后补拍，画面里家具已全部撤走。</p>
+              <div class="card-meta"><span>热度 <b>2.0万</b></span><span>10-30 发布</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3 更新 -->
+      <section class="block" id="updates">
+        <div class="block-head">
+          <h2>推特更新与发布动态</h2>
+          <span class="sub">近 30 天，按时间倒序</span>
+        </div>
+        <div class="updates">
+          <div class="upd"><time>11-08 09:12</time><span class="u-type">图集</span><div class="u-main"><strong>冬夜车厢 · 05/06 上线</strong><p>共 12 张，含 4 张废片与一张拍摄花絮，推文第二行署名摄影师 K.Sato。</p></div></div>
+          <div class="upd"><time>11-07 23:40</time><span class="u-type">直播</span><div class="u-main"><strong>深夜开箱第 14 期回放分段上传</strong><p>切成 3 段，总长 1 小时 52 分，开箱清单由 @707archive 同步到置顶表格。</p></div></div>
+          <div class="upd"><time>11-06 15:02</time><span class="u-type">转发</span><div class="u-main"><strong>转推 MOLLY SALT 正片倒计时</strong><p>品牌方公布 11 月 15 日首发，推特端确认只放前 20 秒，完整版在品牌官网。</p></div></div>
+          <div class="upd"><time>11-05 19:30</time><span class="u-type">企划</span><div class="u-main"><strong>粉雾企划预告片 45 秒释出</strong><p>干冰与粉色滤片拍摄，正片 11 月 15 日上线，预告片单独设了一条置顶。</p></div></div>
+          <div class="upd"><time>11-04 12:18</time><span class="u-type">说明</span><div class="u-main"><strong>更正 03/06 组图编号</strong><p>原推误写为「03/05」，两小时后编辑更正为「03/06」，评论区保留了更正说明。</p></div></div>
+          <div class="upd"><time>11-03 21:06</time><span class="u-type">图集</span><div class="u-main"><strong>冬夜车厢 · 03/06 上线</strong><p>9 张，车厢连接处拍摄，其中第 2 张为晃动糊片，推文说明「糊得刚好」故保留。</p></div></div>
+          <div class="upd"><time>10-31 20:44</time><span class="u-type">图集</span><div class="u-main"><strong>冬夜车厢 · 01/06 上线</strong><p>10 张，10 月 29 日末班车拍摄，车厢灯管偏绿未校色，摄影师为 K.Sato。</p></div></div>
+          <div class="upd"><time>10-30 18:20</time><span class="u-type">图集</span><div class="u-main"><strong>旧公寓日光 · 06/06 收尾</strong><p>只拍 9 张，公寓 10 月底退租，家具已撤空，推文附了空房现场照。</p></div></div>
+          <div class="upd"><time>10-27 22:50</time><span class="u-type">短视频</span><div class="u-main"><strong>换装转场短片 07 发布</strong><p>58 秒一镜到底，剪辑 @nana_cut，评论区有观众逐帧核对换装次数。</p></div></div>
+          <div class="upd"><time>10-22 14:05</time><span class="u-type">企划</span><div class="u-main"><strong>旧胶片企划冲印店篇上线</strong><p>Portra 400 全程拍摄，扫描件未修，推文列出每张机型与快门参数。</p></div></div>
+        </div>
+      </section>
+
+      <!-- 4 分类 -->
+      <section class="block" id="cats">
+        <div class="block-head">
+          <h2>按内容类型与企划分入口</h2>
+          <span class="sub">8 类，点击定位到对应条目组</span>
+        </div>
+        <div class="cat-grid">
+          <a class="cat" href="/#picks"><strong>写真图集</strong><span>按系列名＋组号检索，共 42 条</span></a>
+          <a class="cat" href="/#picks"><strong>短视频片段</strong><span>花絮、转场与废片剪辑，17 段</span></a>
+          <a class="cat" href="/#picks"><strong>直播回放</strong><span>深夜开箱全 14 期，分 3 段上传</span></a>
+          <a class="cat" href="/#picks"><strong>联名企划</strong><span>粉雾、旧胶片、午夜食堂三次</span></a>
+          <a class="cat" href="/#picks"><strong>未采用废片</strong><span>随图集附发，含对焦失败与穿帮</span></a>
+          <a class="cat" href="/#deep"><strong>拍摄班底</strong><span>摄影师、剪辑、造型署名对照</span></a>
+          <a class="cat" href="/#guide"><strong>观看顺序</strong><span>按系列补看的最省时路径</span></a>
+          <a class="cat" href="/#news"><strong>企划进度</strong><span>预告、正片、幕后分别在哪发</span></a>
+        </div>
+      </section>
+
+      <!-- 5 深度解析 -->
+      <section class="block" id="deep">
+        <div class="block-head">
+          <h2>系列图集的拍摄逻辑与取舍</h2>
+          <span class="sub">以「冬夜车厢」与「旧公寓日光」为样本</span>
+        </div>
+        <article class="article">
+          <h3>一、两组图集的技术路线完全不同</h3>
+          <p>
+            「旧公寓日光」六组全部依赖自然光，拍摄窗口固定在下午两点到四点。第三组推文里写得很直白：没有补光设备，窗帘穿帮就重拍。
+            这套做法在夏季可行，因为日照角度稳定；到了 10 月底，公寓退租，最后一组拍的是空房，家具撤走，画面靠逆光和窗帘撑住构图。
+          </p>
+          <p>
+            「冬夜车厢」走了相反的路。第一组推文承认车厢灯管偏绿，成片保留色偏没有校色。第三组在车厢连接处拍不锈钢反光，第二张因列车晃动糊掉，
+            本人判断「糊得刚好」保留进正片。两组的技术选择差异，直接决定了成片的气质：前者干净但受限，后者可控性差但出片有偶然性。
+          </p>
+          <div class="quote">「05/06 的雨棚补光只带了一盏 LED，色温 5600K，和站台钠灯混在一起偏得离谱，后期没救，索性不救。」——11 月 8 日推文第二段原文</div>
+
+          <h3>二、署名结构能看出合作深度</h3>
+          <p>
+            推特端的署名习惯是推文第二行写「摄影 / 剪辑 / 造型」，不是每一条都写全。把 2026 年 6 月至今的推文按署名统计，可以分出三类合作：
+          </p>
+          <ul>
+            <li><b>固定班底：</b>摄影师 K.Sato，参与「冬夜车厢」01、03、05 三组，署名格式统一为「Photo: K.Sato」，是目前出现次数最多的外部姓名。</li>
+            <li><b>一次性合作：</b>「旧胶片企划」的冲印店篇由 35mm 事务所提供场地与扫描，署名写在正文末尾，而非第二行，说明是场地合作而非拍摄合作。</li>
+            <li><b>粉丝侧参与：</b>剪辑 @nana_cut 负责换装转场短片 07，账号此前在评论区活跃，属于从观众转为合作者。</li>
+          </ul>
+          <p>
+            署名位置本身携带信息：写在第二行的是主创，写在末尾的是资源方，只出现在评论区回复里的是临时帮忙。按这个规律回查旧推文，
+            能判断哪些条目是完整班底制作、哪些是单人完成。
+          </p>
+
+          <h3>三、编号体系比日期更可靠</h3>
+          <p>
+            11 月 4 日出现过一次编号更正：03/06 组的推文原写「03/05」，两小时后编辑为「03/06」，评论区保留了更正说明。
+            这类错误在 2026 年共出现三次，全部发生在系列中段，原因是发布前未核对总组数。
+          </p>
+          <p>
+            对按编号检索的人来说，日期会骗人，编号不会——更正后编号不回退，只在原推追加说明。所以查某一组是否发布，看编号连续性比看时间线更准。
+            05/06 的编号在 11 月 8 日上线，06/06 尚未发布，按前五组的间隔推算，最后一组大概率在 11 月中旬，但账号没有给出确认日期。
+          </p>
+
+          <h3>四、把「可信度」拆成可核对的三项</h3>
+          <p>
+            关于企划信息，常有人说推特端消息「不全」或「慢」。这个判断可以拆成三项具体核对：
+          </p>
+          <table class="check-table">
+            <thead>
+              <tr><th>核对项</th><th>推特端表现</th><th>缺口在哪</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>正片完整度</td><td>粉雾企划只放前 20 秒</td><td>完整版在 MOLLY SALT 官网，推特不转载</td></tr>
+              <tr><td>发布时间</td><td>预告与推特同步，正片晚于官网</td><td>官网 11-15 首发，推特端未给具体补发时间</td></tr>
+              <tr><td>幕后信息</td><td>拍摄花絮随图集附发</td><td>剪辑工程文件与调色参数从未公开</td></tr>
+            </tbody>
+          </table>
+          <p>
+            三项里前两项属于渠道策略，第三项属于创作者选择。把「不全」笼统归为账号问题并不准确：正片缺口是品牌方排他协议造成的，
+            幕后缺口才是账号自身的发布习惯。分开看，才能判断该去哪个平台补哪一块。
+          </p>
+
+          <h3>五、废片的价值被低估</h3>
+          <p>
+            「冬夜车厢」05/06 附了 4 张废片，其中两张因对焦失败被标注「报废」。这类附发从 2026 年 8 月开始成为惯例，
+            平均每组带 2—4 张。废片里能看到正式成片没有的信息：机位试错、灯光位置、被放弃的构图。
+          </p>
+          <p>
+            对模仿拍摄的人来说，废片比正片有用。正片是结果，废片是过程。03/06 那张晃动糊片能保留，恰恰说明这组图集的取舍标准不是「清晰」，
+            而是「有没有留下当时车厢的状态」。标准一旦明确，看片时就能判断哪些是刻意、哪些是失误。
+          </p>
+        </article>
+      </section>
+
+      <!-- 6 指南 -->
+      <section class="block" id="guide">
+        <div class="block-head">
+          <h2>补看系列图集的顺序与判断依据</h2>
+          <span class="sub">按时间成本从低到高</span>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>先看单组完整度，再决定是否追系列</strong>
+            <p>「冬夜车厢」05/06 是 12 张加 4 张废片，信息密度最高；01/06 只有 10 张且色偏明显。时间有限就从 05 开始，能一次看清这组的构图与补光方式。</p>
+          </div>
+          <div class="step">
+            <strong>用编号核对发布进度，不用日期</strong>
+            <p>03/06 曾误写为 03/05，两小时后更正。编号一旦发布不回退，查系列是否完结看编号连续性即可，06/06 截至 11 月 8 日仍未发布。</p>
+          </div>
+          <div class="step">
+            <strong>企划类内容先查渠道再投入时间</strong>
+            <p>粉雾企划推特端只有 45 秒预告，正片 11 月 15 日在 MOLLY SALT 官网首发。想看完整体验，等官网比反复刷推特有效。</p>
+          </div>
+          <div class="step">
+            <strong>直播回放按段看，不必从头</strong>
+            <p>深夜开箱第 14 期切成 3 段，第一段是开场闲聊，第二段才是开箱主体。只想看拆箱的可以从第二段进入，清单在 @707archive 的置顶表格里。</p>
+          </div>
+          <div class="step">
+            <strong>同类条目比较看署名与废片附发量</strong>
+            <p>署名完整、废片附发多的组，通常制作周期更长。「旧公寓日光」06/06 只拍 9 张且无废片，是因为公寓退租仓促，与前三组的完成度不在一个水平。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 FAQ -->
+      <section class="block" id="faq">
+        <div class="block-head">
+          <h2>关于图集与企划的常见问题</h2>
+          <span class="sub">6 问</span>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>「冬夜车厢」一共有几组，最后一组什么时候发？</summary>
+            <div class="ans">计划 6 组，截至 2026 年 11 月 8 日已发布 01、03、05 三组，02、04 两组分别在 11 月 1 日和 11 月 6 日发布后未单独置顶，检索时容易漏。06/06 尚未发布，账号没有给出确认日期，按前几组间隔推算在 11 月中旬。</div>
+          </details>
+          <details>
+            <summary>粉雾企划的完整正片在哪里看？</summary>
+            <div class="ans">完整版由服装品牌 MOLLY SALT 在自家官网首发，日期是 11 月 15 日。推特端只放 45 秒预告，正片不转载，11 月 6 日的转推里品牌方明确了这一点。</div>
+          </details>
+          <details>
+            <summary>深夜开箱第 14 期拆到了什么？</summary>
+            <div class="ans">粉丝寄来的旧相机、两件当季外套和一盒手写信。旧相机当场试拍了两张，成像偏黄，主播判断是快门帘老化。完整清单由粉丝账号 @707archive 整理成表，置顶在推特主页。</div>
+          </details>
+          <details>
+            <summary>03/06 组的编号为什么改过？</summary>
+            <div class="ans">11 月 4 日发布时误写为「03/05」，两小时后编辑更正为「03/06」，原因是发布前没核对系列总组数。更正说明保留在评论区，原推没有删除。</div>
+          </details>
+          <details>
+            <summary>废片是每期都附吗，一般几张？</summary>
+            <div class="ans">从 2026 年 8 月起成为惯例，平均每组 2—4 张。冬夜车厢 05/06 附了 4 张，其中两张因对焦失败被标注「报废」。旧公寓日光 06/06 因公寓退租仓促，没有附废片。</div>
+          </details>
+          <details>
+            <summary>换装转场短片 07 到底换了几次装？</summary>
+            <div class="ans">成片看起来是三次，实际只有两次真换装，第三次靠镜面遮挡加后期叠化完成。剪辑 @nana_cut 在评论区回复确认了这一点，有观众逐帧数过。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8 评论 -->
+      <section class="block" id="comments">
+        <div class="block-head">
+          <h2>观众与读者评论</h2>
+          <span class="sub">18 条，含中性评价</span>
+        </div>
+        <div class="cmt-list">
+          <div class="cmt"><div class="cmt-head"><span class="avatar">阿</span><strong>阿岚不打伞</strong><time>11-08 10:02</time></div><p>05/06 站台那张拖影真的顶，雨棚下就一盏 LED 还能压住背景，K.Sato 这组比 01 稳太多。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">冬</span><strong>冬眠的猫头鹰</strong><time>11-08 09:41</time></div><p>06/06 到底什么时候发，等到花儿都谢了。别又拖到十二月。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">胶</span><strong>胶片收容所</strong><time>11-07 23:55</time></div><p>旧胶片企划那组 Portra 400 的扫描件没修，肤色看着有点脏，但我觉得挺对，修了反而假。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">m</span><strong>momo_2077</strong><time>11-07 22:31</time></div><p>第 14 期拆到旧相机那段笑死，快门帘老化了还硬拍。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">南</span><strong>南瓜浓汤少放糖</strong><time>11-07 20:18</time></div><p>粉雾预告看了三遍，干冰那个转场是剪的还是拍的？有人知道吗。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">K</span><strong>KTV麦霸本人</strong><time>11-06 19:44</time></div><p>说真的，编号改来改去容易乱，建议以后发布前先数清楚总组数。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">三</span><strong>三号线常客</strong><time>11-06 16:09</time></div><p>冬夜车厢 03 那张糊片我一开始以为是失误，看了说明才知道是故意留的，行吧，有想法。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">小</span><strong>小满不满</strong><time>11-05 23:12</time></div><p>MOLLY SALT 官网那个正片要注册才能看，麻烦。推特只放 20 秒是真抠。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">锅</span><strong>锅包肉不要胡萝卜</strong><time>11-05 18:37</time></div><p>今天加班到现在，饭还没吃。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">N</span><strong>nana_cut</strong><time>11-04 22:05</time></div><p>转场 07 第三次换装确实是叠化，镜面遮挡那块拍了十七条才过。逐帧数的朋友眼真尖。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">旧</span><strong>旧公寓204</strong><time>11-04 15:20</time></div><p>06/06 空房那组其实比前三组好，家具撤了反而干净。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">路</span><strong>路过打酱油的</strong><time>11-03 21:48</time></div><p>不常看这类，刷到 03 组不锈钢那张停了一下，构图挺怪但好看。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">L</span><strong>Lemon_707fan</strong><time>11-03 13:02</time></div><p>@707archive 那个清单表格是真的好用，比我翻回放快一百倍，感谢整理。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">阿</span><strong>阿May</strong><time>11-02 20:26</time></div><p>每周五蹲直播已经成习惯了，虽然有时候就是闲聊，但听着干活不孤单。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">北</span><strong>北纬35度</strong><time>11-01 11:33</time></div><p>旧公寓日光 03 的重拍对比贴我存了，窗帘穿帮那个细节一般人不注意，但确实碍眼。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">七</span><strong>七号台风</strong><time>10-31 22:19</time></div><p>色偏不校色这个选择有争议吧，绿得有点过了，第一眼看还以为显示器坏了。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">柚</span><strong>柚子茶加冰</strong><time>10-30 19:07</time></div><p>公寓退租那事挺可惜的，那个窗光是真的好。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">壹</span><strong>壹玖贰</strong><time>10-29 23:50</time></div><p>最近地铁末班车人少，拍东西确实方便，就是灯太绿。</p></div>
+        </div>
+      </section>
+
+      <!-- 9 资讯 -->
+      <section class="block" id="news">
+        <div class="block-head">
+          <h2>企划与发布相关资讯</h2>
+          <span class="sub">2026-10-11 至 2026-11-08</span>
+        </div>
+        <div class="news">
+          <article class="news-item">
+            <h3>MOLLY SALT 确认粉雾正片 11 月 15 日官网首发</h3>
+            <time>2026-11-06</time>
+            <p>品牌方在官方账号说明，正片时长 4 分 20 秒，官网观看需注册会员，推特端仅同步预告与前 20 秒，不提供完整版转载。</p>
+          </article>
+          <article class="news-item">
+            <h3>35mm 事务所公布旧胶片企划扫描参数</h3>
+            <time>2026-11-02</time>
+            <p>冲印店在博客贴出扫描设置：Noritsu HS-1800，4000dpi，未做色彩校正。文中提到该批胶片共 8 卷，其中 2 卷因曝光不足被弃用。</p>
+          </article>
+          <article class="news-item">
+            <h3>深夜开箱第 14 期开箱清单同步至置顶表格</h3>
+            <time>2026-11-07</time>
+            <p>@707archive 在回放上传后 40 分钟内更新清单，本期共 11 件物品，其中 7 件为粉丝寄送，清单标注了寄件人账号与到件日期。</p>
+          </article>
+          <article class="news-item">
+            <h3>午夜食堂贴纸关东地区铺货扩至 320 家</h3>
+            <time>2026-10-18</time>
+            <p>便利店方在发售首日追加 60 家门店，贴纸共 6 款，编号 01—06，其中 04 款在部分门店提前售罄，二手平台出现溢价转售。</p>
+          </article>
+          <article class="news-item">
+            <h3>冬夜车厢 03/06 编号更正说明保留在原推</h3>
+            <time>2026-11-04</time>
+            <p>更正发生在发布后 2 小时 11 分，原推未删除，评论区追加说明称「发布前未核对总组数」，该条回复获 340 次点赞。</p>
+          </article>
+          <article class="news-item">
+            <h3>换装转场短片 07 剪辑过程贴出时间线截图</h3>
+            <time>2026-10-27</time>
+            <p>@nana_cut 在回复中贴出剪辑软件时间线，显示第三次换装由两段素材叠化完成，叠化时长 0.4 秒，实拍条数为 17 条。</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10 相关推荐 -->
+      <section class="block" id="related">
+        <div class="block-head">
+          <h2>相关条目与内容方向</h2>
+          <span class="sub">具体条目名与类型词</span>
+        </div>
+        <div class="rel-tags">
+          <a href="/#picks">冬夜车厢 05/06</a>
+          <a href="/#picks">旧公寓日光 06/06</a>
+          <a href="/#picks">粉雾企划预告片</a>
+          <a href="/#picks">旧胶片企划冲印店篇</a>
+          <a href="/#picks">深夜开箱第 14 期</a>
+          <a href="/#picks">换装转场短片 07</a>
+          <a href="/#picks">午夜食堂联名贴纸</a>
+          <a href="/#deep">K.Sato 拍摄署名对照</a>
+        </div>
+      </section>
+
+      <!-- 11 榜单 -->
+      <section class="block" id="rank">
+        <div class="block-head">
+          <h2>图集与短片热度榜</h2>
+          <span class="sub">点赞与转推合计，截至 11-08 10:00</span>
+        </div>
+        <ol class="rank">
+          <li><span class="no">1</span><span class="r-name">冬夜车厢 · 05/06<em>写真图集 · 12 张 + 4 废片</em></span><span class="r-hot">2.3万</span></li>
+          <li><span class="no">2</span><span class="r-name">旧公寓日光 · 06/06<em>写真图集 · 空房收尾</em></span><span class="r-hot">2.0万</span></li>
+          <li><span class="no">3</span><span class="r-name">冬夜车厢 · 01/06<em>写真图集 · 末班车色偏</em></span><span class="r-hot">1.8万</span></li>
+          <li><span class="no">4</span><span class="r-name">冬夜车厢 · 03/06<em>写真图集 · 车厢连接处</em></span><span class="r-hot">1.6万</span></li>
+          <li><span class="no">5</span><span class="r-name">旧公寓日光 · 03/06<em>写真图集 · 自然光重拍</em></span><span class="r-hot">1.4万</span></li>
+          <li><span class="no">6</span><span class="r-name">午夜食堂 · 联名贴纸<em>联名企划 · 6 款</em></span><span class="r-hot">1.2万</span></li>
+          <li><span class="no">7</span><span class="r-name">旧胶片企划 · 冲印店篇<em>联名企划 · Portra 400</em></span><span class="r-hot">1.1万</span></li>
+          <li><span class="no">8</span><span class="r-name">粉雾企划 · 预告片<em>联名企划 · 45 秒</em></span><span class="r-hot">9600</span></li>
+        </ol>
+      </section>
+
+      <!-- 12 投稿互动 -->
+      <section class="block" id="interact">
+        <div class="interact">
+          <div>
+            <h2>投稿与互动</h2>
+            <p>粉丝寄件、废片翻拍、图集编号勘误、直播开箱清单补充，都可以走这四个入口。寄件地址每期直播开场口述一次，清单由 @707archive 维护。</p>
+          </div>
+          <div class="acts">
+            <a class="btn btn-primary" href="/#interact">寄件投稿</a>
+            <a class="btn" href="/#interact">编号勘误</a>
+            <a class="btn" href="/#interact">清单补充</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 右栏 -->
+    <aside class="side" aria-label="辅助栏">
+      <div class="side-box">
+        <h3>站内查找</h3>
+        <div class="search-wrap">
+          <input type="search" id="searchInput" placeholder="输入系列名或编号" aria-label="查找图集与企划条目">
+          <button type="button" id="searchBtn">查找</button>
+        </div>
+        <div class="search-fb" id="searchFb" aria-live="polite"></div>
+        <div id="searchResults"></div>
+      </div>
+
+      <div class="side-box">
+        <h3>最新发布</h3>
+        <ul class="side-list">
+          <li><a href="/#picks">冬夜车厢 · 05/06</a><span>11-08 · 12 张 + 4 废片</span></li>
+          <li><a href="/#picks">深夜开箱第 14 期回放</a><span>11-07 · 分 3 段</span></li>
+          <li><a href="/#picks">粉雾企划 · 预告片</a><span>11-05 · 45 秒</span></li>
+          <li><a href="/#picks">冬夜车厢 · 03/06</a><span>11-03 · 9 张</span></li>
+          <li><a href="/#picks">冬夜车厢 · 01/06</a><span>10-31 · 10 张</span></li>
+        </ul>
+      </div>
+
+      <div class="side-box">
+        <h3>系列发布节点</h3>
+        <ul class="timeline">
+          <li><b>10-29</b>冬夜车厢首组拍摄，末班车</li>
+          <li><b>10-31</b>01/06 上线，色偏未校</li>
+          <li><b>11-03</b>03/06 上线，连接处取景</li>
+          <li><b>11-04</b>03/06 编号更正为 /06</li>
+          <li><b>11-08</b>05/06 上线，雨棚补光</li>
+        </ul>
+      </div>
+
+      <div class="side-box">
+        <h3>企划渠道对照</h3>
+        <ul class="side-list">
+          <li><a href="/#news">粉雾企划</a><span>推特预告 · 官网正片 11-15</span></li>
+          <li><a href="/#news">旧胶片企划</a><span>推特正片 · 冲印店博客参数</span></li>
+          <li><a href="/#news">午夜食堂贴纸</a><span>推特对照表 · 门店发售</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="foot-in">
+    <div>
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+          <rect width="100" height="100" rx="22" fill="#d94f6d"/>
+          <path d="M28 64c9-30 35-30 44 0" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <circle cx="36" cy="37" r="6" fill="#fff"/>
+          <circle cx="64" cy="37" r="6" fill="#fff"/>
+        </svg>
+        <span>yummy_707 推特</span>
+      </div>
+      <p class="foot-pos">
+        归档范围覆盖 2026 年 6 月至 11 月 8 日，条目构成为写真图集 42 条、短视频 17 段、直播回放 9 场、联名企划 3 次。
+        图集按周更新、直播回放 48 小时内分段上传、企划信息随品牌方公告同步，废片与编号更正单独留档。
+      </p>
+    </div>
+    <div class="foot-col">
+      <h4>内容类型</h4>
+      <ul>
+        <li><a href="/#picks">写真图集</a></li>
+        <li><a href="/#picks">短视频片段</a></li>
+        <li><a href="/#picks">直播回放</a></li>
+        <li><a href="/#picks">联名企划</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>系列与企划</h4>
+      <ul>
+        <li><a href="/#picks">冬夜车厢系列</a></li>
+        <li><a href="/#picks">旧公寓日光系列</a></li>
+        <li><a href="/#news">粉雾企划</a></li>
+        <li><a href="/#news">旧胶片企划</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>阅读与参与</h4>
+      <ul>
+        <li><a href="/#deep">拍摄班底解析</a></li>
+        <li><a href="/#guide">补看顺序</a></li>
+        <li><a href="/#faq">常见问题</a></li>
+        <li><a href="/#interact">投稿互动</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>条目名称、热度与日期为内容整理示例，以账号实际发布为准。</span>
+    <span>更新至 2026-11-08 · 冬夜车厢 05/06、深夜开箱第 14 期回放、粉雾企划预告片</span>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+<!-- 移动端抽屉 -->
+<div id="mobileNav" style="display:none;position:fixed;top:0;right:0;bottom:0;width:min(78vw,300px);background:#fff;z-index:80;padding:22px 18px;box-shadow:-6px 0 24px rgba(80,30,45,.18);overflow-y:auto;" aria-label="移动导航">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <strong style="color:var(--main-d);font-size:1rem;">频道导航</strong>
+    <button id="closeNav" class="btn" aria-label="关闭导航" style="padding:4px 10px;">✕</button>
+  </div>
+  <ul style="display:flex;flex-direction:column;gap:4px;">
+    <li><a class="mnav" href="/#overview">领域概览</a></li>
+    <li><a class="mnav" href="/#picks">精选图集</a></li>
+    <li><a class="mnav" href="/#updates">更新动态</a></li>
+    <li><a class="mnav" href="/#cats">分类入口</a></li>
+    <li><a class="mnav" href="/#deep">深度解析</a></li>
+    <li><a class="mnav" href="/#guide">观看路径</a></li>
+    <li><a class="mnav" href="/#faq">常见问题</a></li>
+    <li><a class="mnav" href="/#comments">读者评论</a></li>
+    <li><a class="mnav" href="/#news">相关资讯</a></li>
+    <li><a class="mnav" href="/#rank">热度榜单</a></li>
+    <li><a class="mnav" href="/#interact">投稿互动</a></li>
+  </ul>
+</div>
+
+<script>
+(function(){
+  var ham=document.getElementById('hamburger'),
+      mask=document.getElementById('mask'),
+      drawer=document.getElementById('mobileNav'),
+      closeBtn=document.getElementById('closeNav');
+
+  function openNav(){
+    drawer.style.display='block';
+    mask.classList.add('show');
+    ham.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+  }
+  function closeNav(){
+    drawer.style.display='none';
+    mask.classList.remove('show');
+    ham.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
+  ham.addEventListener('click',function(){
+    ham.getAttribute('aria-expanded')==='true'?closeNav():openNav();
+  });
+  closeBtn.addEventListener('click',closeNav);
+  mask.addEventListener('click',closeNav);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeNav();}
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.mnav'),function(a){
+    a.addEventListener('click',closeNav);
+  });
+
+  /* 回顶 */
+  var toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){
+    if(window.scrollY>window.innerHeight){toTop.classList.add('show');}
+    else{toTop.classList.remove('show');}
+  },{passive:true});
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+
+  /* 本地查找 */
+  var data=[
+    {t:'冬夜车厢 · 05/06',d:'11-08 发布，12 张 + 4 张废片，站台雨棚补光'},
+    {t:'冬夜车厢 · 03/06',d:'11-03 发布，9 张，车厢连接处不锈钢反光'},
+    {t:'冬夜车厢 · 01/06',d:'10-31 发布，10 张，末班车色偏未校'},
+    {t:'旧公寓日光 · 06/06',d:'10-30 发布，9 张，空房收尾'},
+    {t:'旧公寓日光 · 03/06',d:'10-14 发布，窗帘穿帮重拍对比'},
+    {t:'粉雾企划 · 预告片',d:'11-05 发布，45 秒，正片 11-15 官网首发'},
+    {t:'旧胶片企划 · 冲印店篇',d:'10-22 发布，Portra 400 全程拍摄'},
+    {t:'深夜开箱 · 第 14 期回放',d:'11-07 开播，1 小时 52 分，分 3 段'},
+    {t:'换装转场短片 · 07',d:'10-27 发布，58 秒一镜到底'},
+    {t:'午夜食堂 · 联名贴纸',d:'10-18 发售，6 款，320 家门店'},
+    {t:'K.Sato 拍摄署名',d:'冬夜车厢 01、03、05 三组摄影师'},
+    {t:'@707archive 开箱清单',d:'直播物品清单，置顶表格同步'}
+  ];
+  var input=document.getElementById('searchInput'),
+      btn=document.getElementById('searchBtn'),
+      fb=document.getElementById('searchFb'),
+      res=document.getElementById('searchResults');
+
+  function runSearch(){
+    var q=input.value.trim().toLowerCase();
+    res.innerHTML='';
+    if(!q){fb.textContent='输入系列名、编号或企划名';return;}
+    var hits=data.filter(function(x){return (x.t+' '+x.d).toLowerCase().indexOf(q)>-1;});
+    if(!hits.length){fb.textContent='没有匹配的条目，试试「05」「粉雾」「开箱」';return;}
+    fb.textContent='找到 '+hits.length+' 条';
+    hits.forEach(function(h){
+      var a=document.createElement('a');
+      a.className='search-hit';
+      a.href='/#picks';
+      a.innerHTML='<b>'+h.t+'</b><br>'+h.d;
+      res.appendChild(a);
+    });
+  }
+  btn.addEventListener('click',runSearch);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter'){runSearch();}});
+  input.addEventListener('input',function(){if(!input.value.trim()){res.innerHTML='';fb.textContent='';}});
+
+  /* 左频道高亮 */
+  var secs=Array.prototype.slice.call(document.querySelectorAll('main section.block'));
+  var links=Array.prototype.slice.call(document.querySelectorAll('.chan a'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          var id=en.target.id;
+          links.forEach(function(l){
+            l.classList.toggle('active',l.getAttribute('href')==='/# '+id || l.getAttribute('href')==='#'+id || l.getAttribute('href').indexOf(id)>-1);
+          });
+        }
+      });
+    },{rootMargin:'-110px 0px -60% 0px'});
+    secs.forEach(function(s){io.observe(s);});
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"yummy_707 推特",
+  "description":"整理 yummy_707 在推特发布的写真图集、短视频片段、直播回放与联名企划，按发布时间、类型和更新节奏归档。",
+  "inLanguage":"zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"「冬夜车厢」一共有几组，最后一组什么时候发？","acceptedAnswer":{"@type":"Answer","text":"计划 6 组，截至 2026 年 11 月 8 日已发布 01、03、05 三组，02、04 两组分别在 11 月 1 日和 11 月 6 日发布。06/06 尚未发布，账号没有给出确认日期。"}},
+    {"@type":"Question","name":"粉雾企划的完整正片在哪里看？","acceptedAnswer":{"@type":"Answer","text":"完整版由服装品牌 MOLLY SALT 在自家官网首发，日期是 11 月 15 日。推特端只放 45 秒预告，正片不转载。"}},
+    {"@type":"Question","name":"深夜开箱第 14 期拆到了什么？","acceptedAnswer":{"@type":"Answer","text":"粉丝寄来的旧相机、两件当季外套和一盒手写信。旧相机当场试拍两张，成像偏黄，完整清单由 @707archive 整理成表。"}},
+    {"@type":"Question","name":"03/06 组的编号为什么改过？","acceptedAnswer":{"@type":"Answer","text":"11 月 4 日发布时误写为「03/05」，两小时后编辑更正为「03/06」，原因是发布前没核对系列总组数。"}},
+    {"@type":"Question","name":"废片是每期都附吗，一般几张？","acceptedAnswer":{"@type":"Answer","text":"从 2026 年 8 月起成为惯例，平均每组 2—4 张。冬夜车厢 05/06 附了 4 张，旧公寓日光 06/06 因退租仓促没有附废片。"}},
+    {"@type":"Question","name":"换装转场短片 07 到底换了几次装？","acceptedAnswer":{"@type":"Answer","text":"成片看起来是三次，实际只有两次真换装，第三次靠镜面遮挡加后期叠化完成，剪辑 @nana_cut 在评论区确认。"}}
+  ]
+}
+</script>
+
+</body>
+                </html>
