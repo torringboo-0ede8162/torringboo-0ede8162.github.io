@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>海角 - 社区内容聚合与发现</title>
+  <meta name="description" content="海角是一个汇集社区话题、生活随笔、影像记录与深度讨论的内容聚合页。这里整理最新发布、热门精选与分类导航，适合喜欢浏览真实用户分享和参与话题交流的读者。">
+  <meta name="keywords" content="海角">
+  <style>
+    :root {
+      --primary: #2a6f6f;
+      --primary-light: #6ba8a8;
+      --primary-dark: #1e4f4f;
+      --bg: #f6f9f9;
+      --surface: #ffffff;
+      --text-primary: #1a2c2c;
+      --text-secondary: #4a6161;
+      --text-tertiary: #7a9494;
+      --border: #d8e4e4;
+      --radius-card: 14px;
+      --radius-btn: 40px;
+      --radius-tag: 20px;
+      --shadow: 0 4px 12px rgba(0, 30, 30, 0.06);
+      --shadow-hover: 0 8px 24px rgba(0, 50, 50, 0.12);
+      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --max-width: 1280px;
+      --header-height: 110px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-height) + 8px);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* 吸顶公告条 + 页头 */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(246, 249, 249, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .announcement-bar {
+      background: var(--primary-dark);
+      color: #e2f0f0;
+      font-size: 0.875rem;
+      padding: 8px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .announcement-bar span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .announcement-bar .badge {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-tag);
+      padding: 0 10px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .main-header {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary-light);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 6px 14px;
+      gap: 8px;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(42, 111, 111, 0.12);
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      font-size: 0.9rem;
+      padding: 4px 0;
+      width: 140px;
+      outline: none;
+      color: var(--text-primary);
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-box button {
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      padding: 0;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background 0.2s, border-color 0.2s;
+      background: var(--surface);
+    }
+
+    .btn-outline:hover {
+      background: #eaf0f0;
+      border-color: var(--primary-light);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    /* 移动端抽屉 */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--surface);
+      z-index: 200;
+      padding: 24px 20px;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0);
+    }
+
+    .mobile-drawer .close-btn {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: var(--text-tertiary);
+      background: none;
+    }
+
+    .mobile-drawer nav {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .mobile-drawer nav a {
+      font-size: 1.1rem;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 150;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* 首屏 */
+    .hero {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 40px 24px 32px;
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--primary-dark);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-radius: var(--radius-btn);
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--primary-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary-light);
+      background: #f0f7f7;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: auto;
+      max-width: 480px;
+      filter: drop-shadow(0 12px 28px rgba(30, 79, 79, 0.15));
+    }
+
+    /* 布局：三栏门户 */
+    .portal-layout {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 64px;
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .left-sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 20px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .left-sidebar .channel-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .left-sidebar a {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: background 0.15s, color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .left-sidebar a:hover {
+      background: #e2eeee;
+      color: var(--primary-dark);
+    }
+
+    .left-sidebar a.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .right-sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 20px);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .section-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: -0.3px;
+    }
+
+    .section-title small {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-tertiary);
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .content-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      background: #d0e0e0;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 650;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: #eaf4f4;
+      color: var(--primary-dark);
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: var(--radius-tag);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .tag.hot {
+      background: #fde8e0;
+      color: #b13e1e;
+    }
+
+    /* 紧凑列表 */
+    .compact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .compact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compact-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .compact-index {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      min-width: 28px;
+      line-height: 1.4;
+    }
+
+    .compact-content {
+      flex: 1;
+    }
+
+    .compact-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+
+    .compact-summary {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .compact-date {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .category-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .category-item:hover {
+      background: #e2eeee;
+      border-color: var(--primary-light);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .deep-dive h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      color: var(--primary-dark);
+    }
+
+    .deep-dive h3 {
+      font-size: 1.15rem;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .deep-dive p {
+      margin-bottom: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .deep-dive ul {
+      margin: 12px 0 18px 20px;
+      color: var(--text-secondary);
+    }
+
+    .deep-dive li {
+      margin-bottom: 6px;
+    }
+
+    /* FAQ */
+    .faq-list details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+    }
+
+    .faq-list summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--primary-dark);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-list summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-list summary::after {
+      content: "+";
+      font-size: 1.2rem;
+      color: var(--primary-light);
+      transition: transform 0.2s;
+    }
+
+    .faq-list details[open] summary::after {
+      content: "−";
+    }
+
+    .faq-list details p {
+      margin-top: 12px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* 评论 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    .comment-body {
+      flex: 1;
+    }
+
+    .comment-name {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .comment-text {
+      color: var(--text-secondary);
+    }
+
+    /* 资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .news-item {
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-title {
+      font-weight: 650;
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+
+    .news-date {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      margin-bottom: 5px;
+    }
+
+    .news-summary {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* 底部 */
+    .site-footer {
+      background: var(--primary-dark);
+      color: #c8dede;
+      margin-top: 40px;
+      padding: 40px 24px 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand .brand-text {
+      color: white;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #a8c4c4;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: #a8c4c4;
+      margin-bottom: 8px;
+      transition: color 0.15s;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: var(--max-width);
+      margin: 32px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.8rem;
+      color: #8aa8a8;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* 回到顶部 */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--primary);
+      color: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+      z-index: 90;
+      border: none;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1100px) {
+      .portal-layout {
+        grid-template-columns: 170px 1fr;
+      }
+
+      .right-sidebar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .portal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .left-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .left-sidebar .channel-title {
+        display: none;
+      }
+
+      .left-sidebar a {
+        padding: 6px 14px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-tag);
+        font-size: 0.85rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+
+      .main-header {
+        padding: 10px 16px;
+      }
+
+      .search-box input {
+        width: 100px;
+      }
+
+      .announcement-bar {
+        font-size: 0.75rem;
+        gap: 12px;
+        padding: 6px 12px;
+      }
+
+      .portal-layout {
+        padding: 0 16px 40px;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .deep-dive {
+        padding: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 + 页头 -->
+  <div class="sticky-header">
+    <div class="announcement-bar">
+      <span><span class="badge">今日</span> 2026-11-08 新增 12 条「城市漫游」影像记录</span>
+      <span><span class="badge">热榜</span>「夜航船」系列话题讨论量突破 2.3 万</span>
+    </div>
+    <header class="main-header">
+      <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="#1e4f4f" stroke-width="2.5" fill="#eaf4f4"/>
+          <path d="M8 26 Q20 10 32 26" stroke="#2a6f6f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="20" cy="14" r="2.5" fill="#2a6f6f"/>
+        </svg>
+        <span class="brand-text">海角</span>
+      </div>
+      <nav class="nav-links">
+        <a href="/#latest">最新</a>
+        <a href="/#featured">精选</a>
+        <a href="/#categories">分类</a>
+        <a href="/#deep-dive">深度</a>
+        <a href="/#comments">讨论</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="搜索条目..." aria-label="搜索内容">
+          <button id="searchBtn" aria-label="搜索">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+        </div>
+        <button class="btn-outline" id="uploadBtn">投稿</button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <!-- 移动端抽屉 -->
+  <div class="overlay" id="overlay"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="close-btn" id="closeDrawer" aria-label="关闭菜单">✕</button>
+    <nav>
+      <a href="/#latest">最新</a>
+      <a href="/#featured">精选</a>
+      <a href="/#categories">分类</a>
+      <a href="/#deep-dive">深度</a>
+      <a href="/#comments">讨论</a>
+      <a href="/#news">资讯</a>
+    </nav>
+  </div>
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>海角</h1>
+      <p class="hero-description">
+        汇集社区影像记录、城市漫游笔记与生活随笔。每天更新真实用户分享的街巷观察、短途旅行攻略和独立摄影项目，适合喜欢慢节奏阅读和参与话题讨论的浏览者。
+      </p>
+      <div class="hero-actions">
+        <a href="/#latest" class="btn-primary">浏览最新发布</a>
+        <a href="/#categories" class="btn-secondary">按分类查找</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="320" rx="24" fill="#eaf4f4"/>
+        <path d="M0 220 Q100 160 200 210 T400 190 V320 H0 Z" fill="#c8dede" opacity="0.7"/>
+        <path d="M0 260 Q120 200 240 250 T400 240 V320 H0 Z" fill="#a8c4c4" opacity="0.5"/>
+        <circle cx="300" cy="80" r="40" fill="#fde8e0" opacity="0.8"/>
+        <circle cx="300" cy="80" r="28" fill="#f5c6b8"/>
+        <path d="M40 180 L80 140 L120 180 L160 120 L200 180" stroke="#2a6f6f" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="80" cy="140" r="4" fill="#2a6f6f"/>
+        <circle cx="160" cy="120" r="4" fill="#2a6f6f"/>
+        <rect x="240" y="200" width="80" height="50" rx="8" fill="#ffffff" opacity="0.8"/>
+        <line x1="252" y1="216" x2="308" y2="216" stroke="#6ba8a8" stroke-width="2"/>
+        <line x1="252" y1="228" x2="290" y2="228" stroke="#6ba8a8" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 三栏门户布局 -->
+  <div class="portal-layout">
+    <!-- 左侧频道索引 -->
+    <aside class="left-sidebar">
+      <span class="channel-title">频道导航</span>
+      <a href="/#latest" class="active">最新发布</a>
+      <a href="/#featured">热门精选</a>
+      <a href="/#categories">分类索引</a>
+      <a href="/#deep-dive">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#comments">用户讨论</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#recommend">相关推荐</a>
+      <a href="/#timeline">条目时间线</a>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+
+      <!-- 板块：主题领域概览 -->
+      <section class="section-card" id="overview">
+        <h2 class="section-title">领域概览 <small>2026-11-08 更新</small></h2>
+        <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 14px;">
+          海角社区的内容主要围绕城市街巷观察、短途旅行记录和生活影像展开。活跃的创作者多分布在杭州、成都、厦门等城市，以图文和短视频形式分享日常路线与发现。近 30 天内，带有“菜市场”“旧书店”“江边步道”标签的帖子数量增长明显，其中「杭州大马弄早市」系列获得 3400 余次收藏。
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.75;">
+          影像类内容以 35mm 胶片和手机随手拍为主，讨论区常出现关于构图参数和冲洗店选择的经验交流。每周三更新的「城市漫游」专题已累计收录 47 条路线，覆盖 12 个城市。独立摄影项目「夜航船」在 10 月下旬发起，目前收到 86 组投稿，主题为夜间水上交通与码头景象。
+        </p>
+      </section>
+
+      <!-- 板块：精选内容推荐 -->
+      <section id="featured">
+        <h2 class="section-title">精选内容推荐 <small>编辑挑选 · 6 条</small></h2>
+        <div class="card-grid">
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-damalong/400/300" alt="杭州大马弄早市街景" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">杭州大马弄早市：六点半的豆浆与鱼摊</h3>
+              <div class="tag-row"><span class="tag">城市漫游</span><span class="tag">杭州</span><span class="tag">市集</span></div>
+              <p class="card-desc">从鼓楼出发步行 12 分钟，记录早市开摊前的装货、现磨豆浆摊的排队规律，以及鱼摊老板每周二固定进货的品种。</p>
+              <div class="card-meta"><span>🔥 热度 3.4k</span><span>· 11-06</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-yehangchuan/400/300" alt="夜航船摄影项目码头夜景" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">「夜航船」独立摄影项目第 3 期</h3>
+              <div class="tag-row"><span class="tag">摄影项目</span><span class="tag">夜间</span><span class="tag">码头</span></div>
+              <p class="card-desc">收录 22 位投稿者的码头夜景，拍摄时间集中在 19:00—21:00。其中 8 组使用 ISO 1600 以上高感，附参数说明。</p>
+              <div class="card-meta"><span>⭐ 评分 4.8</span><span>· 11-05</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-jiushudian/400/300" alt="厦门旧书店内景" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">厦门沙坡尾旧书店地图（2026 版）</h3>
+              <div class="tag-row"><span class="tag">旧书店</span><span class="tag">厦门</span><span class="tag">地图</span></div>
+              <p class="card-desc">实地走访 9 家旧书店，标注营业时间、主营类别和最低消费。其中「小渔岛」周二闭店，注意避开。</p>
+              <div class="card-meta"><span>🔥 热度 2.1k</span><span>· 11-03</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-jiangbian/400/300" alt="成都江边步道黄昏" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">成都锦江步道夜跑路线实测</h3>
+              <div class="tag-row"><span class="tag">跑步路线</span><span class="tag">成都</span><span class="tag">夜跑</span></div>
+              <p class="card-desc">从东门码头到九眼桥全程 4.2 公里，记录路灯亮度、沿途补给点和三个公厕位置，适合 20:00 后开跑。</p>
+              <div class="card-meta"><span>⭐ 评分 4.6</span><span>· 11-02</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-caishichang/400/300" alt="菜市场摊位特写" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">菜市场里的 8 种本地野菜图鉴</h3>
+              <div class="tag-row"><span class="tag">食材</span><span class="tag">菜市场</span><span class="tag">图鉴</span></div>
+              <p class="card-desc">拍摄于杭州茅廊巷农贸市场，涵盖水芹菜、马兰头、荠菜等 8 种当季野菜，附摊主口述的挑选方法。</p>
+              <div class="card-meta"><span>🔥 热度 1.8k</span><span>· 10-30</span></div>
+            </div>
+          </article>
+          <article class="content-card">
+            <img src="https://picsum.photos/seed/haijiao-jiaopian/400/300" alt="胶片冲洗店工作台" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <h3 class="card-title">胶片冲洗店「光屋」探访记录</h3>
+              <div class="tag-row"><span class="tag">胶片</span><span class="tag">冲洗店</span><span class="tag">探访</span></div>
+              <p class="card-desc">店主老周展示 C-41 工艺的温控流程，并解释为什么 120 胶片的冲洗价格比 135 贵 15 元。附样片对比。</p>
+              <div class="card-meta"><span>⭐ 评分 4.7</span><span>· 10-28</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块：最新更新 -->
+      <section class="section-card" id="latest">
+        <h2 class="section-title">最新更新 <small>2026-11-08 当天</small></h2>
+        <div class="compact-list">
+          <div class="compact-item">
+            <span class="compact-index">01</span>
+            <div class="compact-content">
+              <div class="compact-title">「城市漫游」第 48 期：福州烟台山午后</div>
+              <div class="compact-summary">作者从乐群路出发，途经 4 处历史建筑，记录沿途咖啡店和独立书店的营业状态。</div>
+            </div>
+            <span class="compact-date">11-08</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">02</span>
+            <div class="compact-content">
+              <div class="compact-title">手机夜景模式横向对比：iPhone 17 vs 小米 16 Ultra</div>
+              <div class="compact-summary">在同一码头场景拍摄 10 组样片，比较高光压制和暗部噪点，附原图参数。</div>
+            </div>
+            <span class="compact-date">11-08</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">03</span>
+            <div class="compact-content">
+              <div class="compact-title">菜市场早市时间表：杭州 6 个市场实测</div>
+              <div class="compact-summary">记录大马弄、茅廊巷、凤起路等市场的开摊和收摊时间，建议 6:00—7:30 之间到达。</div>
+            </div>
+            <span class="compact-date">11-07</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">04</span>
+            <div class="compact-content">
+              <div class="compact-title">「夜航船」项目新增 12 组投稿</div>
+              <div class="compact-summary">其中 7 组拍摄于宁波老外滩码头，3 组使用中画幅胶片，单张平均曝光 4 秒。</div>
+            </div>
+            <span class="compact-date">11-07</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">05</span>
+            <div class="compact-content">
+              <div class="compact-title">成都旧书店「求知书社」搬迁至玉林西路</div>
+              <div class="compact-summary">新址面积缩小一半，店主称保留全部 1980 年代文学类库存，营业时间改为 11:00—20:00。</div>
+            </div>
+            <span class="compact-date">11-06</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">06</span>
+            <div class="compact-content">
+              <div class="compact-title">厦门沙坡尾周末人流预警：11 月 9 日有市集</div>
+              <div class="compact-summary">主办方预计 14:00—17:00 为高峰段，周边路段实行单向通行，建议错峰前往。</div>
+            </div>
+            <span class="compact-date">11-06</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">07</span>
+            <div class="compact-content">
+              <div class="compact-title">锦江夜跑路线新增两处直饮水点</div>
+              <div class="compact-summary">位于东门码头和合江亭附近，开放时间 6:00—22:00，跑友反馈水压充足。</div>
+            </div>
+            <span class="compact-date">11-05</span>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">08</span>
+            <div class="compact-content">
+              <div class="compact-title">「光屋」冲洗店推出 120 胶片加急服务</div>
+              <div class="compact-summary">价格上浮 20 元，取件时间从 3 天缩短至 1 天，每日限 10 卷，需提前预约。</div>
+            </div>
+            <span class="compact-date">11-04</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块：分类入口 -->
+      <section id="categories">
+        <h2 class="section-title">分类入口 <small>按内容类型查找</small></h2>
+        <div class="category-grid">
+          <a href="/#latest" class="category-item">城市漫游路线</a>
+          <a href="/#featured" class="category-item">菜市场与市集</a>
+          <a href="/#featured" class="category-item">旧书店与阅读空间</a>
+          <a href="/#featured" class="category-item">胶片摄影与冲洗</a>
+          <a href="/#latest" class="category-item">夜跑与徒步路线</a>
+          <a href="/#latest" class="category-item">独立摄影项目</a>
+          <a href="/#deep-dive" class="category-item">器材参数与对比</a>
+          <a href="/#comments" class="category-item">街巷观察随笔</a>
+        </div>
+      </section>
+
+      <!-- 板块：深度解析 -->
+      <section class="deep-dive" id="deep-dive">
+        <h2>深度解析：城市影像记录的三种路径与判断依据</h2>
+        <p>在海角社区，城市影像内容大致分为三类：路线型记录、项目型创作和器材型测评。三者的阅读价值和判断标准并不相同，混在一起看容易失去焦点。</p>
+
+        <h3>路线型记录：可复现性比画面更重要</h3>
+        <p>路线型帖子的核心价值在于「照着走一遍能否获得相似体验」。以「杭州大马弄早市」系列为例，作者在 10 月 28 日和 11 月 4 日两次拍摄同一路段，记录了摊位位置的变动：鱼摊从巷口第三家搬到第五家，豆浆摊新增了二维码收款。这类细节直接决定了复现的可行性。判断一条路线记录是否值得收藏，可以核对三个要素：具体时间窗口（如 6:00—7:30）、可定位的起点（如鼓楼公交站）、以及至少一处变动说明（什么变了、为什么变）。缺了变动说明的帖子，往往只是风景照合集。</p>
+
+        <h3>项目型创作：看发起人的筛选标准</h3>
+        <p>「夜航船」项目在 10 月 20 日发起，发起人「老默」在项目说明中列出了三条收稿标准：拍摄时间在 18:00—22:00 之间、画面中必须出现水面或码头设施、附拍摄参数。截至 11 月 7 日，收到的 86 组投稿中，有 14 组因缺少参数被退回补充。这个筛选动作本身提供了判断依据——项目方在意的是可比较的技术信息，而非单纯的画面美感。阅读这类项目时，先看退稿原因，比看入选作品更有信息量。</p>
+
+        <h3>器材型测评：参数表之外的变量</h3>
+        <p>11 月 8 日发布的「手机夜景模式横向对比」提供了 10 组同场景样片，但作者在文末注明：所有照片均使用三脚架固定，未测试手持状态下的防抖表现。这意味着该测评的结论只适用于固定机位拍摄。另一个容易被忽略的变量是后期处理——作者承认在 Lightroom 中统一调整了曝光和降噪。对比 10 月 30 日「光屋」冲洗店发布的胶片样片，后者保留了扫描时的原始色彩配置，未做后期。两种做法各有适用场景，但读者需要先确认测评是否标注了后期介入的程度。</p>
+
+        <h3>一个可核对的判断结构</h3>
+        <p>判断一条城市影像内容是否值得投入时间，可以拆成四个可核查项：</p>
+        <ul>
+          <li><strong>时间与地点</strong>：是否给出具体日期、时段和可定位的起点？</li>
+          <li><strong>变动说明</strong>：是否提到与上次记录相比的变化？</li>
+          <li><strong>参数或条件</strong>：拍摄设备、后期程度、天气条件是否注明？</li>
+          <li><strong>可复现承诺</strong>：作者是否暗示或明示读者可以复现该体验？</li>
+        </ul>
+        <p>四项全部具备的帖子，在海角社区近 30 天的内容中约占 17%。这个比例来自对 11 月 1 日至 7 日发布的 214 条影像类帖子的逐条核对。比例不高，但足够筛出值得细读的条目。</p>
+      </section>
+
+      <!-- 板块：体验指南 -->
+      <section class="section-card" id="guide">
+        <h2 class="section-title">体验指南：内容消费的顺序与判断依据</h2>
+        <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+          打开海角页面后，先看「最新更新」里的条目名称和摘要，判断是否有你正在找的类型。如果你对城市漫游感兴趣，优先点开带有具体地名和时间段的帖子，例如「福州烟台山午后」比「城市漫步」更容易判断是否值得读。菜市场类内容建议从「杭州大马弄早市」入手——它附带了摊主口述和两次拍摄的对比，信息密度高于单次快照。
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px;">
+          比较两个类似条目时，看三个地方：第一，正文是否提到「与上次相比」的变化；第二，是否给出可核对的时间窗口；第三，评论区有没有本地人补充修正。比如「厦门沙坡尾旧书店地图」的评论区里，用户「鹭岛小陈」指出「小渔岛」的周二闭店信息已过时，实际从 11 月起改为周三闭店。这类修正比原文更有参考价值。
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.75;">
+          器材类内容适合在确定拍摄计划后阅读。先看测评是否标注了三脚架或手持、是否说明后期程度，再决定是否参考其结论。如果测评只放样片不写条件，可以直接跳过。
+        </p>
+      </section>
+
+      <!-- 板块：FAQ -->
+      <section id="faq">
+        <h2 class="section-title">常见问答</h2>
+        <div class="faq-list">
+          <details>
+            <summary>「夜航船」摄影项目怎么参加？</summary>
+            <p>在「夜航船」项目页提交 3—5 张夜间码头或水面照片，附拍摄时间、地点和设备参数。发起人「老默」每周三和周六集中审稿，通过后会收到站内通知。11 月 7 日更新的收稿标准要求画面中必须出现水面或码头设施，缺少参数的投稿会被退回补充。</p>
+          </details>
+          <details>
+            <summary>杭州大马弄早市几点去最合适？</summary>
+            <p>根据 10 月 28 日和 11 月 4 日的两次实地记录，早市在 6:00 左右开始出摊，7:30 前摊位最全。豆浆摊通常 6:20 开始排队，鱼摊周二进货品种最多。周末 8:00 后人流明显增加，建议工作日前往。</p>
+          </details>
+          <details>
+            <summary>胶片冲洗选 C-41 还是 E-6 工艺？</summary>
+            <p>取决于胶卷类型。彩色负片（如 Kodak Gold 200）用 C-41 工艺，反转片（如 Fujifilm Provia 100F）用 E-6 工艺。海角社区「光屋」冲洗店探访记录提到，C-41 的温控精度要求是 ±0.3°C，E-6 则要求 ±0.1°C，后者成本更高。日常街拍用 C-41 即可。</p>
+          </details>
+          <details>
+            <summary>「城市漫游」专题的路线可以照搬吗？</summary>
+            <p>路线型记录的价值在于可复现性。建议先核对帖子是否给出了具体时间窗口、起点定位和变动说明。例如「福州烟台山午后」标注了 14:00 从乐群路出发、沿途 4 处历史建筑的具体位置，这类路线照搬的成功率较高。缺少时间窗口的帖子，复现时容易扑空。</p>
+          </details>
+          <details>
+            <summary>手机夜景模式和胶片夜拍，哪个更适合码头场景？</summary>
+            <p>11 月 8 日的手机对比测评使用三脚架固定机位，结论适用于静态拍摄。胶片方面，「夜航船」项目中 3 组中画幅投稿使用 4 秒曝光，需要稳固支撑。如果手持拍摄，手机夜景模式的成功率更高；如果追求暗部层次和颗粒感，胶片在稳定支撑下更有优势。</p>
+          </details>
+          <details>
+            <summary>评论区指出的信息错误怎么处理？</summary>
+            <p>海角社区的通行做法是：在原帖下方以评论形式补充更正，并注明更正日期。例如「厦门沙坡尾旧书店地图」的评论区中，用户「鹭岛小陈」在 11 月 5 日指出「小渔岛」周二闭店信息已过时，作者随后在 11 月 6 日回复确认并补充了周三闭店的新信息。读者阅读时以最新日期的评论为准。</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- 板块：用户评论 -->
+      <section class="section-card" id="comments">
+        <h2 class="section-title">用户讨论 <small>12 条</small></h2>
+        <div class="comment-list">
+          <div class="comment-item">
+            <div class="comment-avatar">林</div>
+            <div class="comment-body">
+              <div class="comment-name">林间有风</div>
+              <div class="comment-text">大马弄那篇写得很细，鱼摊搬位置这事我上周去也发现了，但没当回事。作者记下来就很有用。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">陈</div>
+            <div class="comment-body">
+              <div class="comment-name">鹭岛小陈</div>
+              <div class="comment-text">沙坡尾旧书店地图里「小渔岛」的周二闭店不准确了，11 月开始改成周三闭店，老板说周二照常开。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">老</div>
+            <div class="comment-body">
+              <div class="comment-name">老默</div>
+              <div class="comment-text">夜航船第三期收稿快结束了，缺参数的投稿还有几组没补，麻烦尽快。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">跑</div>
+            <div class="comment-body">
+              <div class="comment-name">跑不动了</div>
+              <div class="comment-text">锦江夜跑路线实测那个，4.2 公里我跑了 28 分钟，中间等红灯三次。补给点位置准确。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">胶</div>
+            <div class="comment-body">
+              <div class="comment-name">胶卷杀手</div>
+              <div class="comment-text">光屋的 120 加急服务试了一次，确实当天取件，但价格涨到 45 了，之前是 25。店主说药水成本涨了。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">菜</div>
+            <div class="comment-body">
+              <div class="comment-name">菜场常客</div>
+              <div class="comment-text">马兰头那图鉴里第三种和第五种我分不清，摊主说是同一个东西不同叫法。有人知道吗？</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">夜</div>
+            <div class="comment-body">
+              <div class="comment-name">夜拍新手</div>
+              <div class="comment-text">手机夜景对比那篇，作者用了三脚架但没提前说，我手持拍出来完全不是那个效果。建议标题加上“固定机位”。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">烟</div>
+            <div class="comment-body">
+              <div class="comment-name">烟台山散步</div>
+              <div class="comment-text">第 48 期福州那篇，乐群路上去有一家咖啡店 11 月 1 日已经关了，作者可能没注意。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">豆</div>
+            <div class="comment-body">
+              <div class="comment-name">豆浆配油条</div>
+              <div class="comment-text">大马弄豆浆摊排队规律是真的，6:20 去前面排了 8 个人，7 点去反而没人。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">求</div>
+            <div class="comment-body">
+              <div class="comment-name">求知书社老客</div>
+              <div class="comment-text">玉林西路新店小了一圈，但文学区还在，老板说 80 年代的旧书一本没卖。就是座位少了，站着看有点累。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">路</div>
+            <div class="comment-body">
+              <div class="comment-name">路过的风</div>
+              <div class="comment-text">最近帖子质量还行，但有些标题太长了，读起来累。</div>
+            </div>
+          </div>
+          <div class="comment-item">
+            <div class="comment-avatar">阿</div>
+            <div class="comment-body">
+              <div class="comment-name">阿泽</div>
+              <div class="comment-text">夜航船第 3 期第 7 组那张宁波老外滩的构图很好，但作者没写用了什么滤镜，有点可惜。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块：相关资讯 -->
+      <section class="section-card" id="news">
+        <h2 class="section-title">相关资讯 <small>近 30 天</small></h2>
+        <div class="news-list">
+          <div class="news-item">
+            <div class="news-title">「城市漫游」专题第 48 期上线，福州烟台山路线收录 4 处历史建筑</div>
+            <div class="news-date">2026-11-08</div>
+            <div class="news-summary">本期路线从乐群路出发，全程步行约 2.5 公里。编辑在文末补充了 10 月 31 日实地踩点时发现的咖啡店关闭信息。</div>
+          </div>
+          <div class="news-item">
+            <div class="news-title">「夜航船」摄影项目投稿量达 86 组，宁波码头场景占 27%</div>
+            <div class="news-date">2026-11-07</div>
+            <div class="news-summary">发起人「老默」在项目页更新了审稿进度：已通过 52 组，退回补充参数 14 组，剩余 20 组待审。最终入选名单将于 11 月 15 日公布。</div>
+          </div>
+          <div class="news-item">
+            <div class="news-title">杭州茅廊巷农贸市场 11 月起调整营业时间，早市提前半小时</div>
+            <div class="news-date">2026-11-06</div>
+            <div class="news-summary">市场管理方通知显示，自 11 月 1 日起开市时间从 6:30 调整为 6:00，闭市时间不变。菜市场图鉴作者已更新帖子中的时间信息。</div>
+          </div>
+          <div class="news-item">
+            <div class="news-title">「光屋」冲洗店新增 120 胶片加急通道，每日限 10 卷</div>
+            <div class="news-date">2026-11-05</div>
+            <div class="news-summary">店主老周解释，加急服务使用独立药水批次，温控精度不变，价格从 25 元调整至 45 元。预约需提前一天在店内登记。</div>
+          </div>
+          <div class="news-item">
+            <div class="news-title">成都求知书社搬迁完成，玉林西路新址面积缩减至 40 平米</div>
+            <div class="news-date">2026-11-04</div>
+            <div class="news-summary">店主确认 1980 年代文学类库存全部保留，但阅读座位从 12 个减至 5 个。营业时间同步改为 11:00—20:00，周一不闭店。</div>
+          </div>
+          <div class="news-item">
+            <div class="news-title">锦江步道东门码头段新增两处直饮水点，11 月 3 日启用</div>
+            <div class="news-date">2026-11-03</div>
+            <div class="news-summary">据成都市河道管理处公告，直饮水点开放时间为 6:00—22:00，采用按压式出水。夜跑路线实测作者已更新帖子中的补给点标注。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块：相关推荐 -->
+      <section class="section-card" id="recommend">
+        <h2 class="section-title">相关推荐</h2>
+        <div class="tag-row" style="gap: 10px;">
+          <a href="/#featured" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">大马弄早市时间表</a>
+          <a href="/#featured" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">沙坡尾旧书店地图</a>
+          <a href="/#featured" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">夜航船项目第 3 期</a>
+          <a href="/#latest" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">锦江夜跑补给点</a>
+          <a href="/#featured" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">菜市场野菜图鉴</a>
+          <a href="/#latest" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">手机夜景对比参数</a>
+          <a href="/#deep-dive" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">胶片 C-41 冲洗流程</a>
+          <a href="/#comments" class="tag" style="padding: 6px 16px; font-size: 0.85rem;">求知书社新址体验</a>
+        </div>
+      </section>
+
+      <!-- 板块：补充 - 条目时间线 -->
+      <section class="section-card" id="timeline">
+        <h2 class="section-title">条目时间线 <small>近 7 天关键节点</small></h2>
+        <div class="compact-list">
+          <div class="compact-item">
+            <span class="compact-index">11-08</span>
+            <div class="compact-content">
+              <div class="compact-title">「城市漫游」第 48 期上线</div>
+              <div class="compact-summary">福州烟台山路线收录，编辑补充了咖啡店关闭信息。</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">11-07</span>
+            <div class="compact-content">
+              <div class="compact-title">「夜航船」项目审稿进度更新</div>
+              <div class="compact-summary">52 组通过，14 组退回补充参数，最终名单 11 月 15 日公布。</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">11-06</span>
+            <div class="compact-content">
+              <div class="compact-title">茅廊巷农贸市场调整开市时间</div>
+              <div class="compact-summary">从 6:30 提前至 6:00，闭市时间不变，菜市场图鉴同步更新。</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">11-05</span>
+            <div class="compact-content">
+              <div class="compact-title">「光屋」加急服务上线</div>
+              <div class="compact-summary">120 胶片当天取件，每日限 10 卷，价格 45 元。</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">11-04</span>
+            <div class="compact-content">
+              <div class="compact-title">求知书社玉林西路新址开业</div>
+              <div class="compact-summary">面积 40 平米，座位 5 个，文学类旧书全部保留。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="right-sidebar">
+      <div class="section-card">
+        <h2 class="section-title" style="font-size: 1rem;">热榜 <small>今日</small></h2>
+        <div class="compact-list">
+          <div class="compact-item">
+            <span class="compact-index">1</span>
+            <div class="compact-content">
+              <div class="compact-title">大马弄早市时间表</div>
+              <div class="compact-summary">热度 3.4k</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">2</span>
+            <div class="compact-content">
+              <div class="compact-title">夜航船第 3 期</div>
+              <div class="compact-summary">热度 2.8k</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">3</span>
+            <div class="compact-content">
+              <div class="compact-title">沙坡尾旧书店地图</div>
+              <div class="compact-summary">热度 2.1k</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">4</span>
+            <div class="compact-content">
+              <div class="compact-title">锦江夜跑路线</div>
+              <div class="compact-summary">热度 1.9k</div>
+            </div>
+          </div>
+          <div class="compact-item">
+            <span class="compact-index">5</span>
+            <div class="compact-content">
+              <div class="compact-title">菜市场野菜图鉴</div>
+              <div class="compact-summary">热度 1.8k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title" style="font-size: 1rem;">互动</h2>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 14px;">正在进行的征集与讨论</p>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <a href="/#featured" style="background: #eaf4f4; padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: var(--primary-dark);">「夜航船」摄影征集 · 11 月 15 日截止</a>
+          <a href="/#comments" style="background: #eaf4f4; padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: var(--primary-dark);">本周话题：你常去的菜市场</a>
+          <a href="/#latest" style="background: #eaf4f4; padding: 12px 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 500; color: var(--primary-dark);">投稿入口 · 分享你的城市路线</a>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2 class="section-title" style="font-size: 1rem;">更新时间</h2>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+          最新条目：2026-11-08 06:30<br>
+          下一期「城市漫游」：2026-11-12 周三
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-text">海角</span>
+        <p class="footer-desc">
+          内容覆盖 2026 年 10 月至 11 月的城市影像记录与街巷观察。条目类型包括路线攻略、器材测评、菜市场图鉴和独立摄影项目投稿，每周三、周六固定更新。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>浏览</h4>
+        <a href="/#latest">最新更新</a>
+        <a href="/#featured">热门精选</a>
+        <a href="/#categories">分类索引</a>
+        <a href="/#timeline">条目时间线</a>
+      </div>
+      <div class="footer-col">
+        <h4>参与</h4>
+        <a href="/#featured">摄影项目投稿</a>
+        <a href="/#comments">话题讨论</a>
+        <a href="/#guide">体验指南</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于</h4>
+        <a href="/#overview">领域概览</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#news">相关资讯</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 海角 · 内容为社区用户分享与编辑整理</span>
+      <span>数据示例说明：页面条目、热度、评分均为演示用途</span>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "海角",
+    "description": "汇集社区影像记录、城市漫游笔记与生活随笔的内容聚合页。",
+    "inLanguage": "zh-CN"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "「夜航船」摄影项目怎么参加？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "在「夜航船」项目页提交 3—5 张夜间码头或水面照片，附拍摄时间、地点和设备参数。发起人「老默」每周三和周六集中审稿，通过后会收到站内通知。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "杭州大马弄早市几点去最合适？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "根据 10 月 28 日和 11 月 4 日的两次实地记录，早市在 6:00 左右开始出摊，7:30 前摊位最全。豆浆摊通常 6:20 开始排队，鱼摊周二进货品种最多。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "胶片冲洗选 C-41 还是 E-6 工艺？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "取决于胶卷类型。彩色负片用 C-41 工艺，反转片用 E-6 工艺。C-41 的温控精度要求是 ±0.3°C，E-6 则要求 ±0.1°C。日常街拍用 C-41 即可。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "「城市漫游」专题的路线可以照搬吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "建议先核对帖子是否给出了具体时间窗口、起点定位和变动说明。缺少时间窗口的帖子，复现时容易扑空。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "手机夜景模式和胶片夜拍，哪个更适合码头场景？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "如果手持拍摄，手机夜景模式的成功率更高；如果追求暗部层次和颗粒感，胶片在稳定支撑下更有优势。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "评论区指出的信息错误怎么处理？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "在原帖下方以评论形式补充更正，并注明更正日期。读者阅读时以最新日期的评论为准。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    (function() {
+      // 移动端抽屉
+      const hamburger = document.getElementById('hamburgerBtn');
+      const drawer = document.getElementById('mobileDrawer');
+      const overlay = document.getElementById('overlay');
+      const closeDrawer = document.getElementById('closeDrawer');
+
+      function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawerFn() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+
+      if (hamburger) {
+        hamburger.addEventListener('click', openDrawer);
+      }
+      if (closeDrawer) {
+        closeDrawer.addEventListener('click', closeDrawerFn);
+      }
+      if (overlay) {
+        overlay.addEventListener('click', closeDrawerFn);
+      }
+
+      // 抽屉内导航点击后关闭
+      drawer.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', closeDrawerFn);
+      });
+
+      // ESC 关闭
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+          closeDrawerFn();
+        }
+      });
+
+      // 回到顶部
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 搜索功能：简单本地筛选（基于可见文本）
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+
+      function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) {
+          alert('请输入搜索词');
+          return;
+        }
+        // 收集所有条目名称
+        const items = document.querySelectorAll('.card-title, .compact-title, .news-title, .category-item');
+        let found = false;
+        items.forEach(el => {
+          if (el.textContent.toLowerCase().includes(query)) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            found = true;
+            // 短暂高亮
+            el.style.transition = 'background 0.3s';
+            el.style.background = '#fde8e0';
+            setTimeout(() => {
+              el.style.background = '';
+            }, 1500);
+          }
+        });
+        if (!found) {
+          alert('没有找到包含「' + query + '」的条目');
+        }
+      }
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
+      }
+      if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            performSearch();
+          }
+        });
+      }
+
+      // 投稿按钮提示
+      const uploadBtn = document.getElementById('uploadBtn');
+      if (uploadBtn) {
+        uploadBtn.addEventListener('click', () => {
+          alert('投稿入口：请前往「夜航船」或「城市漫游」项目页提交内容。');
+        });
+      }
+
+      // 左侧导航当前高亮（简单实现）
+      const sections = document.querySelectorAll('section[id]');
+      const leftLinks = document.querySelectorAll('.left-sidebar a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 140;
+          if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+        leftLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '/#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+  </html>
