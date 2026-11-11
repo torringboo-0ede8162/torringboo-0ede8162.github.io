@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ks舞团夏柏 - 舞团演出与成员动态内容聚合</title>
+<meta name="description" content="ks舞团夏柏内容聚合页，汇集舞团近期公演、成员夏柏个人舞台、排练花絮与舞蹈作品解析。适合关注街舞团体演出与编舞细节的观众浏览。">
+<meta name="keywords" content="ks舞团夏柏">
+<style>
+:root {
+  --brand: #1f2a44;
+  --brand-light: #2e3d5c;
+  --brand-deep: #141d30;
+  --accent: #c9483a;
+  --accent-soft: #e8a59c;
+  --bg: #f5f3ef;
+  --panel: #ffffff;
+  --text: #1c1c1c;
+  --text-2: #5c5c5c;
+  --text-3: #8a8a8a;
+  --line: #e0dcd5;
+  --radius-card: 10px;
+  --radius-btn: 6px;
+  --radius-tag: 4px;
+  --shadow: 0 1px 3px rgba(20,29,48,.08);
+  --shadow-hover: 0 6px 18px rgba(20,29,48,.12);
+  --announce-h: 38px;
+  --header-h: 60px;
+  --gap: 24px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--announce-h) + var(--header-h) + 12px); }
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15px;
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+img { max-width: 100%; display: block; }
+
+/* 公告条 */
+.announce {
+  position: sticky; top: 0; z-index: 60;
+  height: var(--announce-h);
+  background: var(--brand-deep);
+  color: #e8e4db;
+  display: flex; align-items: center;
+  overflow: hidden;
+  font-size: 13px;
+}
+.announce-inner {
+  max-width: 1360px; margin: 0 auto; padding: 0 20px;
+  display: flex; align-items: center; gap: 18px; width: 100%;
+  white-space: nowrap; overflow-x: auto;
+}
+.announce-inner::-webkit-scrollbar { display: none; }
+.announce-brand { font-weight: 700; color: #fff; flex-shrink: 0; letter-spacing: .5px; }
+.announce-item { flex-shrink: 0; display: flex; gap: 6px; align-items: center; }
+.announce-date { color: var(--accent-soft); font-variant-numeric: tabular-nums; }
+.announce-sep { width: 1px; height: 14px; background: #4a5570; flex-shrink: 0; }
+
+/* 页头 */
+.site-header {
+  position: sticky; top: var(--announce-h); z-index: 50;
+  height: var(--header-h);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  max-width: 1360px; margin: 0 auto; padding: 0 20px;
+  height: 100%; display: flex; align-items: center; gap: 28px;
+}
+.logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.logo-mark { width: 34px; height: 34px; }
+.logo-text { font-weight: 800; font-size: 17px; color: var(--brand); letter-spacing: .3px; }
+.main-nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.main-nav::-webkit-scrollbar { display: none; }
+.main-nav a {
+  padding: 6px 12px; border-radius: var(--radius-btn); font-size: 14px;
+  color: var(--text-2); white-space: nowrap; transition: background .15s, color .15s;
+}
+.main-nav a:hover { background: var(--brand-light); color: #fff; }
+.header-actions { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 16px; border-radius: var(--radius-btn); font-size: 14px;
+  border: 1px solid transparent; cursor: pointer; transition: all .18s;
+  font-family: inherit;
+}
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-primary:hover { background: var(--brand-deep); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-ghost { border-color: var(--line); color: var(--text-2); background: transparent; }
+.btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+.menu-toggle {
+  display: none; background: none; border: 1px solid var(--line);
+  border-radius: var(--radius-btn); width: 38px; height: 38px;
+  cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
+}
+.menu-toggle span { display: block; width: 18px; height: 2px; background: var(--brand); transition: .2s; }
+
+/* 首屏 */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--brand-deep) 0%, var(--brand) 55%, #3a4a6e 100%);
+  color: #fff; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; right: -80px; top: -80px;
+  width: 460px; height: 460px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,72,58,.35) 0%, transparent 68%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ""; position: absolute; left: 8%; bottom: -120px;
+  width: 300px; height: 300px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.12);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1360px; margin: 0 auto; padding: 64px 20px 56px;
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  display: inline-block; padding: 4px 12px; border-radius: var(--radius-tag);
+  background: rgba(201,72,58,.22); color: var(--accent-soft);
+  font-size: 12px; letter-spacing: 1px; margin-bottom: 18px;
+}
+.hero h1 {
+  font-size: 44px; line-height: 1.18; font-weight: 800; margin-bottom: 18px;
+  letter-spacing: .5px;
+}
+.hero-desc {
+  font-size: 16px; color: #c8cdd8; max-width: 520px; line-height: 1.8; margin-bottom: 28px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-actions .btn-primary { background: var(--accent); }
+.hero-actions .btn-primary:hover { background: #b03a2e; }
+.hero-actions .btn-ghost { border-color: rgba(255,255,255,.3); color: #fff; }
+.hero-actions .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-visual svg { width: 100%; max-width: 380px; height: auto; }
+
+/* 主容器 */
+.container {
+  max-width: 1360px; margin: 0 auto; padding: 0 20px;
+}
+.content-layout {
+  display: grid; grid-template-columns: 180px minmax(0,1fr) 250px;
+  gap: 28px; padding: 36px 0 60px;
+}
+/* 左侧频道 */
+.side-channels {
+  position: sticky; top: calc(var(--announce-h) + var(--header-h) + 20px);
+  align-self: start;
+}
+.side-title {
+  font-size: 12px; color: var(--text-3); letter-spacing: 1.5px;
+  margin-bottom: 10px; text-transform: uppercase;
+}
+.channel-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+.channel-list a {
+  display: block; padding: 8px 12px; border-radius: var(--radius-btn);
+  font-size: 14px; color: var(--text-2); border-left: 3px solid transparent;
+  transition: all .15s;
+}
+.channel-list a:hover, .channel-list a.active {
+  background: #fff; color: var(--brand); border-left-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+/* 右侧辅助 */
+.side-aux { display: flex; flex-direction: column; gap: 20px; }
+.aux-card {
+  background: var(--panel); border-radius: var(--radius-card);
+  padding: 16px 18px; box-shadow: var(--shadow); border: 1px solid var(--line);
+}
+.aux-card h3 { font-size: 14px; margin-bottom: 12px; color: var(--brand); }
+.aux-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.aux-list li { font-size: 13px; color: var(--text-2); display: flex; gap: 8px; }
+.aux-list .num { color: var(--accent); font-weight: 700; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.aux-update { font-size: 13px; color: var(--text-2); padding: 8px 0; border-bottom: 1px dashed var(--line); }
+.aux-update:last-child { border-bottom: none; }
+.aux-update .date { color: var(--text-3); font-size: 12px; display: block; margin-top: 2px; }
+
+/* 主内容区 */
+.main-content { display: flex; flex-direction: column; gap: 46px; min-width: 0; }
+.section-head { margin-bottom: 20px; }
+.section-head h2 {
+  font-size: 22px; font-weight: 800; color: var(--brand);
+  display: flex; align-items: center; gap: 10px;
+}
+.section-head h2::before {
+  content: ""; width: 5px; height: 20px; background: var(--accent);
+  border-radius: 2px; display: block;
+}
+.section-head p { font-size: 13px; color: var(--text-3); margin-top: 6px; }
+
+/* 概览 */
+.overview-text {
+  background: var(--panel); border-radius: var(--radius-card);
+  padding: 24px 26px; box-shadow: var(--shadow); border: 1px solid var(--line);
+  font-size: 15px; color: var(--text-2); line-height: 1.85;
+}
+.overview-text p { margin-bottom: 12px; }
+.overview-text p:last-child { margin-bottom: 0; }
+.overview-text strong { color: var(--brand); }
+
+/* 卡片网格 */
+.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.card {
+  background: var(--panel); border-radius: var(--radius-card); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  transition: transform .18s, box-shadow .18s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.card-img { width: 100%; height: 150px; object-fit: cover; }
+.card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-size: 11px; padding: 2px 8px; border-radius: var(--radius-tag);
+  background: #f0ece5; color: var(--text-2);
+}
+.tag-accent { background: rgba(201,72,58,.12); color: var(--accent); }
+.card-title { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.4; }
+.card-desc { font-size: 13px; color: var(--text-2); line-height: 1.6; flex: 1; }
+.card-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: var(--text-3); border-top: 1px dashed var(--line); padding-top: 10px;
+}
+.card-meta .score { color: var(--accent); font-weight: 700; }
+
+/* 动态列表 */
+.dynamic-list { display: flex; flex-direction: column; gap: 2px; }
+.dynamic-item {
+  display: grid; grid-template-columns: 76px 1fr; gap: 14px;
+  padding: 14px 16px; background: var(--panel); border-radius: var(--radius-card);
+  border: 1px solid var(--line); transition: border-color .15s;
+}
+.dynamic-item:hover { border-color: var(--brand-light); }
+.dynamic-date { font-size: 12px; color: var(--text-3); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.dynamic-title { font-size: 14px; font-weight: 700; color: var(--brand); margin-bottom: 3px; }
+.dynamic-summary { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+/* 分类入口 */
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cat-item {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-card);
+  padding: 16px 14px; text-align: center; transition: all .18s;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.cat-item:hover { border-color: var(--accent); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.cat-icon { width: 30px; height: 30px; }
+.cat-name { font-size: 13px; font-weight: 700; color: var(--brand); }
+.cat-count { font-size: 11px; color: var(--text-3); }
+
+/* 深度解析 */
+.deep-analysis {
+  background: var(--panel); border-radius: var(--radius-card); padding: 28px 30px;
+  box-shadow: var(--shadow); border: 1px solid var(--line);
+}
+.deep-analysis h3 {
+  font-size: 17px; color: var(--brand); margin: 26px 0 10px;
+  padding-left: 12px; border-left: 3px solid var(--accent);
+}
+.deep-analysis h3:first-child { margin-top: 0; }
+.deep-analysis p { font-size: 14.5px; color: var(--text-2); margin-bottom: 12px; line-height: 1.85; }
+.deep-analysis ul { margin: 10px 0 14px 20px; }
+.deep-analysis li { font-size: 14px; color: var(--text-2); margin-bottom: 6px; line-height: 1.7; }
+.deep-analysis strong { color: var(--brand); }
+.deep-analysis .callout {
+  background: #faf7f2; border-left: 3px solid var(--accent);
+  padding: 12px 16px; border-radius: 0 var(--radius-tag) var(--radius-tag) 0;
+  font-size: 13.5px; color: var(--text-2); margin: 14px 0;
+}
+.deep-analysis table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+.deep-analysis th, .deep-analysis td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; }
+.deep-analysis th { background: #f5f3ef; color: var(--brand); font-weight: 700; }
+
+/* 体验指南 */
+.guide-steps { display: flex; flex-direction: column; gap: 14px; }
+.guide-step {
+  display: grid; grid-template-columns: 40px 1fr; gap: 16px;
+  background: var(--panel); border-radius: var(--radius-card);
+  padding: 18px 20px; border: 1px solid var(--line);
+}
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%; background: var(--brand);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.step-body h4 { font-size: 15px; color: var(--brand); margin-bottom: 5px; }
+.step-body p { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  background: var(--panel); border-radius: var(--radius-card); border: 1px solid var(--line);
+  overflow: hidden;
+}
+.faq-item summary {
+  padding: 14px 18px; font-size: 14.5px; font-weight: 700; color: var(--brand);
+  cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;
+  transition: background .15s;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { background: #faf8f4; }
+.faq-item summary::after {
+  content: "+"; font-size: 20px; color: var(--accent); font-weight: 400; transition: transform .2s;
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-answer { padding: 0 18px 16px; font-size: 13.5px; color: var(--text-2); line-height: 1.75; }
+
+/* 评论 */
+.comment-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.comment-item {
+  background: var(--panel); border-radius: var(--radius-card); padding: 14px 16px;
+  border: 1px solid var(--line); font-size: 13.5px; color: var(--text-2); line-height: 1.6;
+}
+.comment-user { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.comment-avatar {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--brand-light);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.comment-name { font-size: 12.5px; font-weight: 700; color: var(--brand); }
+.comment-time { font-size: 11px; color: var(--text-3); margin-left: auto; }
+
+/* 资讯 */
+.news-list { display: flex; flex-direction: column; gap: 14px; }
+.news-item {
+  background: var(--panel); border-radius: var(--radius-card); padding: 16px 18px;
+  border: 1px solid var(--line); display: flex; gap: 16px; align-items: flex-start;
+}
+.news-img { width: 90px; height: 68px; object-fit: cover; border-radius: var(--radius-tag); flex-shrink: 0; }
+.news-body { flex: 1; min-width: 0; }
+.news-title { font-size: 14.5px; font-weight: 700; color: var(--brand); margin-bottom: 4px; }
+.news-meta { font-size: 12px; color: var(--text-3); margin-bottom: 5px; }
+.news-summary { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+/* 相关推荐 */
+.rec-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.rec-tag {
+  font-size: 13px; padding: 6px 14px; border-radius: 20px;
+  background: var(--panel); border: 1px solid var(--line); color: var(--text-2);
+  transition: all .15s;
+}
+.rec-tag:hover { border-color: var(--accent); color: var(--accent); background: #fff9f7; }
+
+/* 榜单 */
+.ranking-list { display: flex; flex-direction: column; gap: 2px; }
+.rank-item {
+  display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center;
+  padding: 12px 16px; background: var(--panel); border-radius: var(--radius-card);
+  border: 1px solid var(--line);
+}
+.rank-num {
+  font-weight: 800; font-size: 16px; color: var(--text-3); text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.rank-item:nth-child(1) .rank-num { color: var(--accent); }
+.rank-item:nth-child(2) .rank-num { color: #d4762c; }
+.rank-item:nth-child(3) .rank-num { color: #b8962e; }
+.rank-title { font-size: 14px; font-weight: 700; color: var(--brand); }
+.rank-sub { font-size: 12px; color: var(--text-3); }
+.rank-score { font-size: 13px; color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* 投稿区 */
+.submit-banner {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%);
+  border-radius: var(--radius-card); padding: 28px 30px; color: #fff;
+  display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+}
+.submit-banner h3 { font-size: 19px; margin-bottom: 8px; }
+.submit-banner p { font-size: 13.5px; color: #c8cdd8; line-height: 1.7; }
+.submit-banner .btn-primary { background: var(--accent); }
+.submit-banner .btn-primary:hover { background: #b03a2e; }
+
+/* 页尾 */
+.site-footer {
+  background: var(--brand-deep); color: #b8bfcc; margin-top: 20px;
+  padding: 44px 0 28px;
+}
+.footer-inner {
+  max-width: 1360px; margin: 0 auto; padding: 0 20px;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px;
+}
+.footer-brand { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+.footer-desc { font-size: 13px; line-height: 1.75; color: #9aa3b5; }
+.footer-col h4 { font-size: 13px; color: #fff; margin-bottom: 12px; letter-spacing: .5px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col a { font-size: 13px; color: #9aa3b5; transition: color .15s; }
+.footer-col a:hover { color: var(--accent-soft); }
+.footer-bottom {
+  max-width: 1360px; margin: 28px auto 0; padding: 18px 20px 0;
+  border-top: 1px solid #2a3448; font-size: 12px; color: #68738a;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+
+/* 回到顶部 */
+.back-top {
+  position: fixed; right: 24px; bottom: 30px; z-index: 40;
+  width: 42px; height: 42px; border-radius: 50%; border: none;
+  background: var(--brand); color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-hover); opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.back-top.show { opacity: 1; pointer-events: auto; }
+.back-top:hover { transform: translateY(-3px); background: var(--accent); }
+
+/* 遮罩 */
+.overlay {
+  display: none; position: fixed; inset: 0; background: rgba(20,29,48,.45);
+  z-index: 45;
+}
+.overlay.show { display: block; }
+
+/* 响应式 */
+@media (max-width: 1100px) {
+  .content-layout { grid-template-columns: 160px minmax(0,1fr); }
+  .side-aux { display: none; }
+  .cat-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 28px; padding: 48px 20px 40px; }
+  .hero-visual { display: none; }
+  .hero h1 { font-size: 34px; }
+  .content-layout { grid-template-columns: 1fr; }
+  .side-channels {
+    position: static; display: none; background: var(--panel);
+    border-radius: var(--radius-card); padding: 14px; box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+  .side-channels.open { display: block; }
+  .channel-list { flex-direction: row; flex-wrap: wrap; }
+  .channel-list a { border-left: none; border-bottom: 3px solid transparent; border-radius: var(--radius-tag); }
+  .channel-list a:hover, .channel-list a.active { border-bottom-color: var(--accent); }
+  .menu-toggle { display: flex; }
+  .main-nav { display: none; }
+  .main-nav.open { display: flex; position: absolute; top: var(--header-h); left: 0; right: 0;
+    background: #fff; padding: 12px 20px; box-shadow: var(--shadow-hover);
+    flex-wrap: wrap; border-bottom: 1px solid var(--line); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .submit-banner { grid-template-columns: 1fr; }
+  .comment-list { grid-template-columns: 1fr; }
+}
+@media (max-width: 740px) {
+  .header-inner { gap: 12px; }
+  .hero h1 { font-size: 28px; }
+  .hero-desc { font-size: 14.5px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .dynamic-item { grid-template-columns: 1fr; gap: 4px; }
+  .news-item { flex-direction: column; }
+  .news-img { width: 100%; height: 140px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; }
+  .deep-analysis { padding: 20px 18px; }
+  .overview-text { padding: 18px; }
+  .rank-item { grid-template-columns: 26px 1fr auto; }
+  .back-top { right: 14px; bottom: 18px; }
+  .header-actions .btn-ghost { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce" role="region" aria-label="站内公告">
+  <div class="announce-inner">
+    <span class="announce-brand">ks舞团夏柏</span>
+    <span class="announce-sep"></span>
+    <span class="announce-item"><span class="announce-date">11-07</span>《逆光生长》公演录像上线</span>
+    <span class="announce-sep"></span>
+    <span class="announce-item"><span class="announce-date">11-05</span>夏柏个人编舞《折枝》排练花絮</span>
+    <span class="announce-sep"></span>
+    <span class="announce-item">本周新增 <strong>6</strong> 条排练记录</span>
+    <span class="announce-sep"></span>
+    <span class="announce-item">秋季招新投稿开放至 11-20</span>
+  </div>
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/#top" class="logo" aria-label="ks舞团夏柏首页">
+      <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="9" fill="#1f2a44"/>
+        <path d="M10 26 L16 14 L22 26 M14 22 H26" stroke="#e8a59c" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="30" cy="13" r="3.4" fill="#c9483a"/>
+      </svg>
+      <span class="logo-text">ks舞团夏柏</span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="主题导航">
+      <a href="/#overview">舞团概览</a>
+      <a href="/#featured">精选舞台</a>
+      <a href="/#updates">最新动态</a>
+      <a href="/#categories">分类索引</a>
+      <a href="/#analysis">深度解析</a>
+      <a href="/#guide">观看指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#comments">观众评论</a>
+    </nav>
+    <div class="header-actions">
+      <a href="/#submit" class="btn btn-ghost">作品投稿</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="hero-tag">街舞团体 · 舞台作品 · 排练记录</span>
+      <h1>ks舞团夏柏</h1>
+      <p class="hero-desc">汇集 ks 舞团及其成员夏柏近期的公演录像、个人编舞作品、排练花絮与编舞思路拆解。条目按演出类型与创作阶段归类，适合想追踪团体舞台表现、研究编舞细节的观众按需翻阅。</p>
+      <div class="hero-actions">
+        <a href="/#featured" class="btn btn-primary">查看精选舞台</a>
+        <a href="/#updates" class="btn btn-ghost">最新排练动态</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 380 340" fill="none">
+        <circle cx="200" cy="150" r="120" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+        <circle cx="200" cy="150" r="86" stroke="rgba(232,165,156,.35)" stroke-width="1.5" stroke-dasharray="4 6"/>
+        <circle cx="200" cy="150" r="52" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+        <path d="M140 200 Q170 110 200 150 Q230 190 260 130" stroke="#e8a59c" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="200" cy="150" r="6" fill="#c9483a"/>
+        <circle cx="140" cy="200" r="4" fill="#e8a59c"/>
+        <circle cx="260" cy="130" r="4" fill="#e8a59c"/>
+        <path d="M120 260 Q200 300 280 260" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-linecap="round"/>
+        <rect x="168" y="270" width="64" height="4" rx="2" fill="rgba(255,255,255,.15)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 主内容区 -->
+<div class="container">
+  <div class="content-layout">
+
+    <!-- 左侧频道索引 -->
+    <aside class="side-channels" id="sideChannels" aria-label="频道索引">
+      <p class="side-title">频道索引</p>
+      <nav>
+        <ul class="channel-list">
+          <li><a href="/#overview">舞团概览</a></li>
+          <li><a href="/#featured">精选舞台</a></li>
+          <li><a href="/#updates">最新动态</a></li>
+          <li><a href="/#categories">分类索引</a></li>
+          <li><a href="/#analysis">深度解析</a></li>
+          <li><a href="/#guide">观看指南</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#comments">观众评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#ranking">热门榜单</a></li>
+          <li><a href="/#submit">作品投稿</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 中主内容 -->
+    <main class="main-content">
+
+      <!-- 1. 主题领域概览 -->
+      <section id="overview">
+        <div class="section-head">
+          <h2>舞团与成员概览</h2>
+          <p>从齐舞公演到个人编舞，梳理近期作品的构成与走向</p>
+        </div>
+        <div class="overview-text">
+          <p><strong>ks舞团</strong>以 Urban Dance 与 Hip-hop 齐舞为主要方向，成员夏柏近年从群舞位逐步过渡到独立编舞与双人作品。团体公演以赛季制推进，2026 年秋季场《逆光生长》在 10 月 25 日完成首演，录像于 11 月 7 日释出。</p>
+          <p>值得关注的方向包括：齐舞作品的空间调度与队形切换、夏柏个人编舞中反复出现的“失衡—回正”动作逻辑、排练阶段对音乐切分的调整，以及双人合作中力量传递的处理方式。这些内容在公演录像、排练花絮和编舞手记中均有对应素材。</p>
+          <p>条目类型覆盖完整公演、单曲舞台、排练记录、编舞思路访谈与观众讨论。团体目前保持每月 2—3 次公开排练记录更新，个人作品则跟随创作周期发布。观看时可按“演出—排练—解读”三个层次切入，也可以直接按具体曲目名检索。</p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section id="featured">
+        <div class="section-head">
+          <h2>精选舞台与编舞作品</h2>
+          <p>近期公演与个人作品中值得逐帧回看的条目</p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance01/400/300" width="400" height="300" loading="lazy" alt="ks舞团秋季公演《逆光生长》群舞队形展开的舞台瞬间">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">齐舞公演</span><span class="tag">Urban</span><span class="tag">8人编队</span></div>
+              <h3 class="card-title">《逆光生长》秋季场完整版</h3>
+              <p class="card-desc">8 人齐舞作品，第二段队形从 V 字转为两列对冲，中段留出 12 秒单人独舞给夏柏。整支作品在 4 分 20 秒处有一个全体定格设计。</p>
+              <div class="card-meta"><span>10-25 首演 · 11-07 录像上线</span><span class="score">9.2</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance02/400/300" width="400" height="300" loading="lazy" alt="夏柏个人编舞作品《折枝》排练厅内低角度起身动作">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">个人编舞</span><span class="tag">Contemporary Hip-hop</span><span class="tag">独舞</span></div>
+              <h3 class="card-title">夏柏《折枝》排练版</h3>
+              <p class="card-desc">3 分 08 秒的独舞，开场 26 秒在地面完成重心转移，随后连续三次“失衡—回正”动作贯穿全曲。排练版保留了中途喊停调整的片段。</p>
+              <div class="card-meta"><span>11-05 上传 · 排练花絮</span><span class="score">8.8</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance03/400/300" width="400" height="300" loading="lazy" alt="ks舞团双人作品《回声》中两人交替支撑的托举动作">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">双人作品</span><span class="tag">Popping</span><span class="tag">接触即兴</span></div>
+              <h3 class="card-title">双人舞《回声》完整舞台</h3>
+              <p class="card-desc">夏柏与团员阿哲合作，整支作品没有独立独舞段落，两人在 2 分 40 秒处有一次连续 6 个八拍的同步 Pop，后半段转入地面接触。</p>
+              <div class="card-meta"><span>10-18 社区展演</span><span class="score">8.5</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance04/400/300" width="400" height="300" loading="lazy" alt="ks舞团排练厅内成员围圈讨论队形走位的场景">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">排练记录</span><span class="tag">编舞会议</span><span class="tag">队形调整</span></div>
+              <h3 class="card-title">《逆光生长》队形调整记录</h3>
+              <p class="card-desc">记录了首演前 6 天的一次大改：原本第三段的两列横移被改成斜向穿插，原因是舞台侧幕宽度不足，斜线更安全，视觉上也更集中。</p>
+              <div class="card-meta"><span>10-19 排练厅 · 时长 14 分钟</span><span class="score">—</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance05/400/300" width="400" height="300" loading="lazy" alt="夏柏在排练厅对着镜子练习音乐切分的单人画面">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">编舞手记</span><span class="tag">音乐切分</span><span class="tag">夏柏</span></div>
+              <h3 class="card-title">夏柏谈《折枝》的音乐处理</h3>
+              <p class="card-desc">文字加音频记录，夏柏解释了为什么把原曲 4/4 拍的第二、四拍弱化，改以人声气口作为动作触发点，以及这个选择在排练中带来的三次返工。</p>
+              <div class="card-meta"><span>11-03 发布 · 阅读 3800+</span><span class="score">—</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card-img" src="https://picsum.photos/seed/ksdance06/400/300" width="400" height="300" loading="lazy" alt="ks舞团在户外舞台表演群舞的远景，观众在台前围观">
+            <div class="card-body">
+              <div class="card-tags"><span class="tag tag-accent">户外公演</span><span class="tag">Hip-hop</span><span class="tag">6人编队</span></div>
+              <h3 class="card-title">城市广场快闪《地平面》</h3>
+              <p class="card-desc">6 人版本，舞台就是广场地砖，没有侧幕和灯光变化，所有队形切换依靠脚步节奏提示。现场收音里能听到观众的即时反应。</p>
+              <div class="card-meta"><span>10-12 快闪 · 时长 3 分 30 秒</span><span class="score">8.1</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 -->
+      <section id="updates">
+        <div class="section-head">
+          <h2>最新排练与发布动态</h2>
+          <p>近一个月内团体与成员的更新记录</p>
+        </div>
+        <div class="dynamic-list">
+          <div class="dynamic-item">
+            <span class="dynamic-date">11-07</span>
+            <div>
+              <p class="dynamic-title">《逆光生长》公演录像正式上线</p>
+              <p class="dynamic-summary">完整版时长 4 分 32 秒，包含主舞台机位与侧台固定机位两个视角，侧台版本能看清第三段斜向穿插的走位路线。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">11-05</span>
+            <div>
+              <p class="dynamic-title">夏柏《折枝》排练花絮发布</p>
+              <p class="dynamic-summary">这段 9 分 40 秒的花絮保留了 3 次中途停止，其中一次是因为夏柏认为第 48 秒的落地太重，与前面轻触地面的质感不统一。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">11-03</span>
+            <div>
+              <p class="dynamic-title">《折枝》编舞手记文字版更新</p>
+              <p class="dynamic-summary">补充了音乐切分调整的时间线：10 月 28 日第一次改拍，10 月 31 日推翻，11 月 2 日确定以人声气口为准的最终方案。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">10-31</span>
+            <div>
+              <p class="dynamic-title">秋季招新投稿通道开启</p>
+              <p class="dynamic-summary">面向 16—24 岁舞者，提交 1 分钟以内个人即兴或编舞视频即可，截止日期 11 月 20 日，入选者参与 12 月团体合训。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">10-25</span>
+            <div>
+              <p class="dynamic-title">《逆光生长》首演完成</p>
+              <p class="dynamic-summary">当晚演出 2 场，第二场在结尾定格处出现约 0.5 秒的队形偏移，录像上线版本保留了这一版，未做修复。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">10-19</span>
+            <div>
+              <p class="dynamic-title">第三段队形调整记录上传</p>
+              <p class="dynamic-summary">14 分钟排练实录，记录了从两列横移到斜向穿插的完整沟通过程，包括对侧幕宽度的现场测量数据。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">10-18</span>
+            <div>
+              <p class="dynamic-title">双人舞《回声》社区展演</p>
+              <p class="dynamic-summary">在城东社区剧场演出，舞台深度较浅，夏柏与阿哲把两个托举动作改成了地面支撑，现场观众反馈后半段更连贯。</p>
+            </div>
+          </div>
+          <div class="dynamic-item">
+            <span class="dynamic-date">10-12</span>
+            <div>
+              <p class="dynamic-title">城市广场快闪《地平面》</p>
+              <p class="dynamic-summary">6 人版本首次公开，无灯光无侧幕，完全依靠脚步节奏提示队形切换，现场围观约 200 人。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section id="categories">
+        <div class="section-head">
+          <h2>内容分类索引</h2>
+          <p>按演出类型与创作阶段划分的入口</p>
+        </div>
+        <div class="cat-grid">
+          <a class="cat-item" href="/#featured">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect x="3" y="7" width="24" height="16" rx="2" stroke="#1f2a44" stroke-width="1.6"/><path d="M12 12 L19 15 L12 18 Z" fill="#c9483a"/></svg>
+            <span class="cat-name">齐舞公演</span>
+            <span class="cat-count">12 条</span>
+          </a>
+          <a class="cat-item" href="/#featured">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><circle cx="15" cy="10" r="5" stroke="#1f2a44" stroke-width="1.6"/><path d="M6 26 Q6 17 15 17 Q24 17 24 26" stroke="#1f2a44" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="cat-name">个人编舞</span>
+            <span class="cat-count">8 条</span>
+          </a>
+          <a class="cat-item" href="/#featured">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><circle cx="10" cy="12" r="4" stroke="#1f2a44" stroke-width="1.5"/><circle cx="20" cy="12" r="4" stroke="#1f2a44" stroke-width="1.5"/><path d="M4 24 Q4 17 10 17 M26 24 Q26 17 20 17" stroke="#1f2a44" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="cat-name">双人作品</span>
+            <span class="cat-count">5 条</span>
+          </a>
+          <a class="cat-item" href="/#updates">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect x="4" y="5" width="22" height="20" rx="2" stroke="#1f2a44" stroke-width="1.6"/><path d="M4 11 H26 M10 5 V11 M20 5 V11" stroke="#1f2a44" stroke-width="1.4"/><path d="M9 16 H15 M9 20 H19" stroke="#c9483a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="cat-name">排练记录</span>
+            <span class="cat-count">15 条</span>
+          </a>
+          <a class="cat-item" href="/#analysis">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M5 24 L12 10 L19 24 M9 19 H15" stroke="#1f2a44" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="9" r="2.5" fill="#c9483a"/></svg>
+            <span class="cat-name">编舞手记</span>
+            <span class="cat-count">6 条</span>
+          </a>
+          <a class="cat-item" href="/#news">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect x="4" y="6" width="22" height="18" rx="2" stroke="#1f2a44" stroke-width="1.6"/><path d="M8 12 H22 M8 16 H22 M8 20 H16" stroke="#1f2a44" stroke-width="1.4" stroke-linecap="round"/></svg>
+            <span class="cat-name">相关资讯</span>
+            <span class="cat-count">6 条</span>
+          </a>
+          <a class="cat-item" href="/#comments">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M5 8 Q5 5 8 5 H22 Q25 5 25 8 V17 Q25 20 22 20 H13 L8 25 V20 Q5 20 5 17 Z" stroke="#1f2a44" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="cat-name">观众评论</span>
+            <span class="cat-count">24 条</span>
+          </a>
+          <a class="cat-item" href="/#ranking">
+            <svg class="cat-icon" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M7 25 V14 H12 V25 M13 25 V8 H18 V25 M19 25 V18 H24 V25" stroke="#1f2a44" stroke-width="1.6" stroke-linecap="round"/><path d="M4 25 H26" stroke="#1f2a44" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="cat-name">热门榜单</span>
+            <span class="cat-count">10 条</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section id="analysis">
+        <div class="section-head">
+          <h2>编舞结构与观看路径解析</h2>
+          <p>从队形调度、音乐切分到个人动作逻辑，拆开来看</p>
+        </div>
+        <div class="deep-analysis">
+          <h3>齐舞的空间调度：队形切换的触发点在哪</h3>
+          <p>《逆光生长》的队形变化集中在三个节点：第 1 分 10 秒、第 2 分 35 秒和第 4 分 05 秒。前两次切换由鼓点触发，第三次由人声长音触发。触发点不同，舞台上呈现的效果也不同——鼓点切换干净利落，人声长音切换则留出了 4 拍的过渡动作，队形是“滑”过去的。</p>
+          <p>10 月 19 日的排练记录里，编舞团队原本在第三段设计了两列横移。现场测量侧幕宽度为 3.2 米，8 人横排展开需要 5.6 米，横移路线会压到侧幕边缘。改成斜向穿插后，路线缩短到 4.1 米，同时利用了舞台纵深。这个改动发生在前两次带妆排练之后，首演前 6 天。</p>
+          <p>判断一支齐舞的调度是否成立，可以看两个可核对的东西：一是每次队形切换后，所有舞者到达新位置的时间差是否在 1 拍以内；二是切换过程中有没有人需要低头或侧身避让。<strong>前者看整齐度，后者看设计是否留够了空间。</strong></p>
+
+          <h3>《折枝》的动作逻辑：失衡与回正的重复结构</h3>
+          <p>夏柏在《折枝》里用了三次“失衡—回正”结构，分别出现在第 26 秒、1 分 44 秒和 2 分 51 秒。三次的失衡幅度不同：第一次是上半身前倾 45 度后靠单脚支撑拉回，第二次是侧向倒重心后用手撑地回正，第三次幅度最大，几乎是一次完整的倒地再起身。</p>
+          <p>11 月 3 日的编舞手记里，夏柏提到第三次的设计经历了两次修改。最初版本是在倒地后直接起身，排练时发现“太顺了，没有挣扎感”，于是改成倒地后停顿 2 拍再起身。11 月 2 日的最终版里，这 2 拍停顿被压缩到 1.5 拍，理由是“停久了像在等观众反应”。</p>
+          <div class="callout">
+            三次失衡动作的幅度递进，与音乐中鼓点的密度变化是对应的：第一次出现在鼓点稀疏段，第三次出现在鼓点最密的 8 小节。动作幅度和音乐密度同向递增，这是编舞上的一个可验证的选择。
+          </div>
+
+          <h3>音乐切分：以人声气口替代重拍</h3>
+          <p>《折枝》用的原曲是 4/4 拍、BPM 约 92 的慢速曲目。夏柏把第二、四拍的重音弱化处理，动作触发点改为人声的气口位置。这个选择在排练中造成了三次返工：10 月 28 日第一次按新方案排练，发现前 40 秒有 6 个动作与气口错位；10 月 31 日推翻方案，改回以重拍为主；11 月 2 日重新采用气口方案，这次逐个动作对齐了音频波形。</p>
+          <p>以气口为触发点的好处是动作有“呼吸感”，代价是对舞者的听觉专注度要求更高。从排练花絮里能看到，夏柏在第 48 秒处喊停，原因是落地太重，与前面轻触地面的质感不统一。这个细节说明气口方案对力度控制的要求比按重拍跳更细。</p>
+
+          <h3>双人作品《回声》的力量传递</h3>
+          <p>《回声》里夏柏和阿哲的配合，关键在于两次力量传递的处理。第一次在第 1 分 20 秒，阿哲从背后推夏柏的肩胛，夏柏借力向前滑出一步半；第二次在 2 分 55 秒，两人面对面做反向拉扯，夏柏先松力再突然收紧，阿哲顺势被带向前。</p>
+          <p>10 月 18 日社区展演的场地深度只有 4 米，原本设计的两个托举改成了地面支撑。改完之后，第二次力量传递的观感反而更清楚，因为地面支撑让两人的重心变化完全暴露在观众视线里。这个改动后来被保留到了后续版本中。</p>
+
+          <h3>个人作品与团体作品的取舍差异</h3>
+          <p>团体齐舞看重整体画面的稳定性，个人编舞则允许更多冒险动作。《逆光生长》的 8 人版本里，夏柏的个人独舞段落只有 12 秒，动作设计以清晰、易读为主，没有高难度地面动作。《折枝》的独舞版本里，地面动作占了将近 40 秒，包括两次完全贴地的翻滚。</p>
+          <p>两种取舍的差异可以用排练时长来对照：齐舞版本从编舞到首演用了 5 周，其中队形调整占了大半时间；《折枝》从 10 月中旬开始构思到 11 月初排练版成形，用了约 3 周，大部分时间花在单个人动作的反复试错上。</p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 -->
+      <section id="guide">
+        <div class="section-head">
+          <h2>观看与判断指南</h2>
+          <p>按什么顺序看，怎么判断一支作品值不值得反复回看</p>
+        </div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <span class="step-num">1</span>
+            <div class="step-body">
+              <h4>先看完整公演，再看排练花絮</h4>
+              <p>完整版能建立整体印象，知道作品的结构和节奏。排练花絮的价值在于暴露修改过程：哪里返工了、为什么改。先看花絮再看成品，容易带着“找不同”的心态，反而忽略作品本身。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">2</span>
+            <div class="step-body">
+              <h4>判断齐舞作品，盯住队形切换后的第一拍</h4>
+              <p>切换完队形的第一个动作是否整齐，最能反映排练质量。如果第一拍有人慢了半拍或者位置偏了，说明切换路线要么太复杂，要么排练次数不够。这个判断比看整体画面是否好看更具体。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">3</span>
+            <div class="step-body">
+              <h4>个人作品看动作与音乐的对应关系</h4>
+              <p>把声音关掉看一遍，再开声音看一遍。关声音时动作有没有独立的逻辑，开声音时动作有没有在关键节点上回应音乐。两个版本都成立的作品，通常编舞密度更高。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">4</span>
+            <div class="step-body">
+              <h4>比较同类作品时，用同一条标准</h4>
+              <p>拿《折枝》和另一支独舞比较，不要一个看动作难度、一个看情感表达。统一用“失衡—回正结构的完成度”来比，或者统一用“动作与气口的对齐率”来比。标准一致，比较才有意义。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">5</span>
+            <div class="step-body">
+              <h4>排练记录适合当参考资料，不适合当入门</h4>
+              <p>14 分钟的队形调整记录里，有价值的信息可能只有 3 分钟。如果对编舞方法本身没有兴趣，直接看成品即可。想研究编舞决策的观众，可以从记录里的“改了什么”和“为什么改”两处入手。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section id="faq">
+        <div class="section-head">
+          <h2>常见问题</h2>
+          <p>关于作品、排练和观看选择的问答</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>《逆光生长》第二场的队形偏移是怎么回事？</summary>
+            <div class="faq-answer">第二场在结尾定格处，右侧第三位舞者比预定位置偏了约半个身位。原因是上一段斜向穿插结束时，该舞者的落点比排练时靠前了半步，后续定格动作按原路线走就会偏。录像上线版本保留了这个偏移，没有补拍。</div>
+          </details>
+          <details class="faq-item">
+            <summary>《折枝》为什么改了三次音乐切分方案？</summary>
+            <div class="faq-answer">第一次按人声气口排，前 40 秒有 6 个动作错位；10 月 31 日推翻改回重拍，排练时发现动作力度变得生硬；11 月 2 日重新采用气口方案，这次逐个动作对齐了音频波形。三次调整的核心矛盾是：气口方案呼吸感好，但对听觉专注度要求高，按重拍跳则力度够但质感偏硬。</div>
+          </details>
+          <details class="faq-item">
+            <summary>夏柏的个人作品和团体齐舞有什么区别？</summary>
+            <div class="faq-answer">团体齐舞优先保证整体画面稳定，个人段落动作以清晰易读为主；独舞作品允许更多地面动作和身体冒险。《逆光生长》里夏柏的独舞只有 12 秒，《折枝》的地面动作占了将近 40 秒。排练周期也不同，齐舞版本从编舞到首演约 5 周，《折枝》约 3 周。</div>
+          </details>
+          <details class="faq-item">
+            <summary>《回声》在社区剧场改动作，改动大吗？</summary>
+            <div class="faq-answer">两个托举动作改成了地面支撑，位置在第 1 分 20 秒和第 2 分 55 秒。改动原因是场地深度只有 4 米，托举后的移动空间不够。改完之后第二次力量传递的观感更清楚，因为地面支撑让重心变化完全暴露在观众视线里，这个版本后来被保留。</div>
+          </details>
+          <details class="faq-item">
+            <summary>秋季招新投稿需要准备什么？</summary>
+            <div class="faq-answer">1 分钟以内个人即兴或编舞视频即可，不限舞种。截止日期 11 月 20 日，入选者参与 12 月团体合训。投稿时建议保留完整动作起止，不要只剪高光片段，评审主要看动作完成的完整度和节奏感。</div>
+          </details>
+          <details class="faq-item">
+            <summary>观看排练花絮前需要先看完整作品吗？</summary>
+            <div class="faq-answer">建议先看完整作品。花絮里讨论的修改点，比如第三段队形从横移改成斜向穿插，只有看过成品才知道改前改后的差别。反过来先看花絮，容易把注意力放在“找不同”上，忽略作品的整体结构。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section id="comments">
+        <div class="section-head">
+          <h2>观众评论</h2>
+          <p>来自不同观看角度的反馈，含中性评价与吐槽</p>
+        </div>
+        <div class="comment-list">
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">林</span><span class="comment-name">林间散步</span><span class="comment-time">11-07</span></div>
+            《逆光生长》第三段斜向穿插那一下真的帅，侧台机位看得清清楚楚，每个人落点都卡在鼓点上。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">M</span><span class="comment-name">Momo酱</span><span class="comment-time">11-07</span></div>
+            《折枝》看到第三次倒地再起身那里，我反复拖回去看了四遍。停顿一拍半刚好，再长就有点刻意了。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">阿</span><span class="comment-name">阿哲本人</span><span class="comment-time">11-06</span></div>
+            双人舞那个反向拉扯，排练的时候其实经常收不住力，现场能做成那样算运气好。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">c</span><span class="comment-name">choreo_fan</span><span class="comment-time">11-06</span></div>
+            编舞手记里说“停久了像在等观众反应”，这个判断挺准的。很多独舞作品就败在停顿太长，节奏全断了。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">小</span><span class="comment-name">小满</span><span class="comment-time">11-05</span></div>
+            排练花絮 9 分 40 秒，说实话有点长。中间有三次喊停，第二次的讨论我觉得可以剪掉。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">1</span><span class="comment-name">1号观众</span><span class="comment-time">11-05</span></div>
+            夏柏那个落地太重的问题，我关声音看了一遍，确实第 48 秒那下和前面不搭。这种细节不喊停根本注意不到。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">J</span><span class="comment-name">Jazzcat</span><span class="comment-time">11-04</span></div>
+            最近在练 popping，想问《回声》2 分 40 秒那组同步 pop 是几个人一起练多久出来的，有知道的吗。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">周</span><span class="comment-name">周末不加班</span><span class="comment-time">11-04</span></div>
+            广场快闪那个版本我现场看了，没有灯光反而更清楚队形，脚步声当提示音这个设计挺聪明的。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">K</span><span class="comment-name">K.O.</span><span class="comment-time">11-03</span></div>
+            编舞手记文字版比音频版信息密度高，音频里有些口头语听着有点散。建议以后直接出文字加时间戳对照。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">橘</span><span class="comment-name">橘子汽水</span><span class="comment-time">11-02</span></div>
+            秋季招新要求 16—24 岁，超龄了，只能围观。12 月合训如果开放旁听就好了。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">d</span><span class="comment-name">dan_ce</span><span class="comment-time">11-01</span></div>
+            《地平面》6 人版和 8 人版完全是两种东西，少了两个人反而每步都看得清。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">半</span><span class="comment-name">半夜看舞</span><span class="comment-time">10-30</span></div>
+            不太懂编舞，就是觉得《折枝》好看。讲不出为什么。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">L</span><span class="comment-name">Lily不是莉莉</span><span class="comment-time">10-28</span></div>
+            第三段队形调整那个记录，量侧幕宽度 3.2 米这个细节很实在，比光讲“改了队形”有用多了。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">老</span><span class="comment-name">老陈看戏</span><span class="comment-time">10-26</span></div>
+            首演第二场我在现场，结尾定格确实有人偏了，但当时没看出来，回来看录像才注意到。
+          </div>
+          <div class="comment-item">
+            <div class="comment-user"><span class="comment-avatar">Z</span><span class="comment-name">Zzz睡不醒</span><span class="comment-time">10-24</span></div>
+            有没有人觉得《回声》前半段有点平，后面才开始好看。
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section id="news">
+        <div class="section-head">
+          <h2>相关资讯</h2>
+          <p>团体动态与周边演出信息</p>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews01/600/400" width="600" height="400" loading="lazy" alt="ks舞团成员在排练厅进行秋季招新评审的画面">
+            <div class="news-body">
+              <h3 class="news-title">ks舞团秋季招新进入评审阶段，已收到 87 份投稿</h3>
+              <p class="news-meta">2026-11-06 · 团体公告</p>
+              <p class="news-summary">投稿截止日期 11 月 20 日，目前收到的 87 份视频里，即兴类占 54 份、编舞类 33 份。评审团由 3 名现役团员组成，最终入选名单计划 11 月 28 日公布。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews02/600/400" width="600" height="400" loading="lazy" alt="城市文化馆小剧场舞台空景，灯光已就位">
+            <div class="news-body">
+              <h3 class="news-title">《逆光生长》12 月加演场定档城市文化馆小剧场</h3>
+              <p class="news-meta">2026-11-04 · 演出信息</p>
+              <p class="news-summary">加演定在 12 月 13 日，场地座位 280 个，比首演场地少 120 个。舞团表示会根据小剧场的舞台深度（5.5 米）重新调整第三段斜向穿插的路线。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews03/600/400" width="600" height="400" loading="lazy" alt="夏柏在工作室接受采访，桌前放着编舞手稿">
+            <div class="news-body">
+              <h3 class="news-title">夏柏谈《折枝》后续：计划加入现场鼓手</h3>
+              <p class="news-meta">2026-11-02 · 人物访谈</p>
+              <p class="news-summary">夏柏在访谈中提到，《折枝》的稳定版本已成形，下一步打算在 12 月的版本里加入一名现场鼓手，用实时打击替代部分预制鼓点，让动作触发点有更多变化。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews04/600/400" width="600" height="400" loading="lazy" alt="社区剧场外观，入口处张贴着展演海报">
+            <div class="news-body">
+              <h3 class="news-title">社区剧场展演系列公布第二期名单，双人组《回声》入选</h3>
+              <p class="news-meta">2026-10-27 · 展演公告</p>
+              <p class="news-summary">第二期展演共 9 组作品入选，《回声》排在 11 月 22 日场次的第三组出场。剧场方面提供 4 米深度舞台，比第一期增加了 0.5 米。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews05/600/400" width="600" height="400" loading="lazy" alt="排练厅角落的音响设备与散落的乐谱">
+            <div class="news-body">
+              <h3 class="news-title">团体合训时间调整：从每周三改为每周二、四</h3>
+              <p class="news-meta">2026-10-21 · 团体公告</p>
+              <p class="news-summary">调整原因是排练厅周三被其他团体占用。新时间从 10 月 27 日起执行，每次合训时长从 3 小时延长到 2.5 小时加 1 小时自由练习。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img class="news-img" src="https://picsum.photos/seed/ksnews06/600/400" width="600" height="400" loading="lazy" alt="广场快闪现场观众围观的俯拍视角">
+            <div class="news-body">
+              <h3 class="news-title">广场快闪《地平面》现场视频播放量破 10 万</h3>
+              <p class="news-meta">2026-10-16 · 数据记录</p>
+              <p class="news-summary">10 月 12 日发布的快闪视频，4 天内播放量超过 10 万，评论区讨论最多的是“没有灯光怎么提示队形”。舞团在评论区回复确认，切换提示来自脚步节奏变化。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section id="related">
+        <div class="section-head">
+          <h2>相关推荐</h2>
+          <p>按具体内容方向与条目名延伸的标签</p>
+        </div>
+        <div class="rec-tags">
+          <a class="rec-tag" href="/#featured">逆光生长 侧台机位</a>
+          <a class="rec-tag" href="/#analysis">失衡回正 动作结构</a>
+          <a class="rec-tag" href="/#featured">折枝 排练版</a>
+          <a class="rec-tag" href="/#guide">齐舞队形切换 判断</a>
+          <a class="rec-tag" href="/#featured">回声 双人接触即兴</a>
+          <a class="rec-tag" href="/#news">城市文化馆 加演场</a>
+          <a class="rec-tag" href="/#analysis">人声气口 音乐切分</a>
+          <a class="rec-tag" href="/#updates">秋季招新 投稿要求</a>
+        </div>
+      </section>
+
+      <!-- 11. 热门榜单 -->
+      <section id="ranking">
+        <div class="section-head">
+          <h2>热门作品榜单</h2>
+          <p>按站内观看与讨论热度排序，截至 11 月 8 日</p>
+        </div>
+        <div class="ranking-list">
+          <div class="rank-item">
+            <span class="rank-num">1</span>
+            <div><p class="rank-title">《逆光生长》秋季场完整版</p><p class="rank-sub">齐舞公演 · 11-07 上线</p></div>
+            <span class="rank-score">9.2</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">2</span>
+            <div><p class="rank-title">夏柏《折枝》排练版</p><p class="rank-sub">个人编舞 · 11-05 上传</p></div>
+            <span class="rank-score">8.8</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">3</span>
+            <div><p class="rank-title">双人舞《回声》完整舞台</p><p class="rank-sub">双人作品 · 10-18 展演</p></div>
+            <span class="rank-score">8.5</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">4</span>
+            <div><p class="rank-title">城市广场快闪《地平面》</p><p class="rank-sub">户外公演 · 10-12 快闪</p></div>
+            <span class="rank-score">8.1</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">5</span>
+            <div><p class="rank-title">《逆光生长》队形调整记录</p><p class="rank-sub">排练记录 · 10-19 上传</p></div>
+            <span class="rank-score">7.9</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">6</span>
+            <div><p class="rank-title">夏柏谈《折枝》音乐处理</p><p class="rank-sub">编舞手记 · 11-03 发布</p></div>
+            <span class="rank-score">7.6</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 投稿互动 -->
+      <section id="submit">
+        <div class="submit-banner">
+          <div>
+            <h3>作品与排练记录投稿</h3>
+            <p>面向舞者与观众开放：1 分钟以内个人即兴或编舞视频、排练现场记录、编舞思路文字稿均可提交。投稿截止 11 月 20 日，入选内容将在站内条目中展示。</p>
+          </div>
+          <a href="/#submit" class="btn btn-primary">提交作品</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="side-aux" aria-label="辅助信息">
+      <div class="aux-card">
+        <h3>本周更新条目</h3>
+        <div class="aux-update">《逆光生长》公演录像<span class="date">11-07</span></div>
+        <div class="aux-update">《折枝》排练花絮<span class="date">11-05</span></div>
+        <div class="aux-update">《折枝》编舞手记文字版<span class="date">11-03</span></div>
+        <div class="aux-update">秋季招新投稿通道<span class="date">10-31</span></div>
+      </div>
+      <div class="aux-card">
+        <h3>热门条目速览</h3>
+        <ul class="aux-list">
+          <li><span class="num">1</span>逆光生长 侧台机位版</li>
+          <li><span class="num">2</span>折枝 第三次失衡动作</li>
+          <li><span class="num">3</span>回声 2分40秒同步Pop</li>
+          <li><span class="num">4</span>地平面 无灯光队形提示</li>
+          <li><span class="num">5</span>斜向穿插 侧幕宽度测算</li>
+        </ul>
+      </div>
+      <div class="aux-card">
+        <h3>近期演出日程</h3>
+        <div class="aux-update">12-13 《逆光生长》加演<span class="date">城市文化馆小剧场</span></div>
+        <div class="aux-update">11-22 《回声》社区展演<span class="date">城东社区剧场</span></div>
+        <div class="aux-update">11-20 秋季招新截止<span class="date">线上投稿</span></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- 遮罩 -->
+<div class="overlay" id="overlay"></div>
+
+<!-- 回到顶部 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path d="M9 14 V4 M4 9 L9 4 L14 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">ks舞团夏柏</div>
+      <p class="footer-desc">内容覆盖 2026 年 10 月至 11 月的公演录像、排练记录与编舞手记，条目类型包括完整舞台、单曲片段、文字访谈与现场花絮。团体保持每月 2—3 次排练记录更新，个人作品跟随创作周期发布。</p>
+    </div>
+    <div class="footer-col">
+      <h4>内容频道</h4>
+      <ul>
+        <li><a href="/#featured">精选舞台</a></li>
+        <li><a href="/#updates">最新动态</a></li>
+        <li><a href="/#analysis">深度解析</a></li>
+        <li><a href="/#guide">观看指南</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>互动参与</h4>
+      <ul>
+        <li><a href="/#submit">作品投稿</a></li>
+        <li><a href="/#comments">观众评论</a></li>
+        <li><a href="/#faq">常见问答</a></li>
+        <li><a href="/#ranking">热门榜单</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>条目类型</h4>
+      <ul>
+        <li><a href="/#featured">齐舞公演</a></li>
+        <li><a href="/#featured">个人编舞</a></li>
+        <li><a href="/#updates">排练记录</a></li>
+        <li><a href="/#news">相关资讯</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>页面内容为示例条目，引用日期与数据截至 2026 年 11 月 8 日。</span>
+    <span>© 2026 ks舞团夏柏 内容聚合展示</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var menuToggle = document.getElementById('menuToggle');
+  var mainNav = document.getElementById('mainNav');
+  var sideChannels = document.getElementById('sideChannels');
+  var overlay = document.getElementById('overlay');
+  var backTop = document.getElementById('backTop');
+
+  function openMenu() {
+    mainNav.classList.add('open');
+    if (sideChannels) sideChannels.classList.add('open');
+    overlay.classList.add('show');
+    menuToggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeMenu() {
+    mainNav.classList.remove('open');
+    if (sideChannels) sideChannels.classList.remove('open');
+    overlay.classList.remove('show');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }
+  if (menuToggle) {
+    menuToggle.addEventListener('click', function () {
+      if (mainNav.classList.contains('open')) { closeMenu(); } else { openMenu(); }
+    });
+  }
+  if (overlay) overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeMenu();
+  });
+  mainNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+  if (sideChannels) {
+    sideChannels.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.innerWidth <= 1024) closeMenu();
+      });
+    });
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        if (window.scrollY > window.innerHeight * 0.8) {
+          backTop.classList.add('show');
+        } else {
+          backTop.classList.remove('show');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  backTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 滚动高亮当前频道
+  var sections = document.querySelectorAll('main section[id]');
+  var channelLinks = sideChannels ? sideChannels.querySelectorAll('a') : [];
+  if (sections.length && channelLinks.length) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          channelLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '/#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ks舞团夏柏",
+  "description": "汇集ks舞团及其成员夏柏近期的公演录像、个人编舞作品、排练花絮与编舞思路拆解。",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "《逆光生长》第二场的队形偏移是怎么回事？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "第二场在结尾定格处，右侧第三位舞者比预定位置偏了约半个身位。原因是上一段斜向穿插结束时，该舞者的落点比排练时靠前了半步，后续定格动作按原路线走就会偏。录像上线版本保留了这个偏移，没有补拍。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "《折枝》为什么改了三次音乐切分方案？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "第一次按人声气口排，前40秒有6个动作错位；10月31日推翻改回重拍，排练时发现动作力度变得生硬；11月2日重新采用气口方案，这次逐个动作对齐了音频波形。三次调整的核心矛盾是：气口方案呼吸感好，但对听觉专注度要求高，按重拍跳则力度够但质感偏硬。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "夏柏的个人作品和团体齐舞有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "团体齐舞优先保证整体画面稳定，个人段落动作以清晰易读为主；独舞作品允许更多地面动作和身体冒险。《逆光生长》里夏柏的独舞只有12秒，《折枝》的地面动作占了将近40秒。排练周期也不同，齐舞版本从编舞到首演约5周，《折枝》约3周。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "《回声》在社区剧场改动作，改动大吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "两个托举动作改成了地面支撑，位置在第1分20秒和第2分55秒。改动原因是场地深度只有4米，托举后的移动空间不够。改完之后第二次力量传递的观感更清楚，因为地面支撑让重心变化完全暴露在观众视线里，这个版本后来被保留。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "秋季招新投稿需要准备什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1分钟以内个人即兴或编舞视频即可，不限舞种。截止日期11月20日，入选者参与12月团体合训。投稿时建议保留完整动作起止，不要只剪高光片段，评审主要看动作完成的完整度和节奏感。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "观看排练花絮前需要先看完整作品吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "建议先看完整作品。花絮里讨论的修改点，比如第三段队形从横移改成斜向穿插，只有看过成品才知道改前改后的差别。反过来先看花絮，容易把注意力放在“找不同”上，忽略作品的整体结构。"
+      }
+    }
+  ]
+}
+</script>
+
+</body>
+  </html>
