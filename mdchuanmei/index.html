@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>md传媒吴梦梦 - 作品与动态聚合</title>
+    <meta name="description" content="md传媒吴梦梦内容聚合，涵盖吴梦梦主演作品、幕后花絮、最新动态与观众讨论。整理作品类型、发布时间与观看渠道，适合关注华语成人影视动态的观众查阅。">
+    <meta name="keywords" content="md传媒吴梦梦">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e1b2c'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23e6b8a2' font-family='serif'%3EM%3C/text%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary: #1e1b2c;
+            --primary-light: #2d2942;
+            --primary-dark: #13111c;
+            --accent: #c97b5d;
+            --accent-soft: #f0d5c8;
+            --accent-muted: #e6b8a2;
+            --bg: #f7f5f2;
+            --surface: #ffffff;
+            --surface-alt: #f2efea;
+            --text-primary: #1e1b2c;
+            --text-secondary: #5a5568;
+            --text-tertiary: #8a8494;
+            --divider: #e3dfd9;
+            --radius-card: 12px;
+            --radius-btn: 8px;
+            --radius-tag: 20px;
+            --radius-banner: 16px;
+            --shadow-default: 0 2px 8px rgba(30,27,44,0.06);
+            --shadow-hover: 0 6px 20px rgba(30,27,44,0.12);
+            --header-height: 56px;
+            --announce-height: 36px;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            --max-width: 1280px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--announce-height) + var(--header-height) + 16px);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.65;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== 吸顶公告条 ===== */
+        .announce-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--primary);
+            color: var(--accent-soft);
+            height: var(--announce-height);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-size: 13px;
+        }
+        .announce-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            width: 100%;
+            white-space: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .announce-inner::-webkit-scrollbar { display: none; }
+        .announce-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .announce-item .date {
+            color: var(--accent-muted);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+        .announce-item .tag {
+            background: rgba(201,123,93,0.25);
+            color: var(--accent-muted);
+            padding: 1px 8px;
+            border-radius: var(--radius-tag);
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .announce-brand {
+            font-weight: 700;
+            color: var(--accent-muted);
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+
+        /* ===== 吸顶页头 ===== */
+        .site-header {
+            position: sticky;
+            top: var(--announce-height);
+            z-index: 99;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--divider);
+            height: var(--header-height);
+        }
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .logo-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-muted);
+            font-weight: 800;
+            font-size: 18px;
+            font-family: Georgia, serif;
+            transition: transform 0.3s ease;
+        }
+        .logo-area:hover .logo-mark {
+            transform: rotate(-4deg) scale(1.05);
+        }
+        .logo-text {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .header-nav::-webkit-scrollbar { display: none; }
+        .header-nav a {
+            white-space: nowrap;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: var(--radius-btn);
+            transition: background 0.2s, color 0.2s;
+        }
+        .header-nav a:hover {
+            background: var(--surface-alt);
+            color: var(--text-primary);
+        }
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: var(--surface-alt);
+            border-radius: var(--radius-btn);
+            padding: 4px 10px;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .header-search input {
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            width: 120px;
+            outline: none;
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+        .header-search input::placeholder {
+            color: var(--text-tertiary);
+        }
+        .header-search svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--text-tertiary);
+            fill: none;
+            flex-shrink: 0;
+        }
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: var(--radius-btn);
+            color: var(--text-primary);
+        }
+        .hamburger:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .hamburger svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ===== 首屏 ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 45%, #2a2338 100%);
+            color: #fff;
+            padding: 56px 24px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: -80px;
+            top: -80px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,123,93,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            left: 10%;
+            bottom: -60px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(230,184,162,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-content h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .hero-content h1 span {
+            color: var(--accent-muted);
+        }
+        .hero-desc {
+            font-size: 15px;
+            line-height: 1.75;
+            color: rgba(255,255,255,0.8);
+            max-width: 560px;
+            margin-bottom: 24px;
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #b86a4e;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: var(--radius-btn);
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: border-color 0.2s, background 0.2s;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.06);
+        }
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-visual svg {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+        }
+
+        /* ===== 主内容区 · 双栏布局 ===== */
+        .main-wrapper {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 40px 24px 64px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* ===== 通用板块 ===== */
+        .section {
+            margin-bottom: 48px;
+        }
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+            line-height: 1.3;
+        }
+        .section-title .accent {
+            color: var(--accent);
+        }
+        .section-more {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .section-more:hover {
+            color: var(--accent);
+        }
+        .section-intro {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        /* ===== 领域概览 ===== */
+        .overview-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .overview-text p {
+            margin-bottom: 14px;
+        }
+        .overview-text p:last-child {
+            margin-bottom: 0;
+        }
+        .overview-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ===== 精选卡片网格 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .content-card {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-default);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+            background: var(--surface-alt);
+        }
+        .card-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+        .card-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .tag-chip {
+            font-size: 11px;
+            padding: 2px 10px;
+            border-radius: var(--radius-tag);
+            background: var(--surface-alt);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .tag-chip.accent {
+            background: rgba(201,123,93,0.12);
+            color: var(--accent);
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text-primary);
+        }
+        .card-desc {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+        }
+        .card-meta .hot {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ===== 动态列表 ===== */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-default);
+        }
+        .news-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--divider);
+            transition: background 0.2s;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-item:hover {
+            background: var(--surface-alt);
+        }
+        .news-date {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            min-width: 72px;
+            padding-top: 2px;
+        }
+        .news-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .news-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+        .news-summary {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== 分类入口 ===== */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .category-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 18px 10px;
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-default);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            text-align: center;
+            border: 1px solid transparent;
+        }
+        .category-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-soft);
+        }
+        .category-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--surface-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .category-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .category-count {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        /* ===== 深度解析 ===== */
+        .deep-dive {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 28px 28px 24px;
+            box-shadow: var(--shadow-default);
+        }
+        .deep-dive h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 24px 0 10px;
+            padding-left: 12px;
+            border-left: 3px solid var(--accent);
+            line-height: 1.4;
+        }
+        .deep-dive h3:first-of-type {
+            margin-top: 0;
+        }
+        .deep-dive p {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        .deep-dive ul {
+            margin: 8px 0 14px 20px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        .deep-dive li {
+            margin-bottom: 4px;
+        }
+        .deep-dive strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .deep-dive .highlight-box {
+            background: var(--surface-alt);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 14px 0;
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* ===== 体验指南 ===== */
+        .guide-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .guide-step {
+            display: flex;
+            gap: 16px;
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 18px 20px;
+            box-shadow: var(--shadow-default);
+        }
+        .step-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .step-content p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .faq-item {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-default);
+            overflow: hidden;
+        }
+        .faq-item summary {
+            padding: 16px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item summary:hover {
+            background: var(--surface-alt);
+        }
+        .faq-item summary::after {
+            content: '+';
+            font-size: 18px;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .faq-item[open] summary::after {
+            content: '−';
+        }
+        .faq-answer {
+            padding: 0 20px 18px;
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+
+        /* ===== 用户评论 ===== */
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .comment-item {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 14px 18px;
+            box-shadow: var(--shadow-default);
+            display: flex;
+            gap: 12px;
+        }
+        .comment-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--surface-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        .comment-body {
+            flex: 1;
+            min-width: 0;
+        }
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .comment-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .comment-time {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+        .comment-text {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        /* ===== 相关资讯 ===== */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-default);
+        }
+        .info-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--divider);
+            transition: background 0.2s;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        .info-item:hover {
+            background: var(--surface-alt);
+        }
+        .info-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 4px;
+        }
+        .info-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .info-date {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+        .info-summary {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== 相关推荐（标签） ===== */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag-cloud a {
+            display: inline-block;
+            padding: 7px 16px;
+            background: var(--surface);
+            border-radius: var(--radius-tag);
+            text-decoration: none;
+            font-size: 13px;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-default);
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            border: 1px solid var(--divider);
+        }
+        .tag-cloud a:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        /* ===== 热门榜单（补充板块） ===== */
+        .ranking-list {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-default);
+        }
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--divider);
+            transition: background 0.2s;
+        }
+        .ranking-item:last-child {
+            border-bottom: none;
+        }
+        .ranking-item:hover {
+            background: var(--surface-alt);
+        }
+        .rank-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: var(--surface-alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-tertiary);
+            flex-shrink: 0;
+        }
+        .rank-num.top3 {
+            background: var(--accent);
+            color: #fff;
+        }
+        .rank-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .rank-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .rank-meta {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+        .rank-score {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== 侧栏 ===== */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: sticky;
+            top: calc(var(--announce-height) + var(--header-height) + 16px);
+        }
+        .sidebar-box {
+            background: var(--surface);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            box-shadow: var(--shadow-default);
+        }
+        .sidebar-box h3 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--divider);
+            color: var(--text-primary);
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar-nav a:hover {
+            background: var(--surface-alt);
+            color: var(--text-primary);
+        }
+        .sidebar-nav .count {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .sidebar-list-item {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .sidebar-list-item .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+        .sidebar-list-item .text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        .sidebar-list-item .text a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .sidebar-list-item .text a:hover {
+            color: var(--accent);
+        }
+        .sidebar-list-item .text .time {
+            display: block;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        /* ===== 页尾 ===== */
+        .site-footer {
+            background: var(--primary-dark);
+            color: rgba(255,255,255,0.65);
+            padding: 48px 24px 32px;
+            margin-top: 0;
+        }
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 40px;
+        }
+        .footer-brand .logo-text {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .footer-brand p {
+            font-size: 13px;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            font-size: 13px;
+            padding: 3px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover {
+            color: var(--accent-muted);
+        }
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ===== 回到顶部 ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-hover);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s;
+            z-index: 90;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--accent);
+        }
+        .back-to-top svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.5;
+        }
+        .back-to-top:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* ===== 移动端遮罩 ===== */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 98;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .mobile-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 1024px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .hero-visual {
+                display: none;
+            }
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 740px) {
+            .announce-inner {
+                padding: 0 16px;
+                gap: 20px;
+            }
+            .header-inner {
+                padding: 0 16px;
+                gap: 12px;
+            }
+            .header-nav {
+                display: none;
+                position: fixed;
+                top: calc(var(--announce-height) + var(--header-height));
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                flex-direction: column;
+                padding: 12px 16px;
+                box-shadow: var(--shadow-hover);
+                z-index: 97;
+                gap: 2px;
+                max-height: calc(100vh - var(--announce-height) - var(--header-height));
+                overflow-y: auto;
+            }
+            .header-nav.open {
+                display: flex;
+            }
+            .header-nav a {
+                padding: 12px 14px;
+                font-size: 15px;
+                border-bottom: 1px solid var(--divider);
+            }
+            .header-nav a:last-child {
+                border-bottom: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .header-search {
+                display: none;
+            }
+            .hero {
+                padding: 40px 16px 36px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .hero-desc {
+                font-size: 14px;
+            }
+            .main-wrapper {
+                padding: 28px 16px 48px;
+                gap: 28px;
+            }
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section-title {
+                font-size: 19px;
+            }
+            .deep-dive {
+                padding: 20px 16px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .news-item {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .news-date {
+                min-width: auto;
+            }
+            .info-header {
+                flex-direction: column;
+                gap: 2px;
+            }
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* 搜索无结果提示 */
+        .search-empty {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-tertiary);
+            background: var(--surface);
+            border-radius: var(--radius-card);
+        }
+        .search-empty.show {
+            display: block;
+        }
+        .filter-hidden {
+            display: none !important;
+        }
+    </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+    <!-- 吸顶公告条 -->
+    <div class="announce-bar" id="announce-bar">
+        <div class="announce-inner">
+            <span class="announce-brand">md传媒吴梦梦</span>
+            <div class="announce-item">
+                <span class="date">2026-11-06</span>
+                <span class="tag">更新</span>
+                <span>《夜行列车》幕后花絮第二弹上线</span>
+            </div>
+            <div class="announce-item">
+                <span class="date">2026-11-03</span>
+                <span class="tag">新作</span>
+                <span>《她的秘密房间》定档11月15日</span>
+            </div>
+            <div class="announce-item">
+                <span class="date">2026-10-28</span>
+                <span class="tag">榜单</span>
+                <span>十月热度榜出炉，《都市夜归人》登顶</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 吸顶页头 -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="/" class="logo-area">
+                <span class="logo-mark">M</span>
+                <span class="logo-text">md传媒吴梦梦</span>
+            </a>
+            <nav class="header-nav" id="header-nav">
+                <a href="#overview">领域概览</a>
+                <a href="#featured">精选作品</a>
+                <a href="#updates">最新动态</a>
+                <a href="#categories">分类索引</a>
+                <a href="#deep-dive">深度解析</a>
+                <a href="#guide">观看指南</a>
+                <a href="#faq">常见问答</a>
+                <a href="#comments">观众评论</a>
+                <a href="#news">相关资讯</a>
+                <a href="#ranking">热度榜单</a>
+                <a href="#submit">投稿互动</a>
+            </nav>
+            <div class="header-search">
+                <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <input type="search" id="search-input" placeholder="搜索作品或标签..." aria-label="搜索作品或标签">
+            </div>
+            <button class="hamburger" id="hamburger-btn" aria-label="打开导航菜单" aria-expanded="false">
+                <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <!-- 首屏 -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <h1>md传媒吴梦梦</h1>
+                <p class="hero-desc">聚焦吴梦梦出演的剧情向成人影视作品，整理《夜行列车》《她的秘密房间》《都市夜归人》等代表作的类型标签、上线时间与幕后花絮，同时收录观众对角色塑造和叙事节奏的讨论。</p>
+                <div class="hero-actions">
+                    <a href="#featured" class="btn-primary">浏览精选作品</a>
+                    <a href="#updates" class="btn-outline">查看最新动态</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <svg viewBox="0 0 340 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="20" y="20" width="300" height="200" rx="16" fill="#2d2942" stroke="#c97b5d" stroke-width="1.5"/>
+                    <circle cx="80" cy="70" r="22" fill="#c97b5d" opacity="0.3"/>
+                    <circle cx="80" cy="70" r="14" fill="#e6b8a2" opacity="0.5"/>
+                    <rect x="120" y="52" width="120" height="8" rx="4" fill="#e6b8a2" opacity="0.4"/>
+                    <rect x="120" y="68" width="80" height="8" rx="4" fill="#e6b8a2" opacity="0.25"/>
+                    <rect x="40" y="120" width="80" height="60" rx="8" fill="#1e1b2c" stroke="#5a5568" stroke-width="1"/>
+                    <rect x="135" y="120" width="80" height="60" rx="8" fill="#1e1b2c" stroke="#5a5568" stroke-width="1"/>
+                    <rect x="230" y="120" width="70" height="60" rx="8" fill="#1e1b2c" stroke="#5a5568" stroke-width="1"/>
+                    <rect x="40" y="196" width="160" height="6" rx="3" fill="#c97b5d" opacity="0.5"/>
+                    <rect x="20" y="240" width="60" height="6" rx="3" fill="#e6b8a2" opacity="0.3"/>
+                    <rect x="90" y="240" width="40" height="6" rx="3" fill="#e6b8a2" opacity="0.2"/>
+                    <rect x="140" y="240" width="80" height="6" rx="3" fill="#e6b8a2" opacity="0.15"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主内容区 -->
+    <div class="main-wrapper">
+        <main>
+            <!-- 1. 主题领域概览 -->
+            <section class="section" id="overview">
+                <div class="section-header">
+                    <h2 class="section-title">领域概览 · <span class="accent">剧情向成人影视</span></h2>
+                </div>
+                <div class="overview-text">
+                    <p>吴梦梦是md传媒旗下签约演员，作品以剧情向成人影视为主，常见类型涵盖都市情感、悬疑反转、职场关系与古装情景。与纯感官向内容不同，剧情向作品通常有完整的人物弧线和场景叙事，单集时长在40—75分钟之间，制作周期约3—6周。</p>
+                    <p>从2026年已上线的作品看，md传媒在吴梦梦主演的系列中尝试了两种路线：一是<strong>强叙事单本剧</strong>，如《夜行列车》以列车密闭空间为舞台，用倒叙结构推进悬疑线；二是<strong>轻关系系列剧</strong>，如《都市夜归人》按单元展开，每集聚焦一组人物关系。前者豆瓣条目评分7.2，后者在平台站内收藏数突破1.8万。</p>
+                    <p>幕后内容同样是关注焦点。md传媒在官方频道定期发布花絮、演员访谈和场景搭建记录，其中《夜行列车》的列车实景搭建花絮播放量达12.6万次。对观众来说，这类内容提供了成片之外的制作视角，也解释了部分场景为何采用固定机位长镜头。</p>
+                    <p>近期值得关注的方向包括：11月15日将上线的《她的秘密房间》采用单场景叙事，预告片中已出现大量镜面反射构图；十月热度榜中，《都市夜归人》第三单元“合租”以9.1分居首；另外，md传媒在10月底宣布启动“新锐导演计划”，首期三部作品中有两部由吴梦梦主演。</p>
+                </div>
+            </section>
+
+            <!-- 2. 精选内容推荐 -->
+            <section class="section" id="featured">
+                <div class="section-header">
+                    <h2 class="section-title">精选作品 · <span class="accent">近期值得投入时间</span></h2>
+                    <a href="#featured" class="section-more">共 8 部 →</a>
+                </div>
+                <div class="card-grid" id="featured-grid">
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdnight1/400/300" alt="夜行列车车厢场景剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">悬疑</span>
+                                <span class="tag-chip">密闭空间</span>
+                                <span class="tag-chip">倒叙</span>
+                            </div>
+                            <h3 class="card-title">夜行列车</h3>
+                            <p class="card-desc">列车卧铺车厢内六名乘客各怀心事，吴梦梦饰演的列车员串联起三段时间线。第22分钟的镜面调度是今年md传媒单集最高完成度。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 9.2</span>
+                                <span>2026-10-18 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdcity2/400/300" alt="都市夜归人城市夜景海报" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">都市</span>
+                                <span class="tag-chip">单元剧</span>
+                                <span class="tag-chip">关系线</span>
+                            </div>
+                            <h3 class="card-title">都市夜归人</h3>
+                            <p class="card-desc">六个单元各自独立，第三单元“合租”用三场饭桌戏完成关系转变，台词密度高，适合关注对白设计的观众。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 9.1</span>
+                                <span>2026-09-26 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdroom3/400/300" alt="她的秘密房间镜面构图剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">单场景</span>
+                                <span class="tag-chip">心理</span>
+                                <span class="tag-chip">镜面</span>
+                            </div>
+                            <h3 class="card-title">她的秘密房间</h3>
+                            <p class="card-desc">全片发生在同一间公寓，通过镜面反射制造“被注视”的压迫感。预告片已展示11处不同角度的镜面镜头。</p>
+                            <div class="card-meta">
+                                <span class="hot">期待 8.8</span>
+                                <span>2026-11-15 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdoffice4/400/300" alt="办公室午休职场关系剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">职场</span>
+                                <span class="tag-chip">午休</span>
+                                <span class="tag-chip">权力关系</span>
+                            </div>
+                            <h3 class="card-title">办公室午休</h3>
+                            <p class="card-desc">45分钟单集，场景集中在工位与茶水间。用微波炉加热时间作为转场节奏，细节堆叠真实。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 8.4</span>
+                                <span>2026-10-02 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdhotel5/400/300" alt="酒店走廊长镜头剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">长镜头</span>
+                                <span class="tag-chip">酒店</span>
+                                <span class="tag-chip">一夜情</span>
+                            </div>
+                            <h3 class="card-title">走廊尽头</h3>
+                            <p class="card-desc">全片仅用7个镜头完成，其中走廊跟拍长镜头持续6分12秒，是md传媒今年技术实验性最强的一部。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 8.7</span>
+                                <span>2026-09-12 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdsummer6/400/300" alt="夏日天台黄昏场景剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">青春</span>
+                                <span class="tag-chip">天台</span>
+                                <span class="tag-chip">夏日</span>
+                            </div>
+                            <h3 class="card-title">夏日天台</h3>
+                            <p class="card-desc">黄昏光线与手持摄影构成主要视觉语言。吴梦梦在访谈中提到，天台戏份全部在自然光下完成，下午4点到6点拍摄。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 8.0</span>
+                                <span>2026-08-20 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdletter7/400/300" alt="未寄出的信桌面特写剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">书信</span>
+                                <span class="tag-chip">双时间线</span>
+                                <span class="tag-chip">怀旧</span>
+                            </div>
+                            <h3 class="card-title">未寄出的信</h3>
+                            <p class="card-desc">1998年与2026年两条时间线交叉，用同一张书桌连接两个时代。道具组复刻了九十年代文具细节。</p>
+                            <div class="card-meta">
+                                <span class="hot">热度 8.3</span>
+                                <span>2026-07-30 上线</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="content-card">
+                        <img class="card-img" src="https://picsum.photos/seed/mdbackstage8/400/300" alt="后台化妆间花絮剧照" width="400" height="300" loading="lazy">
+                        <div class="card-body">
+                            <div class="card-tags">
+                                <span class="tag-chip accent">幕后</span>
+                                <span class="tag-chip">花絮</span>
+                                <span class="tag-chip">访谈</span>
+                            </div>
+                            <h3 class="card-title">后台：夜行列车花絮</h3>
+                            <p class="card-desc">22分钟幕后纪录，包含列车场景搭建、灯光测试和吴梦梦与导演关于第三幕结局的讨论片段。</p>
+                            <div class="card-meta">
+                                <span class="hot">播放 12.6万</span>
+                                <span>2026-11-06 更新</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="search-empty" id="search-empty">没有找到匹配的作品，试试其他关键词。</div>
+            </section>
+
+            <!-- 3. 最新更新 / 动态 -->
+            <section class="section" id="updates">
+                <div class="section-header">
+                    <h2 class="section-title">最新动态 · <span class="accent">10月28日—11月8日</span></h2>
+                </div>
+                <div class="news-list">
+                    <div class="news-item">
+                        <span class="news-date">11-08</span>
+                        <div class="news-content">
+                            <div class="news-title">《夜行列车》导演剪辑版确认制作</div>
+                            <p class="news-summary">md传媒制片人陈立人在11月8日直播中透露，导演剪辑版将增加约18分钟内容，主要补充列车员背景线。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">11-07</span>
+                        <div class="news-content">
+                            <div class="news-title">《她的秘密房间》释出第二支预告</div>
+                            <p class="news-summary">新预告聚焦镜面反射中的空间变化，时长1分44秒，上线24小时播放量达4.3万次。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">11-06</span>
+                        <div class="news-content">
+                            <div class="news-title">《夜行列车》幕后花絮第二弹上线</div>
+                            <p class="news-summary">本期花絮展示列车餐车场景的搭建过程，美术指导张一凡讲解如何用倾斜地板制造不稳定感。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">11-04</span>
+                        <div class="news-content">
+                            <div class="news-title">吴梦梦参与“新锐导演计划”剧本围读</div>
+                            <p class="news-summary">11月4日md传媒发布围读照片，吴梦梦与导演林晓晨就首期项目《回声》进行第三轮剧本讨论。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">11-03</span>
+                        <div class="news-content">
+                            <div class="news-title">《她的秘密房间》定档11月15日</div>
+                            <p class="news-summary">平台预约数截至11月3日已达7200人，超过《夜行列车》上线前的预约纪录。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">11-01</span>
+                        <div class="news-content">
+                            <div class="news-title">吴梦梦十月观众选择奖投票列第二</div>
+                            <p class="news-summary">md传媒月度观众选择奖10月投票结果公布，吴梦梦以《都市夜归人》第三单元获得28.4%票数，仅次于另一演员的31.1%。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">10-30</span>
+                        <div class="news-content">
+                            <div class="news-title">《都市夜归人》第三单元“合租”评分9.1</div>
+                            <p class="news-summary">站内评分页显示，该单元共收到1400余条评分，其中五星占比62%。评论区高频词为“饭桌戏”和“台词”。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">10-28</span>
+                        <div class="news-content">
+                            <div class="news-title">md传媒公布十月热度榜</div>
+                            <p class="news-summary">《都市夜归人》以总分9.1居首，《夜行列车》9.0列第二，《办公室午休》8.4排第三。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">10-26</span>
+                        <div class="news-content">
+                            <div class="news-title">《走廊尽头》长镜头解析视频发布</div>
+                            <p class="news-summary">摄影指导在12分钟解析中拆解了6分12秒长镜头的走位、焦点变化和隐藏剪辑点。</p>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <span class="news-date">10-22</span>
+                        <div class="news-content">
+                            <div class="news-title">吴梦梦访谈：谈《夜行列车》第三幕</div>
+                            <p class="news-summary">在md传媒官方频道的18分钟访谈中，吴梦梦提到第三幕列车员独白拍了9条，最终选用第7条。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 分类入口 -->
+            <section class="section" id="categories">
+                <div class="section-header">
+                    <h2 class="section-title">按类型查找 · <span class="accent">8 个分类</span></h2>
+                </div>
+                <div class="category-grid">
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🚆</span>
+                        <span class="category-name">悬疑列车</span>
+                        <span class="category-count">3 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🏙️</span>
+                        <span class="category-name">都市单元剧</span>
+                        <span class="category-count">6 集</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🪞</span>
+                        <span class="category-name">单场景心理</span>
+                        <span class="category-count">2 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">💼</span>
+                        <span class="category-name">职场关系</span>
+                        <span class="category-count">4 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🎞️</span>
+                        <span class="category-name">长镜头实验</span>
+                        <span class="category-count">2 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🌅</span>
+                        <span class="category-name">青春夏日</span>
+                        <span class="category-count">3 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">✉️</span>
+                        <span class="category-name">双时间线</span>
+                        <span class="category-count">2 部</span>
+                    </a>
+                    <a href="#featured" class="category-item">
+                        <span class="category-icon">🎬</span>
+                        <span class="category-name">幕后花絮</span>
+                        <span class="category-count">9 条</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 5. 深度解析正文 -->
+            <section class="section" id="deep-dive">
+                <div class="section-header">
+                    <h2 class="section-title">深度解析 · <span class="accent">剧情向作品的三层判断</span></h2>
+                </div>
+                <div class="deep-dive">
+                    <h3>一、叙事密度：信息量与时长的匹配</h3>
+                    <p>以《夜行列车》为例，72分钟的成片包含三条时间线：列车员的入职回忆、当晚乘客冲突、以及结局反转。按场次统计，全片共38场戏，平均每场不到2分钟。对比md传媒另一部50分钟单集《办公室午休》，后者只有19场戏。场次密度翻倍意味着观众需要处理的人物关系和场景切换更多。判断一部剧情向作品是否“拖沓”，可以先看场次数量与总时长的比值——低于每分钟0.4场，叙事推进通常偏慢。</p>
+                    <p>这个指标不是绝对的。《走廊尽头》全片只有7个镜头，但单个镜头内部的信息量极高，长镜头中的焦点转换和人物走位承担了剪辑功能。另一种情况是《夏日天台》，场次不少但单场信息量低，大量时间用于氛围铺陈。两种做法都有成立的作品，关键看类型目标是否一致。</p>
+
+                    <h3>二、表演调度：固定机位与手持的取舍</h3>
+                    <p>吴梦梦在2026年的作品里，表演调度出现了明显分化。《夜行列车》大量使用固定机位中景，演员在画框内完成走位，对话戏几乎不切特写。这种拍法对演员的肢体控制要求高，因为观众始终能看到全身。而在《走廊尽头》中，手持跟拍占比超过70%，摄影机跟随演员移动，画面边缘不断有环境信息涌入。</p>
+                    <p>两种调度对应的观看体验完全不同。固定机位让观众更关注台词和表情细节，手持则制造临场感但容易分散注意力。md传媒在《都市夜归人》第三单元“合租”中采用了折中方案：饭桌戏用固定机位，厨房和走廊用肩扛。从站内评论看，观众对饭桌戏的评价明显更高，1400余条评论中“饭桌”出现频次排在第三。</p>
+
+                    <h3>三、幕后物料的可信度分层</h3>
+                    <p>md传媒在官方频道发布的幕后内容，信息层级并不相同。以《夜行列车》为例，可以拆成三类：</p>
+                    <ul>
+                        <li><strong>制作记录</strong>——列车场景搭建花絮，包含具体搭建天数（11天）和材料清单，属于可核对的事实层。</li>
+                        <li><strong>创作者访谈</strong>——吴梦梦提到第三幕独白拍了9条选用第7条，属于当事人回忆，无第三方交叉验证。</li>
+                        <li><strong>平台宣传文案</strong>——官方发布图文中“年度最具野心作品”等表述，属于宣传话术，不包含可核对的制作信息。</li>
+                    </ul>
+                    <p>观看幕后内容时，区分这三类能避免把宣传语误当作制作事实。11月6日发布的花絮第二弹属于第一类，内容包含餐车倾斜地板的工程细节，美术指导张一凡给出了具体的倾斜角度和材料规格，信息密度较高。相比之下，10月22日的访谈属于第二类，吴梦梦对拍摄条数的回忆可能存在记忆偏差，但与其他幕后物料没有明显矛盾。</p>
+                    <div class="highlight-box">
+                        <strong>可核对结构示例：</strong>判断一条幕后内容的可信度，可以看它是否包含以下三项——具体日期与时长（如“11天搭建”“6分12秒长镜头”）、参与人员的具体职务（如“美术指导张一凡”“摄影指导王其”）、可验证的细节（如“倾斜角度3度”“第7条选用”）。三项缺失两项以上，该条内容更适合当作宣传材料而非制作记录。
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 体验指南 / 消费路径 -->
+            <section class="section" id="guide">
+                <div class="section-header">
+                    <h2 class="section-title">观看路径 · <span class="accent">从哪部开始</span></h2>
+                </div>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <span class="step-num">1</span>
+                        <div class="step-content">
+                            <h4>先看《都市夜归人》第三单元“合租”</h4>
+                            <p>45分钟，场景集中，人物关系在饭桌对话中逐步展开。适合作为进入吴梦梦作品序列的起点，不需要前置背景知识。站内评分9.1，评论高频词为“台词”和“饭桌”，可用来判断自己是否适应这类叙事节奏。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num">2</span>
+                        <div class="step-content">
+                            <h4>再看《夜行列车》</h4>
+                            <p>72分钟，倒叙结构，前三分钟需要集中注意力记住人物关系。如果习惯第一单元的风格，这一部在摄影和调度上更进一步。注意第22分钟的镜面调度，它是全片信息密度最高的一段。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num">3</span>
+                        <div class="step-content">
+                            <h4>根据偏好选择延伸方向</h4>
+                            <p>偏好技术实验可以看《走廊尽头》（长镜头）和《她的秘密房间》（镜面构图）；偏好情感叙事可以看《夏日天台》和《未寄出的信》；想了解制作过程，从《后台：夜行列车花絮》22分钟版本入手，再回看正片会有不同感受。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num">4</span>
+                        <div class="step-content">
+                            <h4>用幕后物料交叉验证</h4>
+                            <p>看完正片后，挑一条包含具体制作信息的幕后内容（如11月6日花絮中的餐车搭建过程），对照正片场景看哪些设计被保留、哪些被调整。这个过程比单纯看花絮更有信息量。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. FAQ -->
+            <section class="section" id="faq">
+                <div class="section-header">
+                    <h2 class="section-title">常见问答 · <span class="accent">6 个高频问题</span></h2>
+                </div>
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>《夜行列车》的倒叙结构具体怎么切分？</summary>
+                        <div class="faq-answer">全片以列车员（吴梦梦饰）向乘客解释晚点原因开场，随后切入第一个闪回：三小时前的餐车冲突。之后每隔12—18分钟插入一段更早的回忆，直到结局揭示列车员的真实目的。时间线按“现在—三小时前—六小时前—入职第一天—现在”的顺序推进，共五个时间节点。</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>《她的秘密房间》和《走廊尽头》都是单场景，区别在哪？</summary>
+                        <div class="faq-answer">《走廊尽头》的场景是一条酒店走廊及两侧房间，空间是线性的，人物沿走廊移动推动叙事。《她的秘密房间》场景是一间公寓，空间是封闭的，叙事靠镜面反射和物品位置变化推进。前者依赖走位，后者依赖构图。</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>md传媒的新锐导演计划会影响吴梦梦后续作品风格吗？</summary>
+                        <div class="faq-answer">首期三部作品中两部由吴梦梦主演，其中《回声》导演林晓晨此前拍过两部短片，偏好自然光和非职业演员。从11月4日围读照片看，《回声》的场景设定在白天室内，与吴梦梦此前偏夜景和密闭空间的作品有明显差异。是否形成风格转向要看成片，目前只能确认制作方向有变化。</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>《都市夜归人》六个单元之间有关联吗？</summary>
+                        <div class="faq-answer">人物没有直接延续，但共享同一座城市和同一个便利店品牌作为视觉锚点。第三单元“合租”中出现的便利店店员在第五单元有独立场景。六个单元按上线顺序观看即可，单元之间没有必须遵守的时间顺序。</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>幕后花絮里哪些信息可以当作制作事实？</summary>
+                        <div class="faq-answer">包含具体数字、职务和流程描述的部分可信度较高，比如列车场景搭建11天、餐车地板倾斜3度、长镜头焦点变化7个位置。只出现“非常用心”“极具挑战”等表述的段落属于宣传话术，不适合作为制作信息引用。</div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>《未寄出的信》中两条时间线怎么区分？</summary>
+                        <div class="faq-answer">1998年时间线采用暖黄色调和4:3画幅，2026年时间线采用冷白调和16:9画幅。书桌上的台灯型号在两个时代不同——1998年是金属罩台灯，2026年是白色塑料罩。吴梦梦在两个时间线中饰演不同角色，靠发型和服装区分。</div>
+                    </details>
+                </div>
+            </section>
+
+            <!-- 8. 用户评论 -->
+            <section class="section" id="comments">
+                <div class="section-header">
+                    <h2 class="section-title">观众评论 · <span class="accent">14 条最新</span></h2>
+                </div>
+                <div class="comment-list">
+                    <div class="comment-item">
+                        <div class="comment-avatar">林</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">林小满</span>
+                                <span class="comment-time">11-08 14:22</span>
+                            </div>
+                            <p class="comment-text">《夜行列车》第三幕独白那段，吴梦梦的眼神从第7条换到第9条差别真的很大，导演选第7条是对的，更收着。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">陈</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">陈默</span>
+                                <span class="comment-time">11-08 11:05</span>
+                            </div>
+                            <p class="comment-text">“合租”那个饭桌戏我反复看了三遍。台词写得像真实对话，有打断有停顿。比大多数同类作品强。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">张</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">张野</span>
+                                <span class="comment-time">11-07 22:41</span>
+                            </div>
+                            <p class="comment-text">花絮里说倾斜地板3度，正片里确实能感觉到轻微的不稳，但如果不是提前知道可能注意不到。这种细节做得很扎实。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">王</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">王迟迟</span>
+                                <span class="comment-time">11-07 18:30</span>
+                            </div>
+                            <p class="comment-text">《走廊尽头》的长镜头确实厉害，但故事本身有点薄。6分钟跟拍看第一遍惊艳，第二遍就有点走神了。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">赵</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">赵四</span>
+                                <span class="comment-time">11-07 09:15</span>
+                            </div>
+                            <p class="comment-text">新锐导演计划那个《回声》围读照片里，吴梦梦的造型完全不一样，短发加素颜，期待值拉满了。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">周</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">周舟</span>
+                                <span class="comment-time">11-06 20:53</span>
+                            </div>
+                            <p class="comment-text">说实话《夏日天台》有点无聊，黄昏光好看是好看，但四十分钟就那点事。可能我不吃青春这套。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">吴</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">吴小柯</span>
+                                <span class="comment-time">11-06 15:10</span>
+                            </div>
+                            <p class="comment-text">《未寄出的信》里1998年的文具细节我专门截图对比了，笔筒和台灯都对，连信纸的横线间距都像那个年代的。道具组用心了。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">郑</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">郑一</span>
+                                <span class="comment-time">11-05 23:18</span>
+                            </div>
+                            <p class="comment-text">十月观众选择奖吴梦梦没拿第一有点意外，但31.1%那位确实也很强，票数差距不大。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">孙</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">孙大圣</span>
+                                <span class="comment-time">11-05 16:44</span>
+                            </div>
+                            <p class="comment-text">《她的秘密房间》预告片里那个镜面我数了不止11处，有些是一闪而过的。正片要是全程这个密度，眼睛会累。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">李</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">李逵不黑</span>
+                                <span class="comment-time">11-04 12:30</span>
+                            </div>
+                            <p class="comment-text">办公室午休那个微波炉转场确实妙，用加热时间控制节奏，三分钟一次，比直接切镜头舒服。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">刘</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">刘二狗</span>
+                                <span class="comment-time">11-03 21:07</span>
+                            </div>
+                            <p class="comment-text">md传媒最近产量有点高，希望质量别掉。上部《走廊尽头》故事再打磨一下就好了。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">黄</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">黄小鞋</span>
+                                <span class="comment-time">11-02 17:55</span>
+                            </div>
+                            <p class="comment-text">夜行列车花絮第一弹里那个列车过道的景深测试有意思，原来焦段换了三个才定下来。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">徐</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">徐胖子</span>
+                                <span class="comment-time">11-01 08:12</span>
+                            </div>
+                            <p class="comment-text">从《都市夜归人》开始追的，现在每部都看。第三单元里便利店店员在第五单元出现那个彩蛋我找了半天才看到。</p>
+                        </div>
+                    </div>
+                    <div class="comment-item">
+                        <div class="comment-avatar">何</div>
+                        <div class="comment-body">
+                            <div class="comment-header">
+                                <span class="comment-name">何首乌</span>
+                                <span class="comment-time">10-30 19:40</span>
+                            </div>
+                            <p class="comment-text">豆瓣条目评分7.2那个，我觉得偏低了。后半段收得有点仓促是真的，但摄影和表演值得更高。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. 相关资讯 -->
+            <section class="section" id="news">
+                <div class="section-header">
+                    <h2 class="section-title">相关资讯 · <span class="accent">6 条近期报道</span></h2>
+                </div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">《夜行列车》导演剪辑版将增加18分钟内容</span>
+                            <span class="info-date">2026-11-08</span>
+                        </div>
+                        <p class="info-summary">制片人陈立人在11月8日直播中确认，新增内容主要围绕列车员入职前的经历展开，预计2027年第一季度上线。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">《她的秘密房间》预约数突破7200人</span>
+                            <span class="info-date">2026-11-03</span>
+                        </div>
+                        <p class="info-summary">md传媒平台数据显示，该片11月15日上线前预约人数已超过《夜行列车》同期的6400人，创下吴梦梦主演作品预约新高。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">md传媒新锐导演计划公布首期片单</span>
+                            <span class="info-date">2026-10-29</span>
+                        </div>
+                        <p class="info-summary">三部作品分别为《回声》《暗涌》《白昼》，吴梦梦主演前两部。计划于2027年3月起陆续上线，每部预算为常规作品的三分之二。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">十月观众选择奖投票结果：吴梦梦28.4%列第二</span>
+                            <span class="info-date">2026-11-01</span>
+                        </div>
+                        <p class="info-summary">共收到4820张有效投票，第一名得票31.1%。吴梦梦凭借《都市夜归人》第三单元获得28.4%，较九月上升4.2个百分点。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">《走廊尽头》长镜头解析视频播放量破8万</span>
+                            <span class="info-date">2026-10-27</span>
+                        </div>
+                        <p class="info-summary">摄影指导在12分钟解析中标注了7个焦点转换位置和2处隐藏剪辑点。视频发布48小时内播放量达8.2万次，为md传媒技术类内容最高。</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-header">
+                            <span class="info-title">吴梦梦十月媒体曝光量环比增长37%</span>
+                            <span class="info-date">2026-10-25</span>
+                        </div>
+                        <p class="info-summary">根据第三方监测数据，吴梦梦10月在影视资讯站点的提及量较9月增长37%，主要来自《都市夜归人》单元剧上线和幕后花絮的连续发布。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. 相关推荐 -->
+            <section class="section" id="related">
+                <div class="section-header">
+                    <h2 class="section-title">相关推荐 · <span class="accent">按方向索引</span></h2>
+                </div>
+                <div class="tag-cloud">
+                    <a href="#featured">夜行列车导演剪辑版</a>
+                    <a href="#featured">都市夜归人合租篇</a>
+                    <a href="#featured">走廊尽头长镜头</a>
+                    <a href="#featured">她的秘密房间镜面构图</a>
+                    <a href="#featured">办公室午休微波炉转场</a>
+                    <a href="#featured">未寄出的信1998道具</a>
+                    <a href="#featured">夏日天台自然光</a>
+                    <a href="#featured">夜行列车花絮第二弹</a>
+                </div>
+            </section>
+
+            <!-- 11. 补充板块：热门榜单 -->
+            <section class="section" id="ranking">
+                <div class="section-header">
+                    <h2 class="section-title">十月热度榜 · <span class="accent">md传媒站内</span></h2>
+                </div>
+                <div class="ranking-list">
+                    <div class="ranking-item">
+                        <span class="rank-num top3">1</span>
+                        <div class="rank-info">
+                            <span class="rank-name">都市夜归人·合租</span>
+                            <span class="rank-meta">单元剧 · 45分钟 · 2026-09-26</span>
+                        </div>
+                        <span class="rank-score">9.1</span>
+                    </div>
+                    <div class="ranking-item">
+                        <span class="rank-num top3">2</span>
+                        <div class="rank-info">
+                            <span class="rank-name">夜行列车</span>
+                            <span class="rank-meta">悬疑 · 72分钟 · 2026-10-18</span>
+                        </div>
+                        <span class="rank-score">9.0</span>
+                    </div>
+                    <div class="ranking-item">
+                        <span class="rank-num top3">3</span>
+                        <div class="rank-info">
+                            <span class="rank-name">走廊尽头</span>
+                            <span class="rank-meta">长镜头 · 51分钟 · 2026-09-12</span>
+                        </div>
+                        <span class="rank-score">8.7</span>
+                    </div>
+                    <div class="ranking-item">
+                        <span class="rank-num">4</span>
+                        <div class="rank-info">
+                            <span class="rank-name">办公室午休</span>
+                            <span class="rank-meta">职场 · 45分钟 · 2026-10-02</span>
+                        </div>
+                        <span class="rank-score">8.4</span>
+                    </div>
+                    <div class="ranking-item">
+                        <span class="rank-num">5</span>
+                        <div class="rank-info">
+                            <span class="rank-name">未寄出的信</span>
+                            <span class="rank-meta">双时间线 · 58分钟 · 2026-07-30</span>
+                        </div>
+                        <span class="rank-score">8.3</span>
+                    </div>
+                    <div class="ranking-item">
+                        <span class="rank-num">6</span>
+                        <div class="rank-info">
+                            <span class="rank-name">夏日天台</span>
+                            <span class="rank-meta">青春 · 42分钟 · 2026-08-20</span>
+                        </div>
+                        <span class="rank-score">8.0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 投稿互动板块 -->
+            <section class="section" id="submit">
+                <div class="section-header">
+                    <h2 class="section-title">投稿与交流 · <span class="accent">参与作品讨论</span></h2>
+                </div>
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <span class="step-num">✎</span>
+                        <div class="step-content">
+                            <h4>撰写作品分析或幕后观察</h4>
+                            <p>针对吴梦梦主演的作品，可以投稿剧情解析、镜头语言分析或幕后花絮解读。建议包含具体场次时间点、制作细节或对比案例。投稿通过后会在站内展示。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num">💬</span>
+                        <div class="step-content">
+                            <h4>参与月度观众选择投票</h4>
+                            <p>md传媒每月1日开放上月作品投票，投票周期5天。十月投票共4820人参与，《都市夜归人·合租》以9.1分居作品评分首位。</p>
+                        </div>
+                    </div>
+                    <div class="guide-step">
+                        <span class="step-num">🎬</span>
+                        <div class="step-content">
+                            <h4>报名新锐导演计划观众评审</h4>
+                            <p>首期三部作品上线前将招募50名观众评审参与试看并提交反馈。报名通道预计2027年1月开放，届时可在md传媒官方频道查看具体细则。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 右侧辅助栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <h3>频道索引</h3>
+                <nav class="sidebar-nav">
+                    <a href="#overview">领域概览 <span class="count">1</span></a>
+                    <a href="#featured">精选作品 <span class="count">8</span></a>
+                    <a href="#updates">最新动态 <span class="count">10</span></a>
+                    <a href="#categories">分类索引 <span class="count">8</span></a>
+                    <a href="#deep-dive">深度解析 <span class="count">3 节</span></a>
+                    <a href="#guide">观看路径 <span class="count">4 步</span></a>
+                    <a href="#faq">常见问答 <span class="count">6</span></a>
+                    <a href="#comments">观众评论 <span class="count">14</span></a>
+                    <a href="#news">相关资讯 <span class="count">6</span></a>
+                    <a href="#ranking">热度榜单 <span class="count">6</span></a>
+                    <a href="#submit">投稿互动 <span class="count">3</span></a>
+                </nav>
+            </div>
+            <div class="sidebar-box">
+                <h3>近期更新</h3>
+                <div class="sidebar-list">
+                    <div class="sidebar-list-item">
+                        <span class="dot"></span>
+                        <div class="text">
+                            <a href="#updates">导演剪辑版确认制作</a>
+                            <span class="time">11-08</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-list-item">
+                        <span class="dot"></span>
+                        <div class="text">
+                            <a href="#updates">《她的秘密房间》第二支预告</a>
+                            <span class="time">11-07</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-list-item">
+                        <span class="dot"></span>
+                        <div class="text">
+                            <a href="#updates">夜行列车花絮第二弹</a>
+                            <span class="time">11-06</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-list-item">
+                        <span class="dot"></span>
+                        <div class="text">
+                            <a href="#updates">新锐导演计划剧本围读</a>
+                            <span class="time">11-04</span>
+                        </div>
+                    </div>
+                    <div class="sidebar-list-item">
+                        <span class="dot"></span>
+                        <div class="text">
+                            <a href="#updates">《她的秘密房间》定档11月15日</a>
+                            <span class="time">11-03</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-box">
+                <h3>热门标签</h3>
+                <div class="tag-cloud">
+                    <a href="#featured">倒叙结构</a>
+                    <a href="#featured">长镜头</a>
+                    <a href="#featured">镜面构图</a>
+                    <a href="#featured">饭桌戏</a>
+                    <a href="#featured">自然光</a>
+                    <a href="#featured">幕后花絮</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 页尾 -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="logo-text">md传媒吴梦梦</span>
+                <p>收录2026年7月至11月期间吴梦梦主演的12部剧情向作品、9条幕后花絮和6条相关资讯，每周更新作品动态与观众讨论。</p>
+            </div>
+            <div class="footer-col">
+                <h4>作品分类</h4>
+                <a href="#featured">悬疑列车</a>
+                <a href="#featured">都市单元剧</a>
+                <a href="#featured">单场景心理</a>
+                <a href="#featured">职场关系</a>
+                <a href="#featured">长镜头实验</a>
+            </div>
+            <div class="footer-col">
+                <h4>内容入口</h4>
+                <a href="#updates">最新动态</a>
+                <a href="#deep-dive">深度解析</a>
+                <a href="#guide">观看路径</a>
+                <a href="#faq">常见问答</a>
+                <a href="#ranking">热度榜单</a>
+            </div>
+            <div class="footer-col">
+                <h4>参与</h4>
+                <a href="#submit">投稿互动</a>
+                <a href="#comments">观众评论</a>
+                <a href="#news">相关资讯</a>
+                <a href="#related">相关推荐</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>页面内容为示例数据，日期与条目基于2026年11月8日前的公开信息整理。</span>
+            <span>© 2026 md传媒吴梦梦内容聚合页</span>
+        </div>
+    </footer>
+
+    <!-- 回到顶部 -->
+    <button class="back-to-top" id="back-to-top" aria-label="回到顶部">
+        <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <script>
+        (function() {
+            // 移动端菜单
+            const hamburger = document.getElementById('hamburger-btn');
+            const nav = document.getElementById('header-nav');
+            const overlay = document.getElementById('mobile-overlay');
+
+            function closeMenu() {
+                nav.classList.remove('open');
+                overlay.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+
+            function openMenu() {
+                nav.classList.add('open');
+                overlay.classList.add('active');
+                hamburger.setAttribute('aria-expanded', 'true');
+                document.body.style.overflow = 'hidden';
+            }
+
+            hamburger.addEventListener('click', function() {
+                if (nav.classList.contains('open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            overlay.addEventListener('click', closeMenu);
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMenu();
+                }
+            });
+
+            // 点击导航后自动收起
+            nav.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 740) {
+                        closeMenu();
+                    }
+                });
+            });
+
+            // 回到顶部
+            const backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > window.innerHeight) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // 搜索过滤（本地可见内容查找）
+            const searchInput = document.getElementById('search-input');
+            const featuredGrid = document.getElementById('featured-grid');
+            const searchEmpty = document.getElementById('search-empty');
+            const cards = featuredGrid.querySelectorAll('.content-card');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.trim().toLowerCase();
+                    let visibleCount = 0;
+                    cards.forEach(function(card) {
+                        const text = card.textContent.toLowerCase();
+                        if (query === '' || text.includes(query)) {
+                            card.classList.remove('filter-hidden');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('filter-hidden');
+                        }
+                    });
+                    if (visibleCount === 0 && query !== '') {
+                        searchEmpty.classList.add('show');
+                    } else {
+                        searchEmpty.classList.remove('show');
+                    }
+                });
+            }
+
+            // 平滑滚动偏移补偿（CSS已设置scroll-padding-top，此处处理不支持的情况）
+            // 现代浏览器已通过scroll-padding-top处理
+        })();
+    </script>
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "md传媒吴梦梦",
+        "description": "md传媒吴梦梦内容聚合，涵盖吴梦梦主演作品、幕后花絮、最新动态与观众讨论。",
+        "about": {
+            "@type": "Person",
+            "name": "吴梦梦",
+            "description": "md传媒签约演员，主演剧情向成人影视作品"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "《夜行列车》的倒叙结构具体怎么切分？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "全片以列车员向乘客解释晚点原因开场，随后切入第一个闪回：三小时前的餐车冲突。之后每隔12—18分钟插入一段更早的回忆，直到结局揭示列车员的真实目的。时间线按“现在—三小时前—六小时前—入职第一天—现在”的顺序推进，共五个时间节点。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "《她的秘密房间》和《走廊尽头》都是单场景，区别在哪？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "《走廊尽头》的场景是一条酒店走廊及两侧房间，空间是线性的，人物沿走廊移动推动叙事。《她的秘密房间》场景是一间公寓，空间是封闭的，叙事靠镜面反射和物品位置变化推进。前者依赖走位，后者依赖构图。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "md传媒的新锐导演计划会影响吴梦梦后续作品风格吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "首期三部作品中两部由吴梦梦主演，其中《回声》导演林晓晨此前拍过两部短片，偏好自然光和非职业演员。从11月4日围读照片看，《回声》的场景设定在白天室内，与吴梦梦此前偏夜景和密闭空间的作品有明显差异。是否形成风格转向要看成片，目前只能确认制作方向有变化。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "《都市夜归人》六个单元之间有关联吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "人物没有直接延续，但共享同一座城市和同一个便利店品牌作为视觉锚点。第三单元“合租”中出现的便利店店员在第五单元有独立场景。六个单元按上线顺序观看即可，单元之间没有必须遵守的时间顺序。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "幕后花絮里哪些信息可以当作制作事实？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "包含具体数字、职务和流程描述的部分可信度较高，比如列车场景搭建11天、餐车地板倾斜3度、长镜头焦点变化7个位置。只出现“非常用心”“极具挑战”等表述的段落属于宣传话术，不适合作为制作信息引用。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "《未寄出的信》中两条时间线怎么区分？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "1998年时间线采用暖黄色调和4:3画幅，2026年时间线采用冷白调和16:9画幅。书桌上的台灯型号在两个时代不同——1998年是金属罩台灯，2026年是白色塑料罩。吴梦梦在两个时间线中饰演不同角色，靠发型和服装区分。"
+                }
+            }
+        ]
+    }
+    </script>
+</body>
+  </html>
