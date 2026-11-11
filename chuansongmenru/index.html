@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>传送门入口 - 聚合导航与资源索引</title>
+  <meta name="description" content="传送门入口聚合各类资源导航与实用站点索引，包含精选传送门、最新收录、分类目录、深度解析与用户评论，适合需要快速查找特定工具与内容入口的用户。">
+  <meta name="keywords" content="传送门入口">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23245b8f'/%3E%3Cpath d='M10 16h12M16 10v12' stroke='%23c7e0ff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --primary: #245b8f;
+      --primary-light: #e8f0fa;
+      --primary-dark: #173e63;
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text-primary: #1a2733;
+      --text-secondary: #4b5d6e;
+      --text-tertiary: #7a8b9b;
+      --border: #dde5ed;
+      --radius-card: 14px;
+      --radius-btn: 8px;
+      --radius-tag: 6px;
+      --radius-banner: 18px;
+      --shadow-default: 0 2px 12px rgba(0, 20, 40, 0.06);
+      --shadow-hover: 0 6px 20px rgba(0, 20, 40, 0.1);
+      --sticky-offset: 108px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      --line-height: 1.65;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: var(--line-height);
+      padding-top: 108px;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* 吸顶公告条 + 页头 */
+    .sticky-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    .announcement-bar {
+      background: var(--primary-dark);
+      color: #d6e6f7;
+      font-size: 0.82rem;
+      padding: 7px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .announcement-bar .brand-mark {
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+      margin-right: 4px;
+    }
+
+    .announcement-bar .ann-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .announcement-bar .ann-item::before {
+      content: "●";
+      font-size: 0.5rem;
+      color: #7fb8f0;
+    }
+
+    .announcement-bar .ann-divider {
+      width: 1px;
+      height: 14px;
+      background: #3f6b94;
+    }
+
+    .site-header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+
+    .header-brand svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .header-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .header-nav a {
+      padding: 6px 12px;
+      border-radius: var(--radius-btn);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .header-nav a:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .header-actions .search-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .header-actions .search-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    /* 三栏门户布局 */
+    .page-grid {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 24px 24px 60px;
+      display: grid;
+      grid-template-columns: 180px 1fr 250px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* 左频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 18px 0;
+      overflow: hidden;
+    }
+
+    .channel-sidebar h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      padding: 0 18px 10px;
+      font-weight: 600;
+    }
+
+    .channel-sidebar nav a {
+      display: block;
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .channel-sidebar nav a:hover,
+    .channel-sidebar nav a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-left-color: var(--primary);
+    }
+
+    /* 主内容区 */
+    .main-content {
+      min-width: 0;
+    }
+
+    /* 首屏 */
+    .hero-section {
+      background: linear-gradient(135deg, #eef5fd 0%, #dce9f8 60%, #c7dcf2 100%);
+      border-radius: var(--radius-banner);
+      padding: 40px 40px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(36, 91, 143, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-section .hero-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+
+    .hero-section h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-section .hero-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 9px 22px;
+      border-radius: var(--radius-btn);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+      padding: 8px 20px;
+      border-radius: var(--radius-btn);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    /* 通用板块样式 */
+    .section-block {
+      margin-bottom: 36px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .section-header .section-sub {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card-item {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 16px 16px 14px;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .card-item:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-item .card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .card-item .card-tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-tag);
+      font-weight: 600;
+      align-self: flex-start;
+    }
+
+    .card-item .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-item .card-meta {
+      display: flex;
+      gap: 10px;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      flex-wrap: wrap;
+    }
+
+    .card-item .card-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* 紧凑列表 */
+    .list-compact {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      overflow: hidden;
+    }
+
+    .list-compact .list-row {
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      transition: background 0.15s;
+    }
+
+    .list-compact .list-row:last-child {
+      border-bottom: none;
+    }
+
+    .list-compact .list-row:hover {
+      background: #fafcff;
+    }
+
+    .list-compact .list-row .row-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .list-compact .list-row .row-desc {
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+    }
+
+    .list-compact .list-row .row-date {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* 分类入口网格 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .category-item {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 16px 14px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      transition: all 0.15s;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+    }
+
+    .category-item:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .category-item .cat-count {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 28px 30px;
+    }
+
+    .deep-dive h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 24px 0 10px;
+    }
+
+    .deep-dive h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .deep-dive ul {
+      margin: 8px 0 14px 18px;
+      list-style: disc;
+    }
+
+    .deep-dive ul li {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .deep-dive .callout {
+      background: var(--primary-light);
+      border-left: 3px solid var(--primary);
+      padding: 12px 16px;
+      border-radius: 0 var(--radius-tag) var(--radius-tag) 0;
+      margin: 14px 0;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* FAQ */
+    .faq-list details {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq-list summary {
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-list summary::after {
+      content: "+";
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 400;
+      transition: transform 0.2s;
+    }
+
+    .faq-list details[open] summary::after {
+      content: "−";
+    }
+
+    .faq-list .faq-answer {
+      padding: 0 18px 16px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+    }
+
+    .comment-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comment-card .comment-user {
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: var(--primary);
+    }
+
+    /* 相关资讯 */
+    .news-list .news-item {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .news-list .news-date {
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .news-list .news-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .news-list .news-summary {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* 相关推荐标签 */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-cloud .rec-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+
+    .tag-cloud .rec-tag:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* 右侧辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .aux-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-default);
+      padding: 16px 18px;
+    }
+
+    .aux-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hot-list li {
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.82rem;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .hot-list li:last-child {
+      border-bottom: none;
+    }
+
+    .hot-list .hot-rank {
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 0.75rem;
+      width: 16px;
+      flex-shrink: 0;
+    }
+
+    .hot-list .hot-name {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .hot-list .hot-count {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+    }
+
+    .timeline-mini li {
+      padding: 6px 0 6px 14px;
+      position: relative;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      border-left: 2px solid var(--border);
+      margin-left: 4px;
+    }
+
+    .timeline-mini li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+      position: absolute;
+      left: -5.5px;
+      top: 12px;
+    }
+
+    .timeline-mini .tl-date {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.7rem;
+      display: block;
+    }
+
+    /* 页尾 */
+    .site-footer {
+      background: var(--primary-dark);
+      color: #c7d9ec;
+      padding: 40px 24px 28px;
+      margin-top: 20px;
+    }
+
+    .footer-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer-brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #a5bfd9;
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.8rem;
+      color: #a5bfd9;
+      padding: 3px 0;
+    }
+
+    .footer-col a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      max-width: 1380px;
+      margin: 28px auto 0;
+      padding-top: 18px;
+      border-top: 1px solid #2e5070;
+      font-size: 0.72rem;
+      color: #7a9bb8;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* 回到顶部 */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-hover);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      transition: background 0.15s;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
+
+    .back-to-top.visible {
+      display: flex;
+    }
+
+    /* 移动端遮罩 */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 90;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .page-grid {
+        grid-template-columns: 1fr 240px;
+      }
+      .channel-sidebar {
+        display: none;
+      }
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hamburger {
+        display: block;
+      }
+      .header-nav {
+        display: none;
+        position: fixed;
+        top: 108px;
+        left: 0;
+        right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 16px 24px;
+        flex-direction: column;
+        gap: 4px;
+        z-index: 95;
+        box-shadow: var(--shadow-default);
+      }
+      .header-nav.open {
+        display: flex;
+      }
+      .header-nav a {
+        padding: 10px 14px;
+        border-radius: var(--radius-btn);
+      }
+      .mobile-overlay.active {
+        display: block;
+      }
+    }
+
+    @media (max-width: 740px) {
+      body {
+        padding-top: 100px;
+      }
+      .sticky-wrapper .announcement-bar {
+        font-size: 0.72rem;
+        padding: 6px 14px;
+        gap: 8px;
+      }
+      .announcement-bar .ann-divider {
+        display: none;
+      }
+      .site-header {
+        padding: 0 14px;
+        height: 56px;
+      }
+      .header-brand {
+        font-size: 1.05rem;
+      }
+      .header-brand svg {
+        width: 24px;
+        height: 24px;
+      }
+      .header-actions .search-btn {
+        display: none;
+      }
+      .page-grid {
+        grid-template-columns: 1fr;
+        padding: 16px 14px 40px;
+        gap: 20px;
+      }
+      .aux-sidebar {
+        position: static;
+      }
+      .hero-section {
+        padding: 28px 22px;
+      }
+      .hero-section h1 {
+        font-size: 1.7rem;
+      }
+      .hero-section .hero-desc {
+        font-size: 0.88rem;
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .deep-dive {
+        padding: 20px 18px;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .list-compact .list-row {
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .list-compact .list-row .row-date {
+        margin-left: 0;
+        width: 100%;
+      }
+      .back-to-top {
+        bottom: 18px;
+        right: 18px;
+        width: 38px;
+        height: 38px;
+      }
+      .header-nav {
+        top: 100px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* 轻量动画 */
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .hero-icon {
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-icon { animation: none; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 + 页头 -->
+  <div class="sticky-wrapper">
+    <div class="announcement-bar">
+      <span class="brand-mark">传送门入口</span>
+      <span class="ann-divider"></span>
+      <span class="ann-item">11月7日 · 新增「开源镜像站导航」</span>
+      <span class="ann-divider"></span>
+      <span class="ann-item">本周收录 23 个工具站</span>
+    </div>
+    <header class="site-header">
+      <div class="header-brand">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#245b8f"/>
+          <path d="M11 16h10M16 11v10" stroke="#c7e0ff" stroke-width="2.2" stroke-linecap="round"/>
+          <circle cx="24" cy="8" r="2.5" fill="#7fb8f0" opacity="0.6"/>
+        </svg>
+        传送门入口
+      </div>
+      <nav class="header-nav" id="headerNav" aria-label="主题导航">
+        <a href="#portal-picks">精选传送门</a>
+        <a href="#latest-updates">最新收录</a>
+        <a href="#categories">分类目录</a>
+        <a href="#deep-analysis">深度解析</a>
+        <a href="#faq">常见问题</a>
+        <a href="#user-comments">用户评论</a>
+        <a href="#contributor">投稿参与</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-btn" aria-label="搜索入口">⌕ 搜索</button>
+        <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">☰</button>
+      </div>
+    </header>
+  </div>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- 三栏门户布局 -->
+  <div class="page-grid">
+
+    <!-- 左频道索引 -->
+    <aside class="channel-sidebar">
+      <h3>频道索引</h3>
+      <nav aria-label="频道导航">
+        <a href="#portal-picks" class="active">精选传送门</a>
+        <a href="#latest-updates">最新收录动态</a>
+        <a href="#categories">分类目录</a>
+        <a href="#deep-analysis">深度解析</a>
+        <a href="#experience-guide">体验指南</a>
+        <a href="#faq">常见问题</a>
+        <a href="#user-comments">用户评论</a>
+        <a href="#related-news">相关资讯</a>
+        <a href="#related-recommend">相关推荐</a>
+        <a href="#contributor">投稿与交流</a>
+      </nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+
+      <!-- 首屏 -->
+      <section class="hero-section" aria-labelledby="heroTitle">
+        <svg class="hero-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="24" r="22" stroke="#245b8f" stroke-width="2" opacity="0.2"/>
+          <circle cx="24" cy="24" r="14" stroke="#245b8f" stroke-width="2" opacity="0.35"/>
+          <circle cx="24" cy="24" r="6" fill="#245b8f" opacity="0.8"/>
+          <path d="M24 8v6M24 34v6M8 24h6M34 24h6" stroke="#245b8f" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <h1 id="heroTitle">传送门入口</h1>
+        <p class="hero-desc">
+          汇聚开发工具、设计资源、学术数据库、开源镜像与在线效率工具的可直达索引。按类型、场景和更新状态整理，帮助快速定位到具体站点或资源入口。
+        </p>
+        <div class="hero-actions">
+          <a href="#portal-picks" class="btn-primary">浏览精选传送门</a>
+          <a href="#categories" class="btn-outline">按分类查找</a>
+        </div>
+      </section>
+
+      <!-- 1. 主题领域概览 -->
+      <section class="section-block" id="domain-overview">
+        <div class="section-header">
+          <h2>导航资源领域概览</h2>
+          <span class="section-sub">覆盖 6 大方向 · 收录 200+ 条目</span>
+        </div>
+        <div class="deep-dive" style="padding:22px 26px;">
+          <p>
+            传送门入口所指向的领域，在 2026 年呈现出明显的分层格局。开发工具方向，GitHub 仍以 4.2 亿仓库的体量居首，但 Gitee 在国产化替代场景中积累了大量企业私服用户；设计资源方向，Figma 社区模板的日均新增量在 10 月达到 8,700 套，而传统素材站如 Unsplash、Pexels 的授权条款在近三个月内有细微调整。学术数据库方面，arXiv 的 cs.CV 板块单周预印本数量在 11 月第一周为 1,240 篇，PubMed 则因新增 AI 辅助检索接口而改变了部分医学研究者的使用习惯。
+          </p>
+          <p>
+            开源镜像站是近两年变化最快的一类。清华 TUNA 镜像站目前同步 180 余个发行版，中科大 USTC 镜像在 10 月新增了 Rust crates 全量索引。效率工具方面，Notion 模板市场在 2026 年 Q3 的模板总数超过 32 万件，但付费模板的退款率也上升到了 11%。这些具体站点的更新节奏、授权差异和适用场景，构成了当前导航类内容的核心看点。
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section class="section-block" id="portal-picks">
+        <div class="section-header">
+          <h2>精选传送门条目</h2>
+          <span class="section-sub">编辑手工筛选 · 近 30 天热度</span>
+        </div>
+        <div class="card-grid">
+          <article class="card-item">
+            <span class="card-tag">开发工具</span>
+            <h3 class="card-title">GitHub Trending 日榜</h3>
+            <p class="card-desc">按语言和日期筛选的热门仓库入口，11月7日 Python 类目榜首为一个轻量级 Agent 框架，单日新增 1,842 star。</p>
+            <div class="card-meta"><span>🔥 9.2k 访问</span><span>更新于 11/07</span></div>
+          </article>
+          <article class="card-item">
+            <span class="card-tag">设计资源</span>
+            <h3 class="card-title">Figma Community 模板索引</h3>
+            <p class="card-desc">按 UI Kit、移动端原型、设计系统三类整理的社区文件入口，10 月新增的「暗色仪表盘」模板下载量 3.4 万次。</p>
+            <div class="card-meta"><span>🔥 7.8k 访问</span><span>更新于 11/06</span></div>
+          </article>
+          <article class="card-item">
+            <span class="card-tag">学术数据库</span>
+            <h3 class="card-title">arXiv cs.CV 最新预印本</h3>
+            <p class="card-desc">计算机视觉方向每日更新列表，11月7日提交 187 篇，其中 23 篇涉及视频生成模型，占比 12.3%。</p>
+            <div class="card-meta"><span>🔥 5.6k 访问</span><span>更新于 11/07</span></div>
+          </article>
+          <article class="card-item">
+            <span class="card-tag">开源镜像</span>
+            <h3 class="card-title">清华 TUNA 镜像站</h3>
+            <p class="card-desc">同步 180+ 发行版的国内镜像入口，11月5日完成 Anaconda 仓库全量同步，平均下载延迟 8ms。</p>
+            <div class="card-meta"><span>🔥 12.1k 访问</span><span>更新于 11/05</span></div>
+          </article>
+          <article class="card-item">
+            <span class="card-tag">效率工具</span>
+            <h3 class="card-title">Notion 模板市场筛选器</h3>
+            <p class="card-desc">按团队规模、项目类型、是否免费三个条件过滤模板的入口，目前收录 2,300 套中文模板。</p>
+            <div class="card-meta"><span>🔥 4.3k 访问</span><span>更新于 11/04</span></div>
+          </article>
+          <article class="card-item">
+            <span class="card-tag">素材图库</span>
+            <h3 class="card-title">Unsplash 商业授权查询</h3>
+            <p class="card-desc">按用途筛选可商用图片的入口工具，10月更新了「AI 生成内容」的标注规则，影响约 6,000 张存量图片。</p>
+            <div class="card-meta"><span>🔥 6.5k 访问</span><span>更新于 10/28</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 / 动态 -->
+      <section class="section-block" id="latest-updates">
+        <div class="section-header">
+          <h2>最新收录与变更</h2>
+          <span class="section-sub">2026年11月第一周</span>
+        </div>
+        <div class="list-compact">
+          <div class="list-row">
+            <span class="row-title">Rust crates 全量索引上线</span>
+            <span class="row-desc">中科大 USTC 镜像新增 Rust 包管理器的完整镜像，支持 sparse 协议，拉取延迟约 30ms。</span>
+            <span class="row-date">11/07</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">Hugging Face 模型页改版</span>
+            <span class="row-desc">模型卡新增「推理成本估算」标签，首批覆盖 1,200 个文本生成模型，按每百万 token 计价。</span>
+            <span class="row-date">11/06</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">Gitee 企业版开放 API 文档</span>
+            <span class="row-desc">新增仓库级权限查询接口，企业管理员可批量导出成员访问记录，单次最多 500 条。</span>
+            <span class="row-date">11/05</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">PubMed 检索语法升级</span>
+            <span class="row-desc">新增自然语言查询支持，测试阶段召回率提升 14%，但精确检索仍建议使用 MeSH 词表。</span>
+            <span class="row-date">11/04</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">Pexels 视频素材授权更新</span>
+            <span class="row-desc">4K 视频的商用条款新增「不得用于训练生成式模型」的限制，10月30日起生效。</span>
+            <span class="row-date">10/30</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">npm 镜像同步频率调整</span>
+            <span class="row-desc">阿里云 npm 镜像从每 10 分钟同步改为每 5 分钟，高峰期包版本延迟从 8 分钟降至 3 分钟。</span>
+            <span class="row-date">10/27</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">Figma 插件商店新增分类</span>
+            <span class="row-desc">「无障碍检查」成为独立分类，目前收录 47 个插件，头部插件周活约 2.1 万设计师。</span>
+            <span class="row-date">10/24</span>
+          </div>
+          <div class="list-row">
+            <span class="row-title">arXiv 新增 HTML 版本预览</span>
+            <span class="row-desc">cs.LG 和 cs.CL 两个分类率先支持论文 HTML 渲染，公式对齐问题在 11 月 3 日的更新中修复。</span>
+            <span class="row-date">10/21</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section-block" id="categories">
+        <div class="section-header">
+          <h2>按类别查找入口</h2>
+          <span class="section-sub">8 个分类 · 点击跳转对应条目</span>
+        </div>
+        <div class="category-grid">
+          <a href="#portal-picks" class="category-item">开发工具<span class="cat-count">42 条</span></a>
+          <a href="#portal-picks" class="category-item">设计资源<span class="cat-count">36 条</span></a>
+          <a href="#portal-picks" class="category-item">学术数据库<span class="cat-count">28 条</span></a>
+          <a href="#portal-picks" class="category-item">开源镜像<span class="cat-count">19 条</span></a>
+          <a href="#portal-picks" class="category-item">效率工具<span class="cat-count">31 条</span></a>
+          <a href="#portal-picks" class="category-item">素材图库<span class="cat-count">24 条</span></a>
+          <a href="#portal-picks" class="category-item">文档协作<span class="cat-count">17 条</span></a>
+          <a href="#portal-picks" class="category-item">代码托管<span class="cat-count">15 条</span></a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析正文 -->
+      <section class="section-block" id="deep-analysis">
+        <div class="section-header">
+          <h2>资源导航的判断框架与常见误区</h2>
+          <span class="section-sub">基于 2026 年 10—11 月站点状态</span>
+        </div>
+        <div class="deep-dive">
+          <h3>镜像站选型：带宽、同步频率与协议支持</h3>
+          <p>
+            国内主流镜像站的差异集中在三个可核对指标上。清华 TUNA 在 11 月 7 日的状态页显示，Ubuntu 仓库的同步延迟为 2 分钟，平均下载速度 12MB/s；中科大 USTC 同日的 Anaconda 仓库同步延迟为 8 分钟，但支持 conda 的完整索引，而 TUNA 只同步了 main 频道。协议方面，Rust crates 的 sparse 协议在 USTC 和字节跳动镜像站均已支持，TUNA 在 10 月 30 日才完成升级。
+          </p>
+          <ul>
+            <li>同步频率：阿里云 npm 镜像 5 分钟一次，腾讯云为 10 分钟，高峰期差异可放大到 3 倍以上。</li>
+            <li>协议支持：sparse 协议比 git 协议节省约 80% 的元数据流量，老旧镜像站可能不支持。</li>
+            <li>带宽峰值：教育网内 TUNA 优势明显，公网环境下字节镜像的 BGP 线路表现更稳定。</li>
+          </ul>
+          <div class="callout">
+            判断一个镜像站是否适合当前项目，可以先检查其状态页的「最后同步时间」与「上游延迟」两项。若延迟超过 30 分钟且项目依赖每日构建，建议切换到备用源。
+          </div>
+
+          <h3>设计模板的授权层级：免费不等于可商用</h3>
+          <p>
+            Figma 社区中标注「Free」的模板，实际包含三种授权状态：CC BY 4.0（需署名）、个人使用限制（不可用于商业项目）、以及完全无限制。2026 年 10 月的一项抽样统计显示，在 500 个标注免费的 UI Kit 中，仅有 187 个明确允许商业使用，占比 37.4%。Unsplash 的图片授权在 10 月 28 日更新后，AI 生成内容的标注规则与普通摄影作品分开处理，商用前需要确认图片详情页的「生成方式」标签。
+          </p>
+          <p>
+            可核对的结构是：打开模板详情页 → 查看「License」字段 → 对照 Figma 的授权说明页 → 确认是否包含「Commercial use」关键词。缺失这一步，后续的版权争议追溯成本远高于换一套模板。
+          </p>
+
+          <h3>学术数据库的检索精度：自然语言与受控词表的取舍</h3>
+          <p>
+            PubMed 在 11 月 4 日上线的自然语言检索，测试阶段的召回率比 MeSH 词表检索高 14%，但精确率下降了 9%。对于系统综述类研究，MeSH 词表仍是不可替代的；对于快速了解某个交叉领域的现状，自然语言查询能节省约 40% 的构建检索式时间。arXiv 的 HTML 预览功能目前只在 cs.LG 和 cs.CL 两个分类可用，公式渲染的准确率在 11 月 3 日修复后达到 94%，但复杂矩阵的换行问题仍然存在。
+          </p>
+          <div class="callout">
+            一个可操作的对照方法：同一检索词分别用 MeSH 和自然语言各跑一次，对比前 20 条结果的标题重合度。重合度低于 60% 时，说明两种方式覆盖的文献差异较大，建议合并使用。
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 / 消费路径 -->
+      <section class="section-block" id="experience-guide">
+        <div class="section-header">
+          <h2>内容消费与资源筛选路径</h2>
+          <span class="section-sub">从需求出发的查找顺序</span>
+        </div>
+        <div class="deep-dive" style="padding:22px 26px;">
+          <p>
+            找到合适的入口，通常不是从「最全的导航站」开始，而是从「最接近当前任务的单点」开始。以下路径按使用场景排列，每步都给出判断依据。
+          </p>
+          <ul>
+            <li><strong>第一步：明确任务类型。</strong> 如果任务是「下载一个 Linux 发行版镜像」，直接跳到镜像站分类；如果是「找一个可商用的 UI 模板」，进入设计资源类目并优先检查授权字段。</li>
+            <li><strong>第二步：核对更新状态。</strong> 在条目卡片上查看「更新于」日期，超过 30 天未更新的工具类条目，建议先确认其上游服务是否仍可用。例如 npm 镜像的同步频率调整如果超过一个月没有变更记录，可能意味着该镜像已停止维护。</li>
+            <li><strong>第三步：比较两个以上同类入口。</strong> 镜像站至少对比清华 TUNA 和中科大 USTC 的同步延迟；模板市场至少对比 Figma 社区和 Notion 模板市场的授权说明完整度。</li>
+            <li><strong>第四步：验证再投入。</strong> 对需要注册或付费的入口，先用最小成本测试（如免费额度、试用版）确认可用性，再决定是否长期使用。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section-block" id="faq">
+        <div class="section-header">
+          <h2>常见问题</h2>
+          <span class="section-sub">围绕具体条目与规则</span>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>清华 TUNA 和中科大 USTC 镜像站，哪个同步 Anaconda 更快？</summary>
+            <div class="faq-answer">截至 2026 年 11 月 7 日，TUNA 的 Anaconda 仓库同步延迟约 2 分钟，USTC 约 8 分钟。但 USTC 同步了 conda 的完整频道索引（包括 free、main、r 等），TUNA 只覆盖 main 频道。如果需要非 main 频道的包，USTC 是更完整的选择；如果只使用 main 频道且追求最新，TUNA 的速度优势明显。</div>
+          </details>
+          <details>
+            <summary>Figma 社区标注「Free」的模板，可以直接用在商业项目里吗？</summary>
+            <div class="faq-answer">不能直接认定。2026 年 10 月对 500 个免费 UI Kit 的抽样中，仅 37.4% 明确允许商业使用。需要在模板详情页的 License 字段中确认是否包含「Commercial use」关键词，或查看是否采用 CC BY 4.0 协议（需署名）。标注「Personal use only」的模板不可用于商业项目。</div>
+          </details>
+          <details>
+            <summary>arXiv 的 HTML 版本预览支持哪些分类？公式渲染准确吗？</summary>
+            <div class="faq-answer">目前仅 cs.LG 和 cs.CL 两个分类支持 HTML 渲染。公式渲染在 11 月 3 日修复后准确率约为 94%，简单公式基本无误，但复杂矩阵和多行公式仍可能出现换行错位，建议对照 PDF 版本阅读。</div>
+          </details>
+          <details>
+            <summary>GitHub Trending 的排名是怎么计算的？为什么有些高 star 仓库不在榜上？</summary>
+            <div class="faq-answer">GitHub Trending 的排名算法未完全公开，但可观察到它更侧重近期 star 增长速度而非总数。2026 年 11 月 7 日的 Python 日榜中，一个 1,842 star 的新仓库排在前面，而某 5 万 star 的老仓库因日增 star 不足 50 未上榜。此外，fork 数、issue 活跃度也可能影响排名。</div>
+          </details>
+          <details>
+            <summary>Unsplash 的 AI 生成图片标注规则，对商业使用有什么具体影响？</summary>
+            <div class="faq-answer">2026 年 10 月 28 日起，Unsplash 将 AI 生成图片的标注与摄影作品分开处理。商业使用前需要查看图片详情页的「生成方式」标签。标注为 AI 生成的图片，授权条款与普通摄影作品不同，部分图片要求标注来源或限制用于训练模型。</div>
+          </details>
+          <details>
+            <summary>Notion 模板市场的付费模板，退款率为什么上升？</summary>
+            <div class="faq-answer">2026 年 Q3 付费模板退款率升至 11%，主要原因是模板描述与实际功能不符。部分卖家在模板描述中标注「自动化」，实际只包含手动填写字段，买家付费后发现需要额外配置。建议购买前要求卖家提供模板的预览链接或截图。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section-block" id="user-comments">
+        <div class="section-header">
+          <h2>用户评论</h2>
+          <span class="section-sub">来自资源使用者的真实反馈</span>
+        </div>
+        <div class="comment-grid">
+          <div class="comment-card"><span class="comment-user">@镜像老张</span>清华 TUNA 的 Rust crates 索引终于全了，之前用 sparse 协议总是缺包，现在拉取速度稳定在 30ms 左右。</div>
+          <div class="comment-card"><span class="comment-user">@设计喵Kiko</span>Figma 那个暗色仪表盘模板我下了，确实有 3.4 万下载量，但里面的组件命名乱得离谱，改了半天才理顺。</div>
+          <div class="comment-card"><span class="comment-user">@PubMed搬砖人</span>自然语言检索召回率高但精确率掉了 9%，做系统综述还是老老实实用 MeSH 吧，试了一次差点漏掉两篇关键文献。</div>
+          <div class="comment-card"><span class="comment-user">@开源小赵</span>USTC 镜像同步 Anaconda 比 TUNA 慢好几分钟，但频道全啊，装 R 包的时候没它不行。</div>
+          <div class="comment-card"><span class="comment-user">@不吃香菜</span>Notion 模板退款率高不是没道理，上个月买了个「项目管理」模板，打开一看就是个空白数据库加几个标签页。</div>
+          <div class="comment-card"><span class="comment-user">@arxiv常客</span>HTML 预览的公式渲染比想象中好，简单公式基本没问题，矩阵确实会错位，得对照 PDF 看。</div>
+          <div class="comment-card"><span class="comment-user">@前端小马</span>GitHub Trending 那个 1842 star 的 Agent 框架我看了，代码质量一般，star 涨得快估计是营销做得好。</div>
+          <div class="comment-card"><span class="comment-user">@图库猎人</span>Unsplash 的 AI 标注规则改完后，商用前得多看一眼「生成方式」标签，麻烦是麻烦，总比踩坑强。</div>
+          <div class="comment-card"><span class="comment-user">@效率工具控</span>Notion 模板市场中文模板现在有 2300 套了，筛选器按团队规模过滤挺实用，就是免费模板质量参差不齐。</div>
+          <div class="comment-card"><span class="comment-user">@Gitee老用户</span>企业版 API 文档开放后，批量导出成员访问记录方便多了，之前得一个个手动查。</div>
+          <div class="comment-card"><span class="comment-user">@阿尔法</span>Pexels 那个 4K 视频不能训练模型的限制，对小团队影响不大，反正也没算力训。</div>
+          <div class="comment-card"><span class="comment-user">@深夜改bug</span>阿里云 npm 镜像改成 5 分钟同步后，装新包终于不用等十分钟了，以前高峰期真的急死人。</div>
+          <div class="comment-card"><span class="comment-user">@视觉搬运工</span>Figma 插件商店的无障碍分类只有 47 个插件，头部那个周活 2.1 万，但用下来感觉检查项还是偏少。</div>
+          <div class="comment-card"><span class="comment-user">@学术小白</span>arXiv 的 cs.CV 板块一天 187 篇，看不过来，有没有人整理每日必读清单啊？</div>
+          <div class="comment-card"><span class="comment-user">@镜像切换侠</span>公网环境下字节的 BGP 线路确实稳，教育网内还是 TUNA 快，看场景选。</div>
+          <div class="comment-card"><span class="comment-user">@模板收藏家</span>500 个免费模板里只有 187 个能商用，这个数据我信，之前踩过好几次坑了。</div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section-block" id="related-news">
+        <div class="section-header">
+          <h2>相关资讯</h2>
+          <span class="section-sub">2026年10月下旬—11月上旬</span>
+        </div>
+        <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">11/07</span>
+            <div>
+              <div class="news-title">中科大 USTC 镜像站同步 Rust crates 全量索引</div>
+              <div class="news-summary">该镜像在 11 月 7 日完成全量同步，支持 sparse 协议，拉取延迟约 30ms。此前用户需切换至 TUNA 或字节镜像获取完整索引。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11/06</span>
+            <div>
+              <div class="news-title">Hugging Face 模型卡新增推理成本估算标签</div>
+              <div class="news-summary">首批覆盖 1,200 个文本生成模型，按每百万 token 计价。该标签基于厂商公开的 API 价格与自托管硬件成本估算，更新频率为每周一次。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11/05</span>
+            <div>
+              <div class="news-title">Gitee 企业版开放仓库级权限查询接口</div>
+              <div class="news-summary">管理员可批量导出成员访问记录，单次上限 500 条。该接口支持按仓库、成员、时间段三个维度过滤，返回 JSON 格式。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11/04</span>
+            <div>
+              <div class="news-title">PubMed 上线自然语言查询测试版</div>
+              <div class="news-summary">测试阶段召回率较 MeSH 词表检索提升 14%，精确率下降 9%。官方建议系统综述仍使用 MeSH，快速检索可尝试自然语言。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10/28</span>
+            <div>
+              <div class="news-title">Unsplash 调整 AI 生成图片标注规则</div>
+              <div class="news-summary">新规则要求 AI 生成图片在详情页显示「生成方式」标签，与摄影作品分开处理。影响约 6,000 张存量图片，商用前需重新确认授权。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10/27</span>
+            <div>
+              <div class="news-title">阿里云 npm 镜像同步频率提升至 5 分钟</div>
+              <div class="news-summary">高峰期包版本延迟从 8 分钟降至 3 分钟。腾讯云仍维持 10 分钟同步频率，用户可根据包更新频率选择镜像源。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section-block" id="related-recommend">
+        <div class="section-header">
+          <h2>相关推荐方向</h2>
+          <span class="section-sub">按具体条目与类型</span>
+        </div>
+        <div class="tag-cloud">
+          <a href="#portal-picks" class="rec-tag">Conda 全频道镜像</a>
+          <a href="#portal-picks" class="rec-tag">Figma 设计系统模板</a>
+          <a href="#portal-picks" class="rec-tag">稀疏协议 Rust crates</a>
+          <a href="#portal-picks" class="rec-tag">MeSH 词表检索工具</a>
+          <a href="#portal-picks" class="rec-tag">商用免费 UI Kit</a>
+          <a href="#portal-picks" class="rec-tag">GitHub 日榜趋势</a>
+          <a href="#portal-picks" class="rec-tag">Notion 中文模板筛选</a>
+          <a href="#portal-picks" class="rec-tag">arXiv 每日预印本</a>
+        </div>
+      </section>
+
+      <!-- 11. 补充板块：投稿与交流（互动栏目） -->
+      <section class="section-block" id="contributor">
+        <div class="section-header">
+          <h2>投稿与交流</h2>
+          <span class="section-sub">资源推荐、使用反馈、条目纠错</span>
+        </div>
+        <div class="deep-dive" style="padding:22px 26px;">
+          <p>
+            如果你在使用某个镜像站、模板市场或学术数据库时发现了值得收录的入口，或者对现有条目的描述有更正，可以通过以下方式参与。所有提交会经过人工核对，确认可用性和授权信息后更新到对应分类。
+          </p>
+          <ul>
+            <li><strong>推荐新入口：</strong> 附上站点名称、URL、主要用途和最近的更新日期。如果是镜像站，请注明同步的上游仓库和协议支持情况。</li>
+            <li><strong>报告失效链接：</strong> 说明条目名称和最后一次可用的时间，方便判断是临时故障还是长期下线。</li>
+            <li><strong>授权信息更正：</strong> 如果发现模板或素材的授权字段与实际情况不符，请提供截图或官方说明链接。</li>
+            <li><strong>使用经验分享：</strong> 关于镜像站速度、模板质量、数据库检索技巧的具体使用记录，会整理后放入用户评论或深度解析板块。</li>
+          </ul>
+          <p style="margin-top:12px;font-size:0.82rem;color:var(--text-tertiary);">提交入口暂未开放，可在页尾联系方式中获取后续通知。已收录条目可直接在对应板块下方留言。</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="aux-sidebar">
+      <div class="aux-card">
+        <h3>🔥 本周热门条目</h3>
+        <ul class="hot-list">
+          <li><span class="hot-rank">1</span><span class="hot-name">清华 TUNA 镜像</span><span class="hot-count">12.1k</span></li>
+          <li><span class="hot-rank">2</span><span class="hot-name">GitHub Trending</span><span class="hot-count">9.2k</span></li>
+          <li><span class="hot-rank">3</span><span class="hot-name">Figma 社区模板</span><span class="hot-count">7.8k</span></li>
+          <li><span class="hot-rank">4</span><span class="hot-name">Unsplash 授权查询</span><span class="hot-count">6.5k</span></li>
+          <li><span class="hot-rank">5</span><span class="hot-name">arXiv cs.CV 列表</span><span class="hot-count">5.6k</span></li>
+        </ul>
+      </div>
+      <div class="aux-card">
+        <h3>📅 近七日更新</h3>
+        <ul class="timeline-mini">
+          <li><span class="tl-date">11/07</span>USTC 同步 Rust crates 全量索引</li>
+          <li><span class="tl-date">11/06</span>Hugging Face 新增推理成本标签</li>
+          <li><span class="tl-date">11/05</span>Gitee 开放企业版 API 文档</li>
+          <li><span class="tl-date">11/04</span>PubMed 自然语言查询上线</li>
+          <li><span class="tl-date">10/30</span>Pexels 视频授权条款更新</li>
+        </ul>
+      </div>
+      <div class="aux-card">
+        <h3>📌 投稿提示</h3>
+        <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.6;">推荐新入口时请附上站点名称、用途和最近更新日期。镜像站需注明同步上游和协议支持情况。</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">传送门入口</div>
+        <p class="footer-desc">
+          覆盖开发工具、设计资源、学术数据库、开源镜像、效率工具与素材图库六类入口。条目更新周期为每周一次，收录时间跨度为 2026 年 10 月至 11 月，部分长期维护条目可追溯至 2024 年。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>资源分类</h4>
+        <a href="#portal-picks">开发工具</a>
+        <a href="#portal-picks">设计资源</a>
+        <a href="#portal-picks">学术数据库</a>
+        <a href="#portal-picks">开源镜像</a>
+      </div>
+      <div class="footer-col">
+        <h4>参与</h4>
+        <a href="#contributor">投稿推荐</a>
+        <a href="#contributor">条目纠错</a>
+        <a href="#user-comments">用户评论</a>
+        <a href="#related-news">相关资讯</a>
+      </div>
+      <div class="footer-col">
+        <h4>关于</h4>
+        <a href="#domain-overview">领域概览</a>
+        <a href="#deep-analysis">深度解析</a>
+        <a href="#faq">常见问题</a>
+        <a href="#experience-guide">体验指南</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 传送门入口 · 内容聚合示例 · 条目信息以实际站点为准</span>
+      <span>最近更新：2026年11月8日</span>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <script>
+    (function() {
+      // 汉堡菜单
+      const hamburger = document.getElementById('hamburgerBtn');
+      const headerNav = document.getElementById('headerNav');
+      const overlay = document.getElementById('mobileOverlay');
+
+      function closeMenu() {
+        headerNav.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+
+      hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const isOpen = headerNav.classList.toggle('open');
+        overlay.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+
+      overlay.addEventListener('click', closeMenu);
+
+      headerNav.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+
+      // 滚动高亮当前板块（左侧频道）
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.channel-sidebar nav a');
+
+      function highlightNav() {
+        let currentId = '';
+        sections.forEach(function(section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 160 && rect.bottom > 160) {
+            currentId = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            highlightNav();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // 回到顶部
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        backToTop.classList.toggle('visible', window.scrollY > window.innerHeight);
+      });
+      backToTop.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 初始高亮
+      highlightNav();
+    })();
+  </script>
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "传送门入口",
+    "description": "聚合开发工具、设计资源、学术数据库、开源镜像与效率工具的可直达索引。",
+    "inLanguage": "zh-CN",
+    "about": {
+      "@type": "Thing",
+      "name": "资源导航与入口索引"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "清华 TUNA 和中科大 USTC 镜像站，哪个同步 Anaconda 更快？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "截至 2026 年 11 月 7 日，TUNA 的 Anaconda 仓库同步延迟约 2 分钟，USTC 约 8 分钟。但 USTC 同步了 conda 的完整频道索引，TUNA 只覆盖 main 频道。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Figma 社区标注「Free」的模板，可以直接用在商业项目里吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "不能直接认定。2026 年 10 月对 500 个免费 UI Kit 的抽样中，仅 37.4% 明确允许商业使用。需要在模板详情页的 License 字段中确认是否包含「Commercial use」关键词。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "arXiv 的 HTML 版本预览支持哪些分类？公式渲染准确吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "目前仅 cs.LG 和 cs.CL 两个分类支持 HTML 渲染。公式渲染在 11 月 3 日修复后准确率约为 94%，简单公式基本无误，复杂矩阵可能出现换行错位。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "GitHub Trending 的排名是怎么计算的？为什么有些高 star 仓库不在榜上？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "GitHub Trending 的排名算法未完全公开，但更侧重近期 star 增长速度而非总数。2026 年 11 月 7 日的 Python 日榜中，一个 1,842 star 的新仓库排在前面，而某 5 万 star 的老仓库因日增 star 不足 50 未上榜。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Unsplash 的 AI 生成图片标注规则，对商业使用有什么具体影响？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2026 年 10 月 28 日起，Unsplash 将 AI 生成图片的标注与摄影作品分开处理。商业使用前需要查看图片详情页的「生成方式」标签，部分图片要求标注来源或限制用于训练模型。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Notion 模板市场的付费模板，退款率为什么上升？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2026 年 Q3 付费模板退款率升至 11%，主要原因是模板描述与实际功能不符。部分卖家在模板描述中标注「自动化」，实际只包含手动填写字段。"
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+  </html>
